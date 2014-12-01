@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane fx:id="contentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.login.LoginController">
+   <children>
+      <Pane fx:id="pnlTitle" prefHeight="45.0" prefWidth="300.0" style="-fx-background-color: #2196F3;">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
+      <Pane fx:id="pnlLogin" layoutX="150.0" layoutY="150.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #BBDEFB;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Label layoutX="129.0" layoutY="14.0" text="Login" textFill="#000000de">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtUsername" layoutX="14.0" layoutY="77.0" onKeyTyped="#txtUsername_KeyTyped" prefHeight="25.0" prefWidth="277.0" promptText="Enter your username" />
+            <Label fx:id="lblErrorPassword" alignment="CENTER_RIGHT" layoutX="15.0" layoutY="176.0" prefHeight="20.0" prefWidth="267.0" textFill="RED">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="txtPassword" layoutX="14.0" layoutY="150.0" onKeyTyped="#txtPassword_KeyTyped" prefHeight="25.0" prefWidth="277.0" promptText="Enter your password" />
+            <Label fx:id="lblErrorUsername" alignment="CENTER_RIGHT" layoutX="15.0" layoutY="102.0" prefHeight="20.0" prefWidth="267.0" textAlignment="RIGHT" textFill="RED">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnLogin" layoutX="219.0" layoutY="256.0" mnemonicParsing="false" onAction="#btnLogin_Click" prefHeight="30.0" prefWidth="66.0" style="-fx-background-color: #00E676;" text="LOGIN" textFill="#000000de">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="600.0" style="-fx-background-color: #2196F3;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Label fx:id="lblCopywrite" layoutX="14.0" layoutY="6.0" text="© James Fitzpatrick 2014" />
+         </children>
+      </Pane>
+   </children>
+</Pane>
