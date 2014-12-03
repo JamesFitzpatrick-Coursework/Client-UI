@@ -4,6 +4,7 @@ import com.google.common.base.Throwables;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -20,12 +21,15 @@ import uk.co.thefishlive.meteor.data.LoginProfile;
 import uk.co.thefishlive.meteor.login.exception.LoginException;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  *
  */
-public class LoginController {
+public class LoginController implements Initializable {
 
+    @FXML private Pane pnlLogin;
     @FXML private TextField txtUsername;
     @FXML private PasswordField txtPassword;
 
@@ -87,11 +91,11 @@ public class LoginController {
         }
     }
 
-    @FXML
-    public void txtUsername_KeyTyped(KeyEvent event) {
-    }
-
-    @FXML
-    public void txtPassword_KeyTyped(KeyEvent event) {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), pnlLogin);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+        fadeIn.play();
     }
 }
