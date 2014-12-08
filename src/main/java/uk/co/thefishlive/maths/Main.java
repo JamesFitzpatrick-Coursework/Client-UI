@@ -1,10 +1,14 @@
 package uk.co.thefishlive.maths;
 
+import com.google.common.base.Throwables;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import uk.co.thefishlive.auth.AuthHandler;
+import uk.co.thefishlive.auth.session.Session;
 import uk.co.thefishlive.maths.resources.ResourceManager;
 import uk.co.thefishlive.maths.resources.file.FileResourceManager;
 import uk.co.thefishlive.maths.ui.UILoader;
@@ -26,6 +30,7 @@ public class Main extends Application {
     private Stage stage;
     private AuthHandler authHandler;
     private ResourceManager resourceManager;
+    private Session session;
 
     public static void main(String[] args) throws IOException {
         launch(args);
@@ -44,8 +49,22 @@ public class Main extends Application {
 
         Pane pane = UILoader.loadUI(resourceManager.getResource("ui/login.fxml"));
         Scene scene = new Scene(pane);
+        stage.setMaxHeight(628);
+        stage.setMaxWidth(600);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                try {
+                    stop();
+                } catch (Exception e) {
+                    Throwables.propagate(e);
+                }
+            }
+        });
     }
 
     public Stage getStage() {
@@ -54,5 +73,17 @@ public class Main extends Application {
 
     public AuthHandler getAuthHandler() {
         return this.authHandler;
+    }
+
+    public ResourceManager getResourceManager() {
+        return resourceManager;
+    }
+
+    public Session getCurrentSession() {
+        return this.session;
+    }
+
+    public void setCurrentSession(Session session) {
+        this.session = session;
     }
 }

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.user.UserMainController">
+   <children>
+      <GridPane fx:id="pnlAssets" hgap="7.5" layoutY="45.0" prefHeight="540.0" prefWidth="600.0" vgap="7.5">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <opaqueInsets>
+            <Insets bottom="7.5" left="7.5" right="7.5" top="7.5" />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="7.5" left="7.5" right="7.5" top="7.5" />
+         </padding>
+      </GridPane>
+      <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="600.0" style="-fx-background-color: #2196F3;">
+         <children>
+            <Label fx:id="lblCopywrite" layoutX="14.0" layoutY="6.0" text="© James Fitzpatrick 2014" />
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
+      <Pane fx:id="pnlTitle" prefHeight="45.0" prefWidth="300.0" style="-fx-background-color: #2196F3;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Clicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons/ic_menu_white_36dp.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="pnlMenu" layoutX="-207.0" prefHeight="570.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Circle fill="#2196f3" layoutX="44.0" layoutY="44.0" radius="30.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Circle>
+            <Label fx:id="lblUsername" layoutX="86.0" layoutY="31.0" prefHeight="27.0" prefWidth="114.0" text="James Fitzpatrick">
+               <font>
+                  <Font name="Roboto Regular" size="13.0" />
+               </font>
+            </Label>
+            <GridPane layoutY="81.0" prefHeight="489.0" prefWidth="200.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label layoutX="44.0" layoutY="9.0" prefHeight="20.0" prefWidth="113.0" text="Settings">
+                           <font>
+                              <Font name="Roboto Regular" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="12.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons/ic_settings_black_36dp.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </GridPane>
+            <ImageView fx:id="btnMenuClose" fitHeight="24.0" fitWidth="24.0" layoutX="175.0" layoutY="1.0" onMouseClicked="#btnMenuClose_Clicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons/ic_close_black_36dp.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="pnlAlert" layoutX="360.0" layoutY="535.0" prefHeight="75.0" prefWidth="250.0" style="-fx-background-color: #00E676BB; visibility: none;">
+         <children>
+            <Label fx:id="lblAlertMessage" alignment="TOP_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="51.0" prefWidth="225.0" text="Success" wrapText="true" />
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
+   </children>
+</Pane>

@@ -2,9 +2,13 @@ package uk.co.thefishlive.maths.ui.login;
 
 import com.google.common.base.Throwables;
 import javafx.animation.FadeTransition;
+import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -17,9 +21,12 @@ import uk.co.thefishlive.auth.login.LoginHandler;
 import uk.co.thefishlive.auth.session.Session;
 import uk.co.thefishlive.http.exception.HttpException;
 import uk.co.thefishlive.maths.Main;
+import uk.co.thefishlive.maths.ui.UILoader;
+import uk.co.thefishlive.maths.ui.utils.EffectsUtils;
 import uk.co.thefishlive.meteor.data.LoginProfile;
 import uk.co.thefishlive.meteor.login.exception.LoginException;
 
+import javax.swing.Action;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,6 +37,7 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
 
     @FXML private Pane pnlLogin;
+
     @FXML private TextField txtUsername;
     @FXML private PasswordField txtPassword;
 
@@ -38,8 +46,6 @@ public class LoginController implements Initializable {
 
     @FXML private Button btnLogin;
 
-    @FXML private Pane pnlAlert;
-    @FXML private Label lblAlertMessage;
 
     @FXML
     public void btnLogin_Click(ActionEvent event) {
@@ -65,20 +71,11 @@ public class LoginController implements Initializable {
             LoginHandler handler = Main.getInstance().getAuthHandler().getLoginHandler();
             Session session = handler.login(profile, txtPassword.getText().toCharArray());
             System.out.println(session.getOwner());
+            Main.getInstance().setCurrentSession(session);
 
-            pnlAlert.setVisible(true);
-            lblAlertMessage.setText("Successfully logged in as " + session.getOwner().getDisplayName());
-
-            FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), pnlAlert);
-            fadeIn.setFromValue(0);
-            fadeIn.setToValue(1.0);
-            fadeIn.play();
-
-            FadeTransition fadeOut = new FadeTransition(Duration.seconds(3), pnlAlert);
-            fadeOut.setFromValue(1);
-            fadeOut.setToValue(0);
-            fadeOut.setDelay(Duration.seconds(5));
-            fadeOut.play();
+            Pane pane = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/user_main.fxml"));
+            Scene scene = new Scene(pane);
+            Main.getInstance().getStage().setScene(scene);
         } catch (HttpException ex) {
             if (ex.getMessage().contains("password")) {
                 lblErrorPassword.setText(ex.getMessage());
@@ -94,7 +91,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), pnlLogin);
-        fadeIn.setFromValue(0);
+        fadeIn.setFromValue(0.5d);
         fadeIn.setToValue(1);
         fadeIn.play();
     }
