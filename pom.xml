@@ -12,6 +12,13 @@
         <projecet.build.sourceEncoding>UTF-8</projecet.build.sourceEncoding>
     </properties>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>thefishlive-maven</id>
+            <url>http://thefishlive.co.uk/maven/repo/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -31,6 +38,15 @@
             <groupId>uk.co.thefishlive</groupId>
             <artifactId>auth-lib</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javafx</groupId>
+            <artifactId>jfxrt</artifactId>
+            <version>${java.version}</version>
+            <scope>system</scope>
+            <systemPath>${java.home}/lib/jfxrt.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -48,9 +64,15 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>uk.co.thefishlive</groupId>
+                <artifactId>asset-maven-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
             </plugin>
         </plugins>
     </build>
