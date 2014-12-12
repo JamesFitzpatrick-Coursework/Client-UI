@@ -1,7 +1,7 @@
 package uk.co.thefishlive.maths;
 
 import org.junit.Test;
-import uk.co.thefishlive.maths.utils.ProxyUtils;
+import uk.co.thefishlive.meteor.utils.ProxyUtils;
 
 import java.net.*;
 

@@ -12,14 +12,11 @@ import uk.co.thefishlive.auth.session.Session;
 import uk.co.thefishlive.maths.resources.ResourceManager;
 import uk.co.thefishlive.maths.resources.file.FileResourceManager;
 import uk.co.thefishlive.maths.ui.UILoader;
-import uk.co.thefishlive.maths.utils.ProxyUtils;
 import uk.co.thefishlive.meteor.MeteorAuthHandler;
+import uk.co.thefishlive.meteor.utils.ProxyUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
 
 /**
  *
