@@ -1,13 +1,18 @@
 package uk.co.thefishlive.maths.resources;
 
-import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
+import uk.co.thefishlive.maths.resources.exception.ResourceException;
 
-/**
- * Created by James on 03/12/2014.
- */
 public interface ResourceManager {
 
-    public Resource getResource(String path) throws FileNotFoundException, MalformedURLException;
+    /**
+     * Get the information about a specified resource or load it if it hasn't
+     * already been loaded this session.
+     *
+     * @param path the relative path to this resource
+     * @return the resource specified
+     * @throws ResourceException signals that something went wrong loading the
+     *                              resource
+     */
+    public Resource getResource(String path) throws ResourceException;
 
 }

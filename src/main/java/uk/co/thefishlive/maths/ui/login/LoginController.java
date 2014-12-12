@@ -21,6 +21,7 @@ import uk.co.thefishlive.auth.login.LoginHandler;
 import uk.co.thefishlive.auth.session.Session;
 import uk.co.thefishlive.http.exception.HttpException;
 import uk.co.thefishlive.maths.Main;
+import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.ui.UILoader;
 import uk.co.thefishlive.maths.ui.utils.EffectsUtils;
 import uk.co.thefishlive.meteor.data.LoginProfile;
@@ -83,7 +84,7 @@ public class LoginController implements Initializable {
             if (ex.getMessage().contains("username")) {
                 lblErrorUsername.setText(ex.getMessage());
             }
-        } catch (LoginException | IOException ex) {
+        } catch (LoginException | IOException | ResourceException ex) {
             Throwables.propagate(ex);
         }
     }

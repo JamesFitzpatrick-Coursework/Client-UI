@@ -5,14 +5,14 @@ import javafx.scene.layout.Pane;
 import uk.co.thefishlive.maths.resources.Resource;
 
 import java.io.IOException;
-import java.net.URL;
+import uk.co.thefishlive.maths.resources.exception.ResourceException;
 
 /**
  *
  */
 public class UILoader {
 
-    public static Pane loadUI(Resource dataFile) throws IOException {
+    public static Pane loadUI(Resource dataFile) throws IOException, ResourceException {
         FXMLLoader loader = new FXMLLoader(dataFile.getUrl());
         return (Pane) loader.load();
     }

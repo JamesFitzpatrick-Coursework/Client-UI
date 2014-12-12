@@ -33,14 +33,14 @@ public class UserMainController implements Initializable {
 
     @FXML
     public void btnMenu_Clicked(MouseEvent event) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(1000), pnlMenu);
+        TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
         transition.setByX(205);
         transition.play();
     }
 
     @FXML
     public void btnMenuClose_Clicked(MouseEvent event) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(1000), pnlMenu);
+        TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
         transition.setByX(-205);
         transition.play();
     }
