@@ -9,7 +9,9 @@ import java.util.List;
  */
 public class AssetIndex {
 
+    private String id;
     private List<AssetInfo> assets;
+    private String basedir;
 
     public AssetInfo getAsset(String path) {
         for (AssetInfo info : this.assets) {
@@ -23,5 +25,13 @@ public class AssetIndex {
 
     public List<AssetInfo> getAssets() {
         return ImmutableList.copyOf(assets);
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public String getBaseDir() {
+        return basedir;
     }
 }

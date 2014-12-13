@@ -2,36 +2,45 @@ package uk.co.thefishlive.maths.resources.asset;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.Map;
+import uk.co.thefishlive.maths.resources.CachingResourceManger;
 import uk.co.thefishlive.maths.resources.Resource;
-import uk.co.thefishlive.maths.resources.ResourceManager;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.MalformedURLException;
+import uk.co.thefishlive.maths.resources.exception.ResourceNotFoundException;
 
-/**
- * Created by James on 11/12/2014.
- */
-public class AssetResourceManager implements ResourceManager {
+public class AssetResourceManager extends CachingResourceManger {
 
     private static final Gson GSON = new GsonBuilder()
                                             .create();
 
-    private AssetIndex index;
+    private Map<String, AssetInfo> assets;
+    private File baseDir;
 
-    public AssetResourceManager(File index) throws ResourceException {
-        try (FileReader reader = new FileReader(index)) {
-            this.index = GSON.fromJson(reader, AssetIndex.class);
+    public AssetResourceManager(File indexFile) throws ResourceException {
+        try (FileReader reader = new FileReader(indexFile)) {
+            AssetIndex index = GSON.fromJson(reader, AssetIndex.class);
+            baseDir = new File(indexFile.getParentFile(), index.getBaseDir());
+
+            for (AssetInfo info : index.getAssets()) {
+                assets.put(info.getPath(), info);
+            }
         } catch (IOException ex) {
             throw new ResourceException(ex);
         }
     }
 
     @Override
-    public Resource getResource(String path) throws ResourceException {
-        return null;
+    public Resource loadResource(String path) throws ResourceException {
+        AssetInfo info = assets.get(path);
+
+        if (info == null) {
+            throw new ResourceNotFoundException(path);
+        }
+
+        return new AssetResource(baseDir, info);
     }
 }
