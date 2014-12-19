@@ -44,7 +44,7 @@ public class Main extends Application {
         this.authHandler = new MeteorAuthHandler(ProxyUtils.getSystemProxy());
         this.resourceManager = new FileResourceManager(new File("src/main/resources/"));
 
-        Pane pane = UILoader.loadUI(resourceManager.getResource("ui/login.fxml"));
+        Pane pane = UILoader.loadUI(resourceManager.getResource("ui/user_main.fxml"));
         Scene scene = new Scene(pane);
         stage.setMaxHeight(628);
         stage.setMaxWidth(600);

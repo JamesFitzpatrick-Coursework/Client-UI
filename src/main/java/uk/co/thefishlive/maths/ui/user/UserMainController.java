@@ -38,18 +38,8 @@ public class UserMainController implements Initializable {
         transition.play();
     }
 
-    @FXML
-    public void btnMenuClose_Clicked(MouseEvent event) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
-        transition.setByX(-205);
-        transition.play();
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        pnlAlert.setVisible(true);
-        lblAlertMessage.setText("Successfully logged in as " + Main.getInstance().getCurrentSession().getOwner().getDisplayName());
-
         EffectsUtils.fadeIn(Duration.seconds(1), pnlAlert).play();
         EffectsUtils.fadeOut(Duration.seconds(3), pnlAlert, Duration.seconds(5)).play();
 
