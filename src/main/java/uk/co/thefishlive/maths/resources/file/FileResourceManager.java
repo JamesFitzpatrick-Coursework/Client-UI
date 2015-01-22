@@ -22,7 +22,7 @@ public class FileResourceManager extends CachingResourceManger {
         File file = new File(basedir, path);
 
         if (!file.exists()) {
-            throw new ResourceNotFoundException("Could not find resource at " + path);
+            throw new ResourceNotFoundException("Could not find resource at " + path + " (" + file + ")");
         }
 
         return new FileResource(file);

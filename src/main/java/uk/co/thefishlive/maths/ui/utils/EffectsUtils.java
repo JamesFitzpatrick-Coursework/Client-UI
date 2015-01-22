@@ -43,5 +43,4 @@ public class EffectsUtils {
         transition.setToValue(1);
         return transition;
     }
-
 }

@@ -11,10 +11,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.user.UserMainController">
+<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.admin.GroupListController">
    <children>
-      <GridPane fx:id="pnlAssets" hgap="7.5" layoutY="45.0" prefHeight="540.0" prefWidth="600.0" vgap="7.5">
+      <GridPane fx:id="pnlGroups" hgap="7.5" layoutY="45.0" prefHeight="540.0" prefWidth="600.0" vgap="7.5">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -45,15 +44,20 @@
          <children>
             <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Clicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/icons/ic_menu_white_36dp.png" />
+                  <Image url="@../../images/icons/ic_menu_white_36dp.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
+            <Label layoutX="49.0" layoutY="10.0" text="Groups" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Regular" size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <fx:include fx:id="pnlMenu" source="sidebar.fxml" />
+      <fx:include fx:id="pnlMenu" source="../sidebar.fxml" />
       <Pane fx:id="pnlAlert" layoutX="360.0" layoutY="535.0" prefHeight="75.0" prefWidth="250.0" style="-fx-background-color: #00E676BB; visibility: none;">
          <children>
             <Label fx:id="lblAlertMessage" alignment="TOP_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="51.0" prefWidth="225.0" text="Success" wrapText="true" />

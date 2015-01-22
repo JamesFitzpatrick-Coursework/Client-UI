@@ -12,8 +12,8 @@ import uk.co.thefishlive.maths.resources.exception.ResourceException;
  */
 public class UILoader {
 
-    public static Pane loadUI(Resource dataFile) throws IOException, ResourceException {
+    public static UI loadUI(Resource dataFile) throws IOException, ResourceException {
         FXMLLoader loader = new FXMLLoader(dataFile.getUrl());
-        return (Pane) loader.load();
+        return new UI((Pane) loader.load(), (Controller) loader.getController());
     }
 }

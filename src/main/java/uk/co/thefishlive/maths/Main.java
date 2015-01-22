@@ -1,16 +1,21 @@
 package uk.co.thefishlive.maths;
 
 import com.google.common.base.Throwables;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
+import org.apache.logging.log4j.LogManager;
+
 import uk.co.thefishlive.auth.AuthHandler;
 import uk.co.thefishlive.auth.session.Session;
+import uk.co.thefishlive.maths.logging.Log4JPrintStream;
 import uk.co.thefishlive.maths.resources.ResourceManager;
 import uk.co.thefishlive.maths.resources.file.FileResourceManager;
+import uk.co.thefishlive.maths.ui.UI;
 import uk.co.thefishlive.maths.ui.UILoader;
 import uk.co.thefishlive.meteor.MeteorAuthHandler;
 import uk.co.thefishlive.meteor.utils.ProxyUtils;
@@ -39,15 +44,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        System.setOut(new Log4JPrintStream(System.out, LogManager.getLogger("SysOut")));
+
         instance = this;
         this.stage = stage;
         this.authHandler = new MeteorAuthHandler(ProxyUtils.getSystemProxy());
         this.resourceManager = new FileResourceManager(new File("src/main/resources/"));
 
-        Pane pane = UILoader.loadUI(resourceManager.getResource("ui/user_main.fxml"));
-        Scene scene = new Scene(pane);
+        UI ui = UILoader.loadUI(resourceManager.getResource("ui/login.fxml"));
+        Scene scene = new Scene(ui.getPane());
         stage.setMaxHeight(628);
-        stage.setMaxWidth(600);
+        stage.setMaxWidth(800);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
@@ -56,7 +63,9 @@ public class Main extends Application {
             @Override
             public void handle(WindowEvent event) {
                 try {
+                    System.out.println("Exiting application");
                     stop();
+                    System.exit(0);
                 } catch (Exception e) {
                     Throwables.propagate(e);
                 }

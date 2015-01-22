@@ -70,7 +70,7 @@
             <DropShadow />
          </effect>
       </Pane>
-      <fx:include source="../sidebar.fxml" />
+      <fx:include fx:id="pnlMenu" source="../sidebar.fxml" />
       <Pane fx:id="pnlAlert" layoutX="360.0" layoutY="535.0" prefHeight="75.0" prefWidth="250.0" style="-fx-background-color: #00E676BB; visibility: none;">
          <children>
             <Label fx:id="lblAlertMessage" alignment="TOP_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="51.0" prefWidth="225.0" text="Success" wrapText="true" />

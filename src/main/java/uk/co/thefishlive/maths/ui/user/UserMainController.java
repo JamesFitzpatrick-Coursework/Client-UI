@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import uk.co.thefishlive.maths.Main;
+import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.maths.ui.utils.EffectsUtils;
 
 import java.net.URL;
@@ -21,7 +22,7 @@ import java.util.ResourceBundle;
 /**
  *
  */
-public class UserMainController implements Initializable {
+public class UserMainController implements Controller {
 
     @FXML private Pane pnlContainer;
 
@@ -33,6 +34,7 @@ public class UserMainController implements Initializable {
 
     @FXML
     public void btnMenu_Clicked(MouseEvent event) {
+        System.out.println(pnlMenu);
         TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
         transition.setByX(205);
         transition.play();

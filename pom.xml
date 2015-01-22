@@ -10,6 +10,7 @@
 
     <properties>
         <projecet.build.sourceEncoding>UTF-8</projecet.build.sourceEncoding>
+        <log4j-api.version>2.1</log4j-api.version>
     </properties>
 
     <pluginRepositories>
@@ -38,6 +39,20 @@
             <groupId>uk.co.thefishlive</groupId>
             <artifactId>auth-lib</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j-api.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j-api.version}</version>
             <scope>compile</scope>
         </dependency>
 
@@ -83,7 +98,7 @@
                 <artifactId>asset-maven-plugin</artifactId>
                 <version>1.0-SNAPSHOT</version>
 				<configuration>
-					<hashMethod>md5</hashMethod>
+					<hashMethod>sha1</hashMethod>
 				</configuration>
 				<executions>
 					<execution>
@@ -93,6 +108,40 @@
 						</goals>
 					</execution>
 				</executions>
+            </plugin>
+
+            <plugin>
+                <groupId>uk.co.thefishlive</groupId>
+                <artifactId>libraries-generator-plugin</artifactId>
+                <version>1.2.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-libraries</id>
+                        <goals>
+                            <goal>generate-libs</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <urls>
+                        <uk.co.thefishlive>http://maven.thefishlive.co.uk/repo/</uk.co.thefishlive>
+                    </urls>
+
+                    <filter>
+                        <dependency>
+                            <excludes>
+                                <exclude>org\.hamcrest:(.+):(.+)</exclude>
+                                <exclude>junit:(.+):(.+)</exclude>
+                            </excludes>
+                        </dependency>
+
+                        <scope>
+                            <includes>
+                                <include>compile</include>
+                            </includes>
+                        </scope>
+                    </filter>
+                </configuration>
             </plugin>
         </plugins>
     </build>
