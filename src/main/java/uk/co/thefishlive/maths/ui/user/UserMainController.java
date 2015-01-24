@@ -1,6 +1,7 @@
 package uk.co.thefishlive.maths.ui.user;
 
-import javafx.animation.ScaleTransition;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,15 +10,9 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.util.Duration;
-import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.maths.ui.utils.EffectsUtils;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  *
@@ -38,6 +33,8 @@ public class UserMainController implements Controller {
         TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
         transition.setByX(205);
         transition.play();
+
+        System.out.println("Clicking click click");
     }
 
     @Override

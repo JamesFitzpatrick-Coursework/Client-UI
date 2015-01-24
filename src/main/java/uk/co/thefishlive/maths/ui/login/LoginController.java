@@ -21,12 +21,15 @@ import org.apache.logging.log4j.MarkerManager;
 import uk.co.thefishlive.auth.user.UserProfile;
 import uk.co.thefishlive.auth.login.LoginHandler;
 import uk.co.thefishlive.auth.session.Session;
+import uk.co.thefishlive.auth.user.UserProfile;
 import uk.co.thefishlive.http.exception.HttpException;
 import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.maths.ui.UI;
 import uk.co.thefishlive.maths.ui.UILoader;
+import uk.co.thefishlive.maths.ui.utils.EffectsUtils;
+import uk.co.thefishlive.meteor.user.MeteorUserProfile;
 import uk.co.thefishlive.meteor.login.exception.LoginException;
 import uk.co.thefishlive.meteor.user.MeteorUserProfile;
 
