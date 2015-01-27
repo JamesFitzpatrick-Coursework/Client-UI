@@ -2,7 +2,15 @@
 <Configuration status="info" name="Bs-Maths" packages="org.apache.logging.log4j">
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level]: %msg%n" />
+            <ThresholdFilter level="warn" onMatch="DENY" onMismatch="ACCEPT"/>
+
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%c{1}] [%t/%level]: %msg%n" />
+        </Console>
+
+        <Console name="ConsoleError" target="SYSTEM_ERR">
+            <ThresholdFilter level="warn" onMatch="ACCEPT"/>
+
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%c{1}] [%t/%level]: %msg%n" />
         </Console>
 
         <RollingRandomAccessFile name="File" fileName="logs/latest.log" filePattern="logs/%d{yyyy-MM-dd}-%i.log.gz">
@@ -17,11 +25,18 @@
 
     <Loggers>
         <Root level="debug">
+            <AppenderRef ref="ConsoleError"/>
             <AppenderRef ref="Console"/>
             <AppenderRef ref="File"/>
         </Root>
 
+        <Logger name="uk.co.thefishlive.maths" level="debug">
+        </Logger>
+
         <Logger name="SysOut">
+        </Logger>
+
+        <Logger name="SysErr">
         </Logger>
     </Loggers>
 </Configuration>

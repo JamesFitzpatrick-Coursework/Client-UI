@@ -41,12 +41,13 @@ import java.util.Timer;
 /**
  *
  */
-public class LoginController implements Controller {
+public class LoginController extends Controller {
 
     private static final Logger logger = LogManager.getLogger();
     private static final Marker markerLogin = MarkerManager.getMarker("LOGIN");
 
     @FXML private Pane pnlContainer;
+
     @FXML private Pane pnlLogin;
 
     @FXML private TextField txtUsername;
@@ -60,7 +61,7 @@ public class LoginController implements Controller {
     @FXML
     public void btnLogin_Click(ActionEvent event) {
         try {
-            showLoadingAnimation();
+            showLoadingAnimation(pnlContainer);
         } catch (ResourceException | IOException e) {
             Throwables.propagate(e);
         }
@@ -90,8 +91,7 @@ public class LoginController implements Controller {
             Main.getInstance().getAuthHandler().setActiveSession(session);
 
             UI ui = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/user_main.fxml"));
-            Scene scene = new Scene(ui.getPane());
-            Main.getInstance().getStage().setScene(scene);
+            Main.getInstance().setCurrentUI(ui);
         } catch (HttpException ex) {
             logger.error(markerLogin, "Error logging into account", ex);
 
@@ -112,10 +112,5 @@ public class LoginController implements Controller {
         fadeIn.setFromValue(0.5d);
         fadeIn.setToValue(1);
         fadeIn.play();
-    }
-
-    protected void showLoadingAnimation() throws ResourceException, IOException {
-        UI loading = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/loading.fxml"));
-        pnlContainer.getChildren().add(loading.getPane());
     }
 }

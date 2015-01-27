@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.admin.UserCreateController">
+   <children>
+      <GridPane fx:id="pnlLayout" hgap="10.0" layoutY="45.0" prefHeight="522.0" prefWidth="800.0" vgap="10.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="601.0" minWidth="10.0" prefWidth="596.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="10.0" prefWidth="178.0" />
+         </columnConstraints>
+         <padding>
+            <Insets bottom="7.5" left="7.5" right="7.5" top="7.5" />
+         </padding>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Pane prefHeight="506.0" prefWidth="175.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <children>
+                  <GridPane hgap="5.0" prefHeight="506.0" prefWidth="178.0" vgap="5.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <padding>
+                        <Insets bottom="2.5" left="2.5" right="2.5" top="2.5" />
+                     </padding>
+                     <children>
+                     </children>
+                  </GridPane>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <GridPane fx:id="pnlUsers" hgap="5.0" layoutY="-1.0" prefHeight="506.0" prefWidth="596.0" vgap="5.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="125.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="334.0" minWidth="10.0" prefWidth="315.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" prefWidth="123.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="txtDisplayname" prefHeight="25.0" prefWidth="295.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtUsername" prefHeight="25.0" prefWidth="321.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <PasswordField fx:id="txtPassword" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <PasswordField fx:id="txtPassword2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="147.0" text="Display Name" textAlignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="147.0" text="Username" textAlignment="CENTER" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="147.0" text="Password" textAlignment="CENTER" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="147.0" text="Confirm Password" textAlignment="CENTER" GridPane.rowIndex="4">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="29.0" prefWidth="327.0" text="Create User" textAlignment="CENTER" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Roboto Bold" size="21.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                           <children>
+                              <Button fx:id="btnCreate" layoutX="114.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnCreate_Click" style="-fx-background-color: #2196F3;" text="Create User" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
+                     </children>
+                  </GridPane>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Pane>
+         </children>
+      </GridPane>
+      <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="800.0" style="-fx-background-color: #2196F3;">
+         <children>
+            <Label fx:id="lblCopywrite" layoutX="14.0" layoutY="6.0" text="© James Fitzpatrick 2014" />
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
+      <Pane fx:id="pnlTitle" prefHeight="45.0" prefWidth="300.0" style="-fx-background-color: #2196F3;">
+         <children>
+            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Clicked" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@../../images/icons/ic_menu_white_36dp.png" />
+               </image>
+            </ImageView>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
+      <fx:include fx:id="pnlMenu" source="../sidebar.fxml" />
+      <Pane fx:id="pnlAlert" layoutX="360.0" layoutY="535.0" prefHeight="75.0" prefWidth="250.0" style="-fx-background-color: #00E676BB; visibility: none;">
+         <children>
+            <Label fx:id="lblAlertMessage" alignment="TOP_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="51.0" prefWidth="225.0" text="Success" wrapText="true" />
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
+   </children>
+</Pane>

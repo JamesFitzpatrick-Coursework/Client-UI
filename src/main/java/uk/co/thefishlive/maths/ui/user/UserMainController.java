@@ -17,7 +17,7 @@ import uk.co.thefishlive.maths.ui.utils.EffectsUtils;
 /**
  *
  */
-public class UserMainController implements Controller {
+public class UserMainController extends Controller {
 
     @FXML private Pane pnlContainer;
 

@@ -1,6 +1,7 @@
 package uk.co.thefishlive.maths.ui.admin;
 
 import com.google.common.base.Throwables;
+import com.google.common.util.concurrent.AbstractScheduledService.Scheduler;
 import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -33,7 +34,7 @@ import java.util.ResourceBundle;
 /**
  *
  */
-public class GroupListController implements Controller {
+public class GroupListController extends Controller {
 
     @FXML private Pane pnlContainer;
 
@@ -92,16 +93,17 @@ public class GroupListController implements Controller {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
                             try {
-                                showLoadingAnimation();
+                                showLoadingAnimation(pnlContainer);
 
                                 UI ui = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/admin/user_list.fxml"));
-                                Scene scene = new Scene(ui.getPane());
+                                ui.setParent(Main.getInstance().getCurrentUI());
                                 UserListController controller = (UserListController) ui.getController();
                                 controller.setGroup(groupProfile);
-                                Main.getInstance().getStage().setScene(scene);
+                                Main.getInstance().setCurrentUI(ui);
                             } catch (IOException | ResourceException e) {
                                 e.printStackTrace();
                             }
+
                         }
                     });
                     group.getChildren().add(button);
@@ -116,10 +118,5 @@ public class GroupListController implements Controller {
         } catch (IOException e) {
             Throwables.propagate(e);
         }
-    }
-
-    public void showLoadingAnimation() throws ResourceException, IOException {
-        UI loading = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/loading.fxml"));
-        pnlContainer.getChildren().add(loading.getPane());
     }
 }

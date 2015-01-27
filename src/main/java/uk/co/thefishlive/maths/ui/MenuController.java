@@ -13,15 +13,14 @@ import javafx.util.Duration;
 import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 
-public class MenuController implements Controller {
+public class MenuController extends Controller {
 
     @FXML private Pane pnlMenu;
 
     @FXML
     public void itmGroups_Click(MouseEvent event) throws ResourceException, IOException {
         UI ui = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/admin/group_list.fxml"));
-        Scene scene = new Scene(ui.getPane());
-        Main.getInstance().getStage().setScene(scene);
+        Main.getInstance().setCurrentUI(ui);
     }
 
     @FXML
