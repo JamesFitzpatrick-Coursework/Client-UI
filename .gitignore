@@ -16,3 +16,4 @@ release.properties
 ## Assets ##
 src/main/assets/
 logs
+/config

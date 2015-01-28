@@ -1,5 +1,7 @@
 package uk.co.thefishlive.maths.logging;
 
+import com.google.common.escape.Escaper;
+import com.google.common.escape.Escapers;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
@@ -24,6 +26,8 @@ public class Log4JPrintStream extends PrintStream {
     @Override
     public void println(String string) {
         logger.log(level, string);
+        super.println(string);
     }
+
 
 }

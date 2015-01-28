@@ -24,6 +24,12 @@ public class MenuController extends Controller {
     }
 
     @FXML
+    public void itmHome_Click(MouseEvent event) throws ResourceException, IOException {
+        UI ui = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/user_main.fxml"));
+        Main.getInstance().setCurrentUI(ui);
+    }
+
+    @FXML
     public void btnMenuClose_Clicked(MouseEvent event) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
         transition.setByX(-205);

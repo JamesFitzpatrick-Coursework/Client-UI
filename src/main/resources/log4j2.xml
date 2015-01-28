@@ -13,7 +13,7 @@
             <PatternLayout pattern="[%d{HH:mm:ss}] [%c{1}] [%t/%level]: %msg%n" />
         </Console>
 
-        <RollingRandomAccessFile name="File" fileName="logs/latest.log" filePattern="logs/%d{yyyy-MM-dd}-%i.log.gz">
+        <RollingRandomAccessFile name="File" fileName="logs/latest.log" filePattern="logs/%d{yyyy}/%d{MM}/%d{dd}/%d{yyyy-MM-dd}-%i.log.gz">
             <PatternLayout pattern="[%d{HH:mm:ss}] [%c] [%p]: %msg%n" />
 
             <Policies>

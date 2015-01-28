@@ -14,6 +14,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import uk.co.thefishlive.auth.AuthHandler;
 import uk.co.thefishlive.auth.session.Session;
+import uk.co.thefishlive.auth.session.SessionListener;
+import uk.co.thefishlive.maths.config.AuthDatabase;
+import uk.co.thefishlive.maths.config.SystemSettings;
+import uk.co.thefishlive.maths.logging.Log4JErrorHandler;
 import uk.co.thefishlive.maths.logging.Log4JPrintStream;
 import uk.co.thefishlive.maths.resources.ResourceManager;
 import uk.co.thefishlive.maths.resources.file.FileResourceManager;
@@ -39,7 +43,9 @@ public class Main extends Application {
 
     private AuthHandler authHandler;
     private ResourceManager resourceManager;
-    private Session session;
+
+    private AuthDatabase authDatabase;
+    private SystemSettings systemSettings;
 
     public static void main(String[] args) throws IOException {
         launch(args);
@@ -51,22 +57,38 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        System.setOut(new Log4JPrintStream(System.out, LogManager.getLogger("SysOut"), Level.INFO));
-        System.setErr(new Log4JPrintStream(System.err, LogManager.getLogger("SysErr"), Level.WARN));
+        instance = this;
         logger.info("Starting application");
 
-        instance = this;
-        this.stage = stage;
-        this.authHandler = new MeteorAuthHandler(ProxyUtils.getSystemProxy());
+        // Setup logging redirects
+        System.setOut(new Log4JPrintStream(System.out, LogManager.getLogger("SysOut"), Level.INFO));
+        System.setErr(new Log4JPrintStream(System.err, LogManager.getLogger("SysErr"), Level.WARN));
+
+        Thread.setDefaultUncaughtExceptionHandler(new Log4JErrorHandler());
+
+        // Setup Resource Manager
         this.resourceManager = new FileResourceManager(new File("src/main/resources/"));
+        this.systemSettings = new SystemSettings(new File("config/system.dat"));
+        this.systemSettings.load();
 
-        UI ui = UILoader.loadUI(resourceManager.getResource("ui/login.fxml"));
-        setCurrentUI(ui);
+        // Setup Auth Handler
+        this.authHandler = new MeteorAuthHandler(ProxyUtils.getSystemProxy(), systemSettings.getClientId());
+        this.authHandler.addSessionListener(new SessionListener() {
+            @Override
+            public void onActiveSessionChanged(Session newSession) {
+                authDatabase.updateSession(newSession);
+                authDatabase.save();
+            }
+        });
 
-        stage.setResizable(false);
-        stage.show();
+        // Setup login config
+        this.authDatabase = new AuthDatabase(new File("config/auth.dat"));
+        this.authDatabase.load();
 
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        // Setup JavaFX
+        this.stage = stage;
+        this.stage.setResizable(false);
+        this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
                 try {
@@ -78,6 +100,18 @@ public class Main extends Application {
                 }
             }
         });
+
+        // Load starting UI
+        String uiResource = "ui/login.fxml";
+
+        if (this.authHandler.getActiveSession() != null) {
+            uiResource = "ui/user_main.fxml";
+        }
+
+        UI ui = UILoader.loadUI(resourceManager.getResource(uiResource));
+        setCurrentUI(ui);
+
+        this.stage.show();
     }
 
     public AuthHandler getAuthHandler() {
@@ -85,12 +119,17 @@ public class Main extends Application {
     }
 
     public ResourceManager getResourceManager() {
-        return resourceManager;
+        return this.resourceManager;
+    }
+
+    public AuthDatabase getAuthDatabase() {
+        return this.authDatabase;
     }
 
     public void setCurrentUI(UI ui) {
         if (currentUI != null) logger.info("Closing UI {}", currentUI.getName());
         logger.info("Displaying UI {}", ui.getName());
+
         this.currentUI = ui;
         ui.onDisplay();
         this.stage.setScene(ui.buildScene());

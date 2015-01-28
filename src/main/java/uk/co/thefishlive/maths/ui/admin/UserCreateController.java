@@ -34,6 +34,7 @@ public class UserCreateController extends Controller {
     @FXML private Label lblErrorDisplayname;
     @FXML private Label lblErrorPassword;
     @FXML private Label lblErrorPassword2;
+
     @FXML private Pane pnlMenu;
 
     @FXML
@@ -45,13 +46,13 @@ public class UserCreateController extends Controller {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 
     @FXML
     public void btnCreate_Click(ActionEvent event) {
         boolean error = false;
 
+        // Validate input
         if (txtUsername.getText().length() <= 0) {
             lblErrorUsername.setVisible(true);
             error = true;
@@ -70,9 +71,11 @@ public class UserCreateController extends Controller {
         }
 
         if (error) {
+            // Something went wrong exit now
             return;
         }
 
+        // Create new user
         UserProfile profile = new MeteorUserProfile(txtUsername.getText(), txtDisplayname.getText());
         UserManager manager = Main.getInstance().getAuthHandler().getUserManager();
 

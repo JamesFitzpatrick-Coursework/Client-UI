@@ -1,12 +1,14 @@
 package uk.co.thefishlive.maths.ui;
 
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Controller implements Initializable, Displayable {
 
@@ -30,5 +32,14 @@ public abstract class Controller implements Initializable, Displayable {
     protected void showLoadingAnimation(Pane container) throws ResourceException, IOException {
         UI loading = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/loading.fxml"));
         container.getChildren().add(loading.getPane());
+    }
+
+    protected void hideLoadingAnimation(Pane container) throws ResourceException, IOException {
+        List<Node> children = new ArrayList<>(container.getChildren());
+        for (Node node : children) {
+            if ("pnlLoading".equals(node.getId())) {
+                container.getChildren().remove(node);
+            }
+        }
     }
 }

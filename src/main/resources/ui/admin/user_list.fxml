@@ -10,12 +10,12 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.admin.UserListController">
+<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.admin.UserListController">
    <children>
       <GridPane fx:id="pnlLayout" hgap="10.0" layoutY="45.0" prefHeight="522.0" prefWidth="800.0" vgap="10.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="601.0" minWidth="10.0" prefWidth="596.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="10.0" prefWidth="178.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="175.0" prefWidth="175.0" />
          </columnConstraints>
          <padding>
             <Insets bottom="7.5" left="7.5" right="7.5" top="7.5" />
@@ -50,7 +50,7 @@
                   <DropShadow />
                </effect>
                <children>
-                  <GridPane hgap="5.0" prefHeight="506.0" prefWidth="200.0" vgap="5.0">
+                  <GridPane hgap="5.0" prefHeight="506.0" prefWidth="175.0" vgap="5.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -72,7 +72,7 @@
                         <Insets bottom="2.5" left="2.5" right="2.5" top="2.5" />
                      </padding>
                      <children>
-                        <Pane fx:id="itmAddUser" onMouseClicked="#itmAddUser_Clicked" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                        <Pane fx:id="itmAddUser" onMouseClicked="#itmAddUser_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <children>
                               <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -81,6 +81,9 @@
                               </ImageView>
                               <Label layoutX="65.0" layoutY="10.0" text="Add User" />
                            </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Pane>
                      </children>
                   </GridPane>
@@ -98,7 +101,7 @@
       </Pane>
       <Pane fx:id="pnlTitle" prefHeight="45.0" prefWidth="300.0" style="-fx-background-color: #2196F3;">
          <children>
-            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Clicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Click" pickOnBounds="true" preserveRatio="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -106,6 +109,11 @@
                   <Image url="@../../images/icons/ic_menu_white_36dp.png" />
                </image>
             </ImageView>
+            <Label fx:id="lblGroupName" layoutX="51.0" layoutY="10.0" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Regular" size="18.0" />
+               </font>
+            </Label>
          </children>
          <effect>
             <DropShadow />
@@ -116,6 +124,11 @@
          <children>
             <Label fx:id="lblAlertMessage" alignment="TOP_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="51.0" prefWidth="225.0" text="Success" wrapText="true" />
          </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
+      <Pane layoutX="708.0" prefHeight="45.0" prefWidth="92.0" style="-fx-background-color: #2196F3;">
          <effect>
             <DropShadow />
          </effect>

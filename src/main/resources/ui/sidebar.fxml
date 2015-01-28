@@ -23,7 +23,7 @@
       </Label>
       <GridPane layoutY="81.0" prefHeight="489.0" prefWidth="200.0">
          <children>
-            <Pane fx:id="itmHome" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <Pane fx:id="itmHome" onMouseClicked="#itmHome_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
                   <Label layoutX="44.0" layoutY="9.0" prefHeight="20.0" prefWidth="113.0" text="Home">
                      <font>

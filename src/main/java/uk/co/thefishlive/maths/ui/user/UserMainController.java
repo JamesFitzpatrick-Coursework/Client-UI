@@ -29,12 +29,9 @@ public class UserMainController extends Controller {
 
     @FXML
     public void btnMenu_Clicked(MouseEvent event) {
-        System.out.println(pnlMenu);
         TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
         transition.setByX(205);
         transition.play();
-
-        System.out.println("Clicking click click");
     }
 
     @Override

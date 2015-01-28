@@ -45,10 +45,15 @@ public class GroupListController extends Controller {
     @FXML private Label lblAlertMessage;
 
     @FXML
-    public void btnMenu_Clicked(MouseEvent event) {
+    public void btnMenu_Click(MouseEvent event) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
         transition.setByX(205);
         transition.play();
+    }
+
+    @FXML
+    private void itmAddGroup_Click(MouseEvent event) {
+
     }
 
     @Override
