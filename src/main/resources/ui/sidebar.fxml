@@ -11,14 +11,19 @@
 
 <Pane fx:id="pnlMenu" layoutX="-205.0" layoutY="0.0" prefHeight="570.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.MenuController">
    <children>
-      <Circle fill="#2196f3" layoutX="44.0" layoutY="44.0" radius="30.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0">
+      <Pane layoutY="-1.0" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #2196F3;">
          <effect>
             <DropShadow />
          </effect>
+      </Pane>
+      <Circle fill="#8BC34A" layoutX="44.0" layoutY="44.0" radius="30.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0">
+         <effect>
+            <DropShadow blurType="GAUSSIAN" color="#000000c0" height="15.5" offsetY="3.0" radius="5.875" width="10.0" />
+         </effect>
       </Circle>
-      <Label fx:id="lblUsername" layoutX="86.0" layoutY="31.0" prefHeight="27.0" prefWidth="114.0" text="James Fitzpatrick">
+      <Label fx:id="lblMenuUsername" layoutX="80.0" layoutY="31.0" prefHeight="27.0" prefWidth="120.0" text="-- Username --" textFill="WHITE">
          <font>
-            <Font name="Roboto Regular" size="13.0" />
+            <Font name="Roboto Bold" size="13.0" />
          </font>
       </Label>
       <GridPane layoutY="81.0" prefHeight="489.0" prefWidth="200.0">
@@ -30,7 +35,7 @@
                         <Font name="Roboto Regular" size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="12.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="12.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" styleClass="icon-home">
                      <image>
                         <Image url="@../images/icons/ic_home_black_36dp.png" />
                      </image>
@@ -47,7 +52,7 @@
                         <Font name="Roboto Regular" size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="12.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="12.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" styleClass="icon-settings">
                      <image>
                         <Image url="@../images/icons/ic_settings_black_36dp.png" />
                      </image>
@@ -59,12 +64,12 @@
             </Pane>
             <Pane fx:id="itmGroups" onMouseClicked="#itmGroups_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
-                  <Label layoutX="44.0" layoutY="9.0" prefHeight="20.0" prefWidth="113.0" text="Groups">
+                  <Label layoutX="44.0" layoutY="9.0" prefHeight="20.0" prefWidth="113.0" text="Classes">
                      <font>
                         <Font name="Roboto Regular" size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="12.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="12.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" styleClass="icon-group">
                      <image>
                         <Image url="@../images/icons/ic_group_black_36dp.png" />
                      </image>
@@ -93,7 +98,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <ImageView fx:id="btnMenuClose" fitHeight="24.0" fitWidth="24.0" layoutX="175.0" layoutY="1.0" onMouseClicked="#btnMenuClose_Clicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btnMenuClose" fitHeight="24.0" fitWidth="24.0" layoutX="175.0" layoutY="1.0" onMouseClicked="#btnMenuClose_Clicked" pickOnBounds="true" preserveRatio="true" styleClass="icon-close">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

@@ -16,6 +16,7 @@ import uk.co.thefishlive.auth.user.UserManager;
 import uk.co.thefishlive.auth.user.UserProfile;
 import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.ui.Controller;
+import uk.co.thefishlive.maths.ui.UI;
 import uk.co.thefishlive.meteor.user.MeteorUserProfile;
 
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class UserCreateController extends Controller {
     @FXML private Pane pnlMenu;
 
     @FXML
-    public void btnMenu_Clicked(MouseEvent event) {
+    public void btnMenu_Click(MouseEvent event) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
         transition.setToX(0);
         transition.play();
@@ -46,6 +47,11 @@ public class UserCreateController extends Controller {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
+
+    @FXML
+    public void btnCancel_Click(MouseEvent event) {
+        Main.getInstance().setCurrentUI(getParent());
     }
 
     @FXML

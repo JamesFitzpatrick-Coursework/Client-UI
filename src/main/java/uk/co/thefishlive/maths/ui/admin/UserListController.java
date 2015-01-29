@@ -2,17 +2,15 @@ package uk.co.thefishlive.maths.ui.admin;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import com.google.common.base.Throwables;
-import com.sun.xml.internal.bind.v2.TODO;
+
 import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.Scene;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -23,21 +21,19 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import uk.co.thefishlive.auth.group.GroupProfile;
 import uk.co.thefishlive.auth.user.User;
 import uk.co.thefishlive.auth.user.UserProfile;
-import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.ui.ColorPalette;
 import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.maths.ui.UI;
 import uk.co.thefishlive.maths.ui.UILoader;
 import uk.co.thefishlive.maths.ui.admin.UserCreateController.CreateCallback;
-import uk.co.thefishlive.meteor.user.MeteorUserProfile;
-
-import javax.imageio.ImageIO;
 
 import static uk.co.thefishlive.maths.Main.getInstance;
 
@@ -50,8 +46,8 @@ public class UserListController extends Controller {
 
     static {
         try {
-            EDIT_ICON = new Image(getInstance().getResourceManager().getResource("images/icons/ic_mode_edit_black_36dp.png").getContent());
-            DELETE_ICON = new Image(getInstance().getResourceManager().getResource("images/icons/ic_delete_black_36dp.png").getContent());
+            EDIT_ICON = new Image(getInstance().getResourceManager().getResource("images/icons/ic_mode_edit_grey600_24dp.png").getContent());
+            DELETE_ICON = new Image(getInstance().getResourceManager().getResource("images/icons/ic_delete_grey600_24dp.png").getContent());
         } catch (ResourceException e) {
             Throwables.propagate(e);
         }
@@ -88,6 +84,12 @@ public class UserListController extends Controller {
         getInstance().setCurrentUI(ui);
     }
 
+    public void itmEditUser_Click(MouseEvent event) throws ResourceException, IOException {
+        UI ui = UILoader.loadUI(getInstance().getResourceManager().getResource("ui/admin/user_edit.fxml"));
+
+        ui.getController();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
@@ -100,7 +102,7 @@ public class UserListController extends Controller {
     public void onDisplay() {
         try {
             pnlUsers.getChildren().clear();
-            
+
             List<UserProfile> users = getInstance().getAuthHandler().getGroupManager().getGroupProfile(group).getUsers();
             int pos = 0;
 
@@ -130,18 +132,20 @@ public class UserListController extends Controller {
                 ImageView edit = new ImageView();
                 edit.setImage(EDIT_ICON);
                 edit.setX(525d);
-                edit.setY(4d);
-                edit.setFitWidth(32d);
-                edit.setFitHeight(32d);
+                edit.setY(8d);
+                edit.setFitWidth(24d);
+                edit.setFitHeight(24d);
+                edit.setCursor(Cursor.HAND);
                 pane.getChildren().add(edit);
 
                 ImageView delete = new ImageView();
-                edit.setImage(DELETE_ICON);
-                edit.setX(560d);
-                edit.setY(4d);
-                edit.setFitWidth(32d);
-                edit.setFitHeight(32d);
-                edit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                delete.setImage(DELETE_ICON);
+                delete.setX(560d);
+                delete.setY(8d);
+                delete.setFitWidth(24d);
+                delete.setFitHeight(24d);
+                delete.setCursor(Cursor.HAND);
+                delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         try {
@@ -160,6 +164,7 @@ public class UserListController extends Controller {
                 });
                 pane.getChildren().add(delete);
 
+                System.out.println(pane.getChildren());
                 pnlUsers.add(pane, 0, pos++);
             }
         } catch (IOException e) {

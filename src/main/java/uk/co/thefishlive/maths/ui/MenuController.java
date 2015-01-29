@@ -7,6 +7,7 @@ import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -16,6 +17,8 @@ import uk.co.thefishlive.maths.resources.exception.ResourceException;
 public class MenuController extends Controller {
 
     @FXML private Pane pnlMenu;
+
+    @FXML private Label lblMenuUsername;
 
     @FXML
     public void itmGroups_Click(MouseEvent event) throws ResourceException, IOException {
@@ -38,5 +41,6 @@ public class MenuController extends Controller {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        lblMenuUsername.setText(Main.getInstance().getAuthHandler().getActiveSession().getProfile().getDisplayName());
     }
 }
