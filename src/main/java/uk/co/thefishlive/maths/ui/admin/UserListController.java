@@ -28,6 +28,8 @@ import org.apache.logging.log4j.Logger;
 import uk.co.thefishlive.auth.group.GroupProfile;
 import uk.co.thefishlive.auth.user.User;
 import uk.co.thefishlive.auth.user.UserProfile;
+import uk.co.thefishlive.maths.Main;
+import uk.co.thefishlive.maths.resources.Resource;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.ui.ColorPalette;
 import uk.co.thefishlive.maths.ui.Controller;
@@ -84,12 +86,6 @@ public class UserListController extends Controller {
         getInstance().setCurrentUI(ui);
     }
 
-    public void itmEditUser_Click(MouseEvent event) throws ResourceException, IOException {
-        UI ui = UILoader.loadUI(getInstance().getResourceManager().getResource("ui/admin/user_edit.fxml"));
-
-        ui.getController();
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
@@ -136,6 +132,19 @@ public class UserListController extends Controller {
                 edit.setFitWidth(24d);
                 edit.setFitHeight(24d);
                 edit.setCursor(Cursor.HAND);
+                edit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        try {
+                            UI ui = UILoader.loadUI(getInstance().getResourceManager().getResource("ui/admin/user_edit.fxml"));
+
+                            ui.getController(UserEditController.class).setUser(user);
+                            Main.getInstance().setCurrentUI(ui);
+                        } catch (IOException | ResourceException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
                 pane.getChildren().add(edit);
 
                 ImageView delete = new ImageView();

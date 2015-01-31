@@ -130,6 +130,7 @@ public class Main extends Application {
         if (currentUI != null) logger.info("Closing UI {}", currentUI.getName());
         logger.info("Displaying UI {}", ui.getName());
 
+        ui.setParent(this.currentUI);
         this.currentUI = ui;
         ui.onDisplay();
         this.stage.setScene(ui.buildScene());

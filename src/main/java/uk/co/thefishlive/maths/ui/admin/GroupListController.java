@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
+import uk.co.thefishlive.auth.group.Group;
 import uk.co.thefishlive.auth.group.GroupProfile;
 import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
@@ -53,14 +54,29 @@ public class GroupListController extends Controller {
 
     @FXML
     private void itmAddGroup_Click(MouseEvent event) {
+        try {
+            UI ui = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/admin/group_create.fxml"));
 
+            ui.getController(GroupCreateController.class).setCreateCallback(new GroupCreateController.CreateCallback() {
+                @Override
+                public void groupCreated(Group profile) {
+                }
+            });
+
+            Main.getInstance().setCurrentUI(ui);
+        } catch (IOException | ResourceException e) {
+            Throwables.propagate(e);
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         EffectsUtils.fadeIn(Duration.seconds(1), pnlAlert).play();
         EffectsUtils.fadeOut(Duration.seconds(3), pnlAlert, Duration.seconds(5)).play();
+    }
 
+    @Override
+    public void onDisplay() {
         try {
             final List<GroupProfile> groups = Main.getInstance().getAuthHandler().getGroupManager().getGroups();
             int index = 0;
