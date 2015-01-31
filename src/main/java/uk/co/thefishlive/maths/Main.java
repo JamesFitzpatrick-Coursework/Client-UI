@@ -1,10 +1,10 @@
 package uk.co.thefishlive.maths;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -127,12 +127,18 @@ public class Main extends Application {
     }
 
     public void setCurrentUI(UI ui) {
-        if (currentUI != null) logger.info("Closing UI {}", currentUI.getName());
-        logger.info("Displaying UI {}", ui.getName());
+        Preconditions.checkNotNull(ui, "Cannot display a null ui");
 
-        ui.setParent(this.currentUI);
+        if (currentUI != null)  {
+            logger.info("Closing UI {}", currentUI.getName());
+            this.currentUI.onClose();
+            ui.setParent(this.currentUI);
+        }
+
+        logger.info("Displaying UI {}", ui.getName());
         this.currentUI = ui;
         ui.onDisplay();
+
         this.stage.setScene(ui.buildScene());
     }
 

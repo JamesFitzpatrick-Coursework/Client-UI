@@ -48,4 +48,9 @@ public class UserMainController extends Controller {
             }
         }
     }
+
+    @Override
+    protected Pane getContentPane() {
+        return pnlContainer;
+    }
 }

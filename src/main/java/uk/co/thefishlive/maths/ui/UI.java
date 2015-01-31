@@ -35,6 +35,10 @@ public class UI {
         this.controller.onDisplay();
     }
 
+    public void onClose() {
+        this.controller.onClose();
+    }
+
     public void setParent(UI ui) {
         this.controller.setParent(ui);
     }

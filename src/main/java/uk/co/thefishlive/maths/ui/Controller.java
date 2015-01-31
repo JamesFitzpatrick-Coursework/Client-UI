@@ -1,5 +1,6 @@
 package uk.co.thefishlive.maths.ui;
 
+import com.google.common.base.Throwables;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -29,16 +30,27 @@ public abstract class Controller implements Initializable, Displayable {
     @Override
     public void onDisplay() {}
 
-    protected void showLoadingAnimation(Pane container) throws ResourceException, IOException {
-        UI loading = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/loading.fxml"));
-        container.getChildren().add(loading.getPane());
+    @Override
+    public void onClose() {
+        try {
+            hideLoadingAnimation();
+        } catch (ResourceException | IOException e) {
+            Throwables.propagate(e);
+        }
     }
 
-    protected void hideLoadingAnimation(Pane container) throws ResourceException, IOException {
-        List<Node> children = new ArrayList<>(container.getChildren());
+    protected abstract Pane getContentPane();
+
+    protected void showLoadingAnimation() throws ResourceException, IOException {
+        UI loading = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/loading.fxml"));
+        getContentPane().getChildren().add(loading.getPane());
+    }
+
+    protected void hideLoadingAnimation() throws ResourceException, IOException {
+        List<Node> children = new ArrayList<>(getContentPane().getChildren());
         for (Node node : children) {
             if ("pnlLoading".equals(node.getId())) {
-                container.getChildren().remove(node);
+                getContentPane().getChildren().remove(node);
             }
         }
     }

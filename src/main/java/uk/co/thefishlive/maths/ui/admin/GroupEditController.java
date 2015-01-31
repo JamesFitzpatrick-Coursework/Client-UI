@@ -1,57 +1,52 @@
 package uk.co.thefishlive.maths.ui.admin;
 
 import com.google.common.base.Throwables;
-
-import java.io.IOException;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-
-import uk.co.thefishlive.auth.user.User;
-import uk.co.thefishlive.auth.user.UserProfile;
+import uk.co.thefishlive.auth.group.Group;
+import uk.co.thefishlive.auth.group.GroupProfile;
 import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.ui.Controller;
+import uk.co.thefishlive.meteor.group.MeteorGroupProfile;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import uk.co.thefishlive.meteor.user.MeteorUserProfile;
 
 /**
  *
  */
-public class UserEditController extends Controller {
+public class GroupEditController extends Controller {
 
     @FXML private TextField txtDisplayname;
-    @FXML private TextField txtUsername;
-    @FXML private PasswordField txtPassword;
-    @FXML private PasswordField txtPassword2;
+    @FXML private TextField txtGroupname;
 
     @FXML private Pane pnlMenu;
     @FXML private Pane pnlContainer;
 
-    private UserProfile user;
+    private GroupProfile group;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-    public void setUser(UserProfile user) {
-        this.user = user;
+    public void setGroup(GroupProfile user) {
+        this.group = user;
     }
 
     @Override
     public void onDisplay() {
-        if (this.user == null) {
+        if (this.group== null) {
             return;
         }
 
-        this.txtDisplayname.setText(this.user.getDisplayName());
-        this.txtUsername.setText(this.user.getName());
+        this.txtDisplayname.setText(this.group.getDisplayName());
+        this.txtGroupname.setText(this.group.getName());
     }
 
     @FXML
@@ -63,20 +58,18 @@ public class UserEditController extends Controller {
 
     @FXML
     public void btnCancel_Click(ActionEvent event) {
-        Main.getInstance().setCurrentUI(getParent());
+        this.close();
     }
 
     @FXML
     public void btnEdit_Click(ActionEvent event) {
         try {
-            User user = Main.getInstance().getAuthHandler().getUserManager().getUserProfile(this.user);
+            Group group = Main.getInstance().getAuthHandler().getGroupManager().getGroupProfile(this.group);
 
-            UserProfile updated = new MeteorUserProfile(this.txtUsername.getText(), this.txtDisplayname.getText());
-            user.updateProfile(updated);
+            GroupProfile updated = new MeteorGroupProfile(this.txtGroupname.getText(), this.txtDisplayname.getText());
+            group.updateProfile(updated);
 
-            // TODO update password
-
-            Main.getInstance().setCurrentUI(getParent());
+            this.close();
         } catch (IOException e) {
             Throwables.propagate(e);
         }

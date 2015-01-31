@@ -37,6 +37,7 @@ public class UserCreateController extends Controller {
     @FXML private Label lblErrorPassword2;
 
     @FXML private Pane pnlMenu;
+    @FXML private Pane pnlContainer;
 
     @FXML
     public void btnMenu_Click(MouseEvent event) {
@@ -50,7 +51,7 @@ public class UserCreateController extends Controller {
     }
 
     @FXML
-    public void btnCancel_Click(MouseEvent event) {
+    public void btnCancel_Click(ActionEvent event) {
         Main.getInstance().setCurrentUI(getParent());
     }
 
@@ -100,6 +101,11 @@ public class UserCreateController extends Controller {
 
     public void setCreateCallback(CreateCallback callback) {
         this.callback = callback;
+    }
+
+    @Override
+    protected Pane getContentPane() {
+        return pnlContainer;
     }
 
     public static interface CreateCallback {

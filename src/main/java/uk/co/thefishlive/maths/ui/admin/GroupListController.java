@@ -38,9 +38,9 @@ import java.util.ResourceBundle;
 public class GroupListController extends Controller {
 
     @FXML private Pane pnlContainer;
+    @FXML private Pane pnlMenu;
 
     @FXML private GridPane pnlGroups;
-    @FXML private Pane pnlMenu;
 
     @FXML private Pane pnlAlert;
     @FXML private Label lblAlertMessage;
@@ -78,6 +78,8 @@ public class GroupListController extends Controller {
     @Override
     public void onDisplay() {
         try {
+            pnlGroups.getChildren().clear();
+
             final List<GroupProfile> groups = Main.getInstance().getAuthHandler().getGroupManager().getGroups();
             int index = 0;
 
@@ -114,7 +116,7 @@ public class GroupListController extends Controller {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
                             try {
-                                showLoadingAnimation(pnlContainer);
+                                showLoadingAnimation();
 
                                 UI ui = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/admin/user_list.fxml"));
                                 ui.setParent(Main.getInstance().getCurrentUI());
@@ -139,5 +141,10 @@ public class GroupListController extends Controller {
         } catch (IOException e) {
             Throwables.propagate(e);
         }
+    }
+
+    @Override
+    protected Pane getContentPane() {
+        return pnlContainer;
     }
 }

@@ -43,4 +43,9 @@ public class MenuController extends Controller {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblMenuUsername.setText(Main.getInstance().getAuthHandler().getActiveSession().getProfile().getDisplayName());
     }
+
+    @Override
+    protected Pane getContentPane() {
+        return pnlMenu;
+    }
 }

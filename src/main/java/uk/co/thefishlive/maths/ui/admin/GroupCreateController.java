@@ -29,6 +29,7 @@ public class GroupCreateController extends Controller {
     @FXML private Label lblErrorDisplayname;
 
     @FXML private Pane pnlMenu;
+    @FXML private Pane pnlContainer;
 
     @FXML
     public void btnMenu_Click(MouseEvent event) {
@@ -42,7 +43,7 @@ public class GroupCreateController extends Controller {
     }
 
     @FXML
-    public void btnCancel_Click(MouseEvent event) {
+    public void btnCancel_Click(ActionEvent event) {
         Main.getInstance().setCurrentUI(getParent());
     }
 
@@ -84,6 +85,11 @@ public class GroupCreateController extends Controller {
 
     public void setCreateCallback(CreateCallback callback) {
         this.callback = callback;
+    }
+
+    @Override
+    protected Pane getContentPane() {
+        return pnlContainer;
     }
 
     public static interface CreateCallback {

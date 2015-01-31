@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.admin.UserEditController">
+<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.admin.UserEditController">
    <children>
       <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="800.0" style="-fx-background-color: #2196F3;">
          <children>
@@ -102,11 +102,17 @@
                            <font>
                               <Font size="15.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <Button fx:id="btnCancel" layoutX="195.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnCancel_Click" prefWidth="99.0" style="-fx-background-color: #F44336;" text="Cancel" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                      </children>
                   </Pane>

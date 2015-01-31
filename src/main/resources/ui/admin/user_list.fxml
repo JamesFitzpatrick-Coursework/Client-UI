@@ -85,27 +85,27 @@
                                  <Cursor fx:constant="HAND" />
                              </cursor>
                          </Pane>
-                         <Pane fx:id="itmEditGroup" onMouseClicked="#itmEditGroup_CLick" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                         <Pane fx:id="itmEditGroup" onMouseClicked="#itmEdit_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                              <children>
                                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                                      <image>
                                          <Image url="@../../images/icons/ic_mode_edit_black_36dp.png" />
                                      </image>
                                  </ImageView>
-                                 <Label layoutX="65.0" layoutY="10.0" text="Add User" />
+                                 <Label layoutX="65.0" layoutY="10.0" text="Edit Group" />
                              </children>
                              <cursor>
                                  <Cursor fx:constant="HAND" />
                              </cursor>
                          </Pane>
-                         <Pane fx:id="itmDeleteGroup" onMouseClicked="#itmDeleteGroup_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                         <Pane fx:id="itmDeleteGroup" onMouseClicked="#itmDelete_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                              <children>
                                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                                      <image>
-                                         <Image url="@../../images/icons/ic_delelete_black_36dp.png" />
+                                         <Image url="@../../images/icons/ic_delete_black_36dp.png" />
                                      </image>
                                  </ImageView>
-                                 <Label layoutX="65.0" layoutY="10.0" text="Add User" />
+                                 <Label layoutX="65.0" layoutY="10.0" text="Delete Group" />
                              </children>
                              <cursor>
                                  <Cursor fx:constant="HAND" />

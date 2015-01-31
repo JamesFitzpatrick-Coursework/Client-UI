@@ -55,9 +55,10 @@ public class UserListController extends Controller {
         }
     }
 
-    @FXML private GridPane pnlUsers;
     @FXML private Pane pnlMenu;
     @FXML private Pane pnlContainer;
+
+    @FXML private GridPane pnlUsers;
 
     @FXML private Label lblGroupName;
 
@@ -75,7 +76,6 @@ public class UserListController extends Controller {
         UI ui = UILoader.loadUI(getInstance().getResourceManager().getResource("ui/admin/user_create.fxml"));
 
         UserCreateController controller = ui.getController(UserCreateController.class);
-        controller.setParent(getInstance().getCurrentUI());
         controller.setCreateCallback(new CreateCallback() {
             @Override
             public void userCreated(User profile) {
@@ -86,16 +86,37 @@ public class UserListController extends Controller {
         getInstance().setCurrentUI(ui);
     }
 
+    @FXML
+    public void itmEdit_Click(MouseEvent event) throws ResourceException, IOException {
+        UI ui = UILoader.loadUI(getInstance().getResourceManager().getResource("ui/admin/group_edit.fxml"));
+
+        GroupEditController controller = ui.getController(GroupEditController.class);
+        controller.setGroup(this.group);
+
+        getInstance().setCurrentUI(ui);
+    }
+
+    @FXML
+    public void itmDelete_Click(MouseEvent event) throws ResourceException, IOException {
+        LOGGER.info("Deleting group {}", group.toString());
+        showLoadingAnimation();
+
+        getInstance().getAuthHandler().getGroupManager().deleteGroup(group);
+        close();
+        LOGGER.info("Deleted group {} successfully", group.toString());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
     public void setGroup(GroupProfile group) {
         this.group = group;
-        this.lblGroupName.setText(this.group.getDisplayName());
     }
 
     public void onDisplay() {
+        this.lblGroupName.setText(this.group.getDisplayName());
+
         try {
             pnlUsers.getChildren().clear();
 
@@ -159,12 +180,12 @@ public class UserListController extends Controller {
                     public void handle(MouseEvent mouseEvent) {
                         try {
                             LOGGER.info("Deleting user {}", user.toString());
-                            showLoadingAnimation(pnlContainer);
+                            showLoadingAnimation();
 
                             getInstance().getAuthHandler().getUserManager().deleteUser(user);
                             onDisplay();
 
-                            hideLoadingAnimation(pnlContainer);
+                            hideLoadingAnimation();
                             LOGGER.info("User deleted {} successfully", user.toString());
                         } catch (ResourceException | IOException e) {
                             Throwables.propagate(e);
@@ -173,11 +194,15 @@ public class UserListController extends Controller {
                 });
                 pane.getChildren().add(delete);
 
-                System.out.println(pane.getChildren());
                 pnlUsers.add(pane, 0, pos++);
             }
         } catch (IOException e) {
             Throwables.propagate(e);
         }
+    }
+
+    @Override
+    protected Pane getContentPane() {
+        return pnlContainer;
     }
 }

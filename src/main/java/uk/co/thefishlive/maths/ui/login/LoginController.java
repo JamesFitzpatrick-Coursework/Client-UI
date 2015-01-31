@@ -61,7 +61,7 @@ public class LoginController extends Controller {
     @FXML
     public void btnLogin_Click(ActionEvent event) {
         try {
-            showLoadingAnimation(pnlContainer);
+            showLoadingAnimation();
         } catch (ResourceException | IOException e) {
             Throwables.propagate(e);
         }
@@ -112,5 +112,10 @@ public class LoginController extends Controller {
         fadeIn.setFromValue(0.5d);
         fadeIn.setToValue(1);
         fadeIn.play();
+    }
+
+    @Override
+    protected Pane getContentPane() {
+        return pnlContainer;
     }
 }
