@@ -42,6 +42,6 @@ public interface Resource {
      * @throws ResourceException signals an error has occurred getting the
      *                              resource url
      */
-    public URL getUrl() throws ResourceException;
+    public URL getUrl();
 
 }

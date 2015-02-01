@@ -1,10 +1,9 @@
-package uk.co.thefishlive.maths.ui.admin;
+package uk.co.thefishlive.maths.ui.controllers.admin;
 
 import com.google.common.base.Throwables;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,7 +15,6 @@ import uk.co.thefishlive.auth.user.UserManager;
 import uk.co.thefishlive.auth.user.UserProfile;
 import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.ui.Controller;
-import uk.co.thefishlive.maths.ui.UI;
 import uk.co.thefishlive.meteor.user.MeteorUserProfile;
 
 import java.io.IOException;

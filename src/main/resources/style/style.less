@@ -1,0 +1,53 @@
+// Variables
+@primary: #2196F3;
+@primary-dark: #1976D2;
+@primary-light: #BBDEFB;
+@accent: #4CAF50;
+
+@text-primary: #212121;
+@text-secondary: #727272;
+
+@success: #4CAF50;
+@danger: #FF5252;
+
+// Shorthands for JavaFX methods
+.background(@color) {
+  -fx-background-color: @color;
+}
+
+.text-fill(@color) {
+  -fx-text-fill: @color;
+}
+
+// Utility classes
+.background-primary {
+  .background(@primary);
+}
+
+.background-primary-dark {
+  .background(@primary-dark);
+}
+
+.background-primary-light {
+  .background(@primary-light);
+}
+
+.background-accent {
+  .background(@accent);
+}
+
+.primary-text {
+  .text-fill(@text-primary);
+}
+
+.secondary-text {
+  .text-fill(@text-secondary);
+}
+
+.background-success {
+  .background(@success);
+}
+
+.background-danger {
+  .background(@danger);
+}

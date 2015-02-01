@@ -1,4 +1,4 @@
-package uk.co.thefishlive.maths.ui.admin;
+package uk.co.thefishlive.maths.ui.controllers.admin;
 
 import com.google.common.base.Throwables;
 

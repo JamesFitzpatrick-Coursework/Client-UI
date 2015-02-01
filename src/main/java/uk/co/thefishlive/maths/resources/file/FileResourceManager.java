@@ -4,6 +4,9 @@ import uk.co.thefishlive.maths.resources.CachingResourceManger;
 import uk.co.thefishlive.maths.resources.Resource;
 
 import java.io.File;
+import java.net.MalformedURLException;
+
+import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.resources.exception.ResourceNotFoundException;
 
 /**
@@ -18,14 +21,18 @@ public class FileResourceManager extends CachingResourceManger {
     }
 
     @Override
-    protected Resource loadResource(String path) throws ResourceNotFoundException {
+    protected Resource loadResource(String path) throws ResourceException {
         File file = new File(basedir, path);
 
         if (!file.exists()) {
             throw new ResourceNotFoundException("Could not find resource at " + path + " (" + file + ")");
         }
 
-        return new FileResource(file);
+        try {
+            return typeRegistry.createResource(path, file.toURI().toURL());
+        } catch (MalformedURLException e) {
+            throw new ResourceException(e);
+        }
     }
 
 }

@@ -1,12 +1,10 @@
-package uk.co.thefishlive.maths.ui.login;
+package uk.co.thefishlive.maths.ui.controllers.login;
 
 import com.google.common.base.Throwables;
 
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -21,22 +19,18 @@ import org.apache.logging.log4j.MarkerManager;
 import uk.co.thefishlive.auth.user.UserProfile;
 import uk.co.thefishlive.auth.login.LoginHandler;
 import uk.co.thefishlive.auth.session.Session;
-import uk.co.thefishlive.auth.user.UserProfile;
 import uk.co.thefishlive.http.exception.HttpException;
 import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.ui.Controller;
-import uk.co.thefishlive.maths.ui.UI;
-import uk.co.thefishlive.maths.ui.UILoader;
-import uk.co.thefishlive.maths.ui.utils.EffectsUtils;
+import uk.co.thefishlive.maths.ui.loader.UI;
+import uk.co.thefishlive.maths.ui.loader.UILoader;
 import uk.co.thefishlive.meteor.user.MeteorUserProfile;
 import uk.co.thefishlive.meteor.login.exception.LoginException;
-import uk.co.thefishlive.meteor.user.MeteorUserProfile;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
 
 /**
  *

@@ -10,9 +10,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.admin.GroupEditController">
+<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.controllers.admin.GroupEditController">
    <children>
-      <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="800.0" style="-fx-background-color: #2196F3;">
+      <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="800.0" styleClass="background-primary">
          <children>
             <Label fx:id="lblCopywrite" layoutX="14.0" layoutY="6.0" text="© James Fitzpatrick 2014" />
          </children>
@@ -20,9 +20,9 @@
             <DropShadow />
          </effect>
       </Pane>
-      <Pane fx:id="pnlTitle" prefHeight="45.0" prefWidth="300.0" style="-fx-background-color: #2196F3;">
+      <Pane fx:id="pnlTitle" prefHeight="45.0" prefWidth="300.0" styleClass="background-primary">
          <children>
-            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Click" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Click" pickOnBounds="true" preserveRatio="true" style="icon: menu;icon-color: white;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -69,24 +69,24 @@
                <children>
                   <TextField fx:id="txtDisplayname" prefHeight="25.0" prefWidth="295.0" promptText="Display Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="txtGroupname" prefHeight="25.0" prefWidth="321.0" promptText="Group Name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="203.0" text="Display Name" textAlignment="CENTER" GridPane.rowIndex="1">
+                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="203.0" styleClass="primary-text" text="Display Name" textAlignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="201.0" text="Group Name" textAlignment="CENTER" GridPane.rowIndex="2">
+                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="201.0" styleClass="primary-text" text="Group Name" textAlignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="29.0" prefWidth="523.0" text="Edit Group" textAlignment="CENTER" GridPane.columnIndex="1">
+                  <Label alignment="CENTER" prefHeight="29.0" prefWidth="523.0" styleClass="primary-text" text="Edit Group" textAlignment="CENTER" textFill="#212121" GridPane.columnIndex="1">
                      <font>
                         <Font name="Roboto Bold" size="21.0" />
                      </font>
                   </Label>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
                      <children>
-                        <Button fx:id="btnEdit" layoutX="85.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnEdit_Click" prefWidth="99.0" style="-fx-background-color: #2196F3;" text="Edit Group" textFill="WHITE">
+                        <Button fx:id="btnEdit" layoutX="85.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnEdit_Click" prefWidth="99.0" styleClass="background-primary" text="Edit Group" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -94,7 +94,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="btnCancel" layoutX="195.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnCancel_Click" prefWidth="99.0" style="-fx-background-color: #F44336;" text="Cancel" textFill="WHITE">
+                        <Button fx:id="btnCancel" layoutX="195.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnCancel_Click" prefWidth="99.0" styleClass="background-danger" text="Cancel" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>

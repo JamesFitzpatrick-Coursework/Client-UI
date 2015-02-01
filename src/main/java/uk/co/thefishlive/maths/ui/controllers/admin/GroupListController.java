@@ -1,13 +1,10 @@
-package uk.co.thefishlive.maths.ui.admin;
+package uk.co.thefishlive.maths.ui.controllers.admin;
 
 import com.google.common.base.Throwables;
-import com.google.common.util.concurrent.AbstractScheduledService.Scheduler;
 import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -23,8 +20,8 @@ import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.ui.ColorPalette;
 import uk.co.thefishlive.maths.ui.Controller;
-import uk.co.thefishlive.maths.ui.UI;
-import uk.co.thefishlive.maths.ui.UILoader;
+import uk.co.thefishlive.maths.ui.loader.UI;
+import uk.co.thefishlive.maths.ui.loader.UILoader;
 import uk.co.thefishlive.maths.ui.utils.EffectsUtils;
 
 import java.io.IOException;

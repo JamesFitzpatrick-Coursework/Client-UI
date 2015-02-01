@@ -8,19 +8,19 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.login.LoginController">
+<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.controllers.login.LoginController">
    <children>
-      <Pane fx:id="pnlTitle" prefHeight="45.0" prefWidth="400.0" style="-fx-background-color: #2196F3;">
+      <Pane fx:id="pnlTitle" prefHeight="45.0" prefWidth="400.0" styleClass="background-primary">
          <effect>
             <DropShadow />
          </effect>
       </Pane>
-      <Pane fx:id="pnlLogin" layoutX="250.0" layoutY="150.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #BBDEFB;">
+      <Pane fx:id="pnlLogin" layoutX="250.0" layoutY="150.0" prefHeight="300.0" prefWidth="300.0" styleClass="background-primary-light">
          <effect>
             <DropShadow />
          </effect>
          <children>
-            <Label layoutX="129.0" layoutY="14.0" text="Login" textFill="#000000de">
+            <Label layoutX="129.0" layoutY="14.0" text="Login" styleClass="text-primary">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -37,7 +37,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="btnLogin" layoutX="219.0" layoutY="256.0" mnemonicParsing="false" onAction="#btnLogin_Click" prefHeight="30.0" prefWidth="66.0" style="-fx-background-color: #00E676;" text="LOGIN" textFill="#000000de">
+            <Button fx:id="btnLogin" layoutX="219.0" layoutY="256.0" mnemonicParsing="false" onAction="#btnLogin_Click" prefHeight="30.0" prefWidth="66.0" styleClass="background-success" text="LOGIN" textFill="#000000de">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -50,12 +50,12 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="800.0" style="-fx-background-color: #2196F3;">
+      <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="800.0" styleClass="background-primary">
          <effect>
             <DropShadow />
          </effect>
          <children>
-            <Label fx:id="lblCopywrite" layoutX="14.0" layoutY="6.0" text="© James Fitzpatrick 2014" />
+            <Label fx:id="lblCopywrite" layoutX="14.0" layoutY="6.0" text="© James Fitzpatrick 2014" textFill="#FFFFFF" />
          </children>
       </Pane>
    </children>

@@ -1,4 +1,4 @@
-package uk.co.thefishlive.maths.ui.admin;
+package uk.co.thefishlive.maths.ui.controllers.admin;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,27 +33,16 @@ import uk.co.thefishlive.maths.resources.Resource;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.ui.ColorPalette;
 import uk.co.thefishlive.maths.ui.Controller;
-import uk.co.thefishlive.maths.ui.UI;
-import uk.co.thefishlive.maths.ui.UILoader;
-import uk.co.thefishlive.maths.ui.admin.UserCreateController.CreateCallback;
+import uk.co.thefishlive.maths.ui.loader.UI;
+import uk.co.thefishlive.maths.ui.loader.UILoader;
+import uk.co.thefishlive.maths.ui.controllers.admin.UserCreateController.CreateCallback;
+import uk.co.thefishlive.maths.ui.loader.icon.IconData;
 
 import static uk.co.thefishlive.maths.Main.getInstance;
 
 public class UserListController extends Controller {
 
     private static final Logger LOGGER = LogManager.getLogger();
-
-    private static Image EDIT_ICON;
-    private static Image DELETE_ICON;
-
-    static {
-        try {
-            EDIT_ICON = new Image(getInstance().getResourceManager().getResource("images/icons/ic_mode_edit_grey600_24dp.png").getContent());
-            DELETE_ICON = new Image(getInstance().getResourceManager().getResource("images/icons/ic_delete_grey600_24dp.png").getContent());
-        } catch (ResourceException e) {
-            Throwables.propagate(e);
-        }
-    }
 
     @FXML private Pane pnlMenu;
     @FXML private Pane pnlContainer;
@@ -147,7 +136,7 @@ public class UserListController extends Controller {
                 pane.getChildren().add(circle);
 
                 ImageView edit = new ImageView();
-                edit.setImage(EDIT_ICON);
+                edit.setImage(UILoader.getIconCache().getIcon(new IconData("edit", "grey600", "24dp")).getImage());
                 edit.setX(525d);
                 edit.setY(8d);
                 edit.setFitWidth(24d);
@@ -169,7 +158,7 @@ public class UserListController extends Controller {
                 pane.getChildren().add(edit);
 
                 ImageView delete = new ImageView();
-                delete.setImage(DELETE_ICON);
+                delete.setImage(UILoader.getIconCache().getIcon(new IconData("delete", "grey600", "24dp")).getImage());
                 delete.setX(560d);
                 delete.setY(8d);
                 delete.setFitWidth(24d);
@@ -196,7 +185,7 @@ public class UserListController extends Controller {
 
                 pnlUsers.add(pane, 0, pos++);
             }
-        } catch (IOException e) {
+        } catch (IOException | ResourceException e) {
             Throwables.propagate(e);
         }
     }

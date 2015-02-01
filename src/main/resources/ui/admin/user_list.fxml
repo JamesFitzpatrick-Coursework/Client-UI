@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.admin.UserListController">
+<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.controllers.admin.UserListController">
    <children>
       <GridPane fx:id="pnlLayout" hgap="10.0" layoutY="45.0" prefHeight="522.0" prefWidth="800.0" vgap="10.0">
          <columnConstraints>
@@ -74,12 +74,8 @@
                      <children>
                          <Pane fx:id="itmAddUser" onMouseClicked="#itmAddUser_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                              <children>
-                                 <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                                     <image>
-                                         <Image url="@../../images/icons/ic_person_add_black_36dp.png" />
-                                     </image>
-                                 </ImageView>
-                                 <Label layoutX="65.0" layoutY="10.0" text="Add User" />
+                                 <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" style="icon: user-add" />
+                                 <Label layoutX="65.0" layoutY="10.0" styleClass="primary-text" text="Add User" />
                              </children>
                              <cursor>
                                  <Cursor fx:constant="HAND" />
@@ -87,12 +83,8 @@
                          </Pane>
                          <Pane fx:id="itmEditGroup" onMouseClicked="#itmEdit_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                              <children>
-                                 <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                                     <image>
-                                         <Image url="@../../images/icons/ic_mode_edit_black_36dp.png" />
-                                     </image>
-                                 </ImageView>
-                                 <Label layoutX="65.0" layoutY="10.0" text="Edit Group" />
+                                 <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" style="icon: edit" />
+                                 <Label layoutX="65.0" layoutY="10.0" styleClass="primary-text" text="Edit Group" />
                              </children>
                              <cursor>
                                  <Cursor fx:constant="HAND" />
@@ -100,12 +92,8 @@
                          </Pane>
                          <Pane fx:id="itmDeleteGroup" onMouseClicked="#itmDelete_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                              <children>
-                                 <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                                     <image>
-                                         <Image url="@../../images/icons/ic_delete_black_36dp.png" />
-                                     </image>
-                                 </ImageView>
-                                 <Label layoutX="65.0" layoutY="10.0" text="Delete Group" />
+                                 <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" style="icon: delete" />
+                                 <Label layoutX="65.0" layoutY="10.0" styleClass="primary-text" text="Delete Group" />
                              </children>
                              <cursor>
                                  <Cursor fx:constant="HAND" />
@@ -117,7 +105,7 @@
             </Pane>
          </children>
       </GridPane>
-      <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="800.0" style="-fx-background-color: #2196F3;">
+      <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="800.0" styleClass="background-primary">
          <children>
             <Label fx:id="lblCopywrite" layoutX="14.0" layoutY="6.0" text="© James Fitzpatrick 2014" />
          </children>
@@ -125,15 +113,12 @@
             <DropShadow />
          </effect>
       </Pane>
-      <Pane fx:id="pnlTitle" prefHeight="45.0" prefWidth="300.0" style="-fx-background-color: #2196F3;">
+      <Pane fx:id="pnlTitle" prefHeight="45.0" prefWidth="300.0" styleClass="background-primary">
          <children>
-            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Click" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Click" pickOnBounds="true" preserveRatio="true" style="icon: menu;icon-color: white;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-               <image>
-                  <Image url="@../../images/icons/ic_menu_white_36dp.png" />
-               </image>
             </ImageView>
             <Label fx:id="lblGroupName" layoutX="51.0" layoutY="10.0" textFill="WHITE">
                <font>
@@ -154,7 +139,7 @@
             <DropShadow />
          </effect>
       </Pane>
-      <Pane layoutX="708.0" prefHeight="45.0" prefWidth="92.0" style="-fx-background-color: #2196F3;">
+      <Pane layoutX="708.0" prefHeight="45.0" prefWidth="92.0" styleClass="background-primary">
          <effect>
             <DropShadow />
          </effect>

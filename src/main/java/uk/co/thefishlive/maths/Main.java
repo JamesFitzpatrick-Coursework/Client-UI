@@ -21,8 +21,8 @@ import uk.co.thefishlive.maths.logging.Log4JErrorHandler;
 import uk.co.thefishlive.maths.logging.Log4JPrintStream;
 import uk.co.thefishlive.maths.resources.ResourceManager;
 import uk.co.thefishlive.maths.resources.file.FileResourceManager;
-import uk.co.thefishlive.maths.ui.UI;
-import uk.co.thefishlive.maths.ui.UILoader;
+import uk.co.thefishlive.maths.ui.loader.UI;
+import uk.co.thefishlive.maths.ui.loader.UILoader;
 import uk.co.thefishlive.meteor.MeteorAuthHandler;
 import uk.co.thefishlive.meteor.utils.ProxyUtils;
 
@@ -67,7 +67,7 @@ public class Main extends Application {
         Thread.setDefaultUncaughtExceptionHandler(new Log4JErrorHandler());
 
         // Setup Resource Manager
-        this.resourceManager = new FileResourceManager(new File("src/main/resources/"));
+        this.resourceManager = new FileResourceManager(new File("classes"));
         this.systemSettings = new SystemSettings(new File("config/system.dat"));
         this.systemSettings.load();
 
@@ -100,6 +100,10 @@ public class Main extends Application {
                 }
             }
         });
+        this.stage.show();
+
+        // Setup UI Loader
+        UILoader.registerStyleSheet(resourceManager.getResource("style/style.css"));
 
         // Load starting UI
         String uiResource = "ui/login.fxml";
@@ -110,8 +114,6 @@ public class Main extends Application {
 
         UI ui = UILoader.loadUI(resourceManager.getResource(uiResource));
         setCurrentUI(ui);
-
-        this.stage.show();
     }
 
     public AuthHandler getAuthHandler() {
@@ -124,6 +126,10 @@ public class Main extends Application {
 
     public AuthDatabase getAuthDatabase() {
         return this.authDatabase;
+    }
+
+    public SystemSettings getSystemSettings() {
+        return this.systemSettings;
     }
 
     public void setCurrentUI(UI ui) {

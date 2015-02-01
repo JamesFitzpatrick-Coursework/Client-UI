@@ -6,6 +6,8 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
+import uk.co.thefishlive.maths.ui.loader.UI;
+import uk.co.thefishlive.maths.ui.loader.UILoader;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -11,8 +11,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.user.UserMainController">
+<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.controllers.user.UserMainController">
    <children>
       <GridPane fx:id="pnlAssets" hgap="7.5" layoutY="45.0" prefHeight="540.0" prefWidth="600.0" vgap="7.5">
         <columnConstraints>
@@ -30,7 +29,7 @@
             <Insets bottom="7.5" left="7.5" right="7.5" top="7.5" />
          </padding>
       </GridPane>
-      <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="600.0" style="-fx-background-color: #2196F3;">
+      <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="600.0" styleClass="background-primary">
          <children>
             <Label fx:id="lblCopywrite" layoutX="14.0" layoutY="6.0" text="© James Fitzpatrick 2014" />
          </children>
@@ -38,15 +37,12 @@
             <DropShadow />
          </effect>
       </Pane>
-      <Pane fx:id="pnlTitle" prefHeight="45.0" prefWidth="300.0" style="-fx-background-color: #2196F3;">
+      <Pane fx:id="pnlTitle" prefHeight="45.0" prefWidth="300.0" styleClass="background-primary">
          <effect>
             <DropShadow />
          </effect>
          <children>
-            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Clicked" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/icons/ic_menu_white_36dp.png" />
-               </image>
+            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Clicked" pickOnBounds="true" preserveRatio="true" style="icon: menu;icon-color: white;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

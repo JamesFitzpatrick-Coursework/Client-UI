@@ -2,6 +2,8 @@ package uk.co.thefishlive.maths.resources.asset;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.net.MalformedURLException;
 import java.util.Map;
 import uk.co.thefishlive.maths.resources.CachingResourceManger;
 import uk.co.thefishlive.maths.resources.Resource;
@@ -41,6 +43,11 @@ public class AssetResourceManager extends CachingResourceManger {
             throw new ResourceNotFoundException(path);
         }
 
-        return new AssetResource(baseDir, info);
+        try {
+            File file = new File(baseDir, info.getLocalPath());
+            return typeRegistry.createResource(path, file.toURI().toURL());
+        } catch (MalformedURLException e) {
+            throw new ResourceException(e);
+        }
     }
 }

@@ -11,7 +11,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.admin.GroupListController">
+<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.controllers.admin.GroupListController">
    <children>
       <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="800.0" style="-fx-background-color: #2196F3;">
          <children>
@@ -26,10 +26,7 @@
             <DropShadow />
          </effect>
          <children>
-            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Click" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../images/icons/ic_menu_white_36dp.png" />
-               </image>
+            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Click" pickOnBounds="true" preserveRatio="true" style="icon: menu;icon-color: white;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -81,11 +78,7 @@
                      <children>
                         <Pane fx:id="itmAddUser" onMouseClicked="#itmAddGroup_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <children>
-                              <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/icons/ic_group_add_black_36dp.png" />
-                                 </image>
-                              </ImageView>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" style="icon: group-add" />
                               <Label layoutX="65.0" layoutY="10.0" text="Add Group" />
                            </children>
                            <cursor>

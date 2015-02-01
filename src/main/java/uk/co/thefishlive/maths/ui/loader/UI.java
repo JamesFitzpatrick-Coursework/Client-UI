@@ -1,7 +1,8 @@
-package uk.co.thefishlive.maths.ui;
+package uk.co.thefishlive.maths.ui.loader;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import uk.co.thefishlive.maths.ui.Controller;
 
 /**
  *
