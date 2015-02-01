@@ -62,15 +62,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- JavaFX Library -->
-        <dependency>
-            <groupId>javafx</groupId>
-            <artifactId>jfxrt</artifactId>
-            <version>${java.version}</version>
-            <scope>system</scope>
-            <systemPath>${java.home}/lib/jfxrt.jar</systemPath>
-        </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
