@@ -14,10 +14,29 @@
         <project.scm.id>thefishlive-github</project.scm.id>
     </properties>
 
+    <developers>
+        <developer>
+            <id>thefishlive</id>
+            <name>James Fitzpatrick</name>
+            <url>http://thefishlive.co.uk</url>
+            <email>james@thefishlive.co.uk</email>
+            <roles>
+                <role>project lead</role>
+            </roles>
+        </developer>
+    </developers>
+
     <scm>
         <url>https://github.com/thefishlive/bs-maths</url>
         <developerConnection>scm:git:https://github.com/thefishlive/bs-maths.git</developerConnection>
     </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>thefishlive-maven</id>
+            <url>ftp://thefishlive.co.uk</url>
+        </repository>
+    </distributionManagement>
 
     <pluginRepositories>
         <pluginRepository>
