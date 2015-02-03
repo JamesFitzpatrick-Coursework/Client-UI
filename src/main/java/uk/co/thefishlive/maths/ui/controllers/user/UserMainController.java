@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.maths.ui.utils.EffectsUtils;
 
@@ -35,9 +36,6 @@ public class UserMainController extends Controller {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        EffectsUtils.fadeIn(Duration.seconds(1), pnlAlert).play();
-        EffectsUtils.fadeOut(Duration.seconds(3), pnlAlert, Duration.seconds(5)).play();
-
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 4; y++) {
                 Pane asset = new Pane();

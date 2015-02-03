@@ -17,6 +17,8 @@ import uk.co.thefishlive.auth.session.Session;
 import uk.co.thefishlive.auth.session.SessionListener;
 import uk.co.thefishlive.maths.config.AuthDatabase;
 import uk.co.thefishlive.maths.config.SystemSettings;
+import uk.co.thefishlive.maths.events.AlertEvent;
+import uk.co.thefishlive.maths.events.EventController;
 import uk.co.thefishlive.maths.logging.Log4JErrorHandler;
 import uk.co.thefishlive.maths.logging.Log4JPrintStream;
 import uk.co.thefishlive.maths.resources.ResourceManager;
@@ -106,14 +108,20 @@ public class Main extends Application {
         UILoader.registerStyleSheet(resourceManager.getResource("style/style.css"));
 
         // Load starting UI
+        boolean loggedin = false;
         String uiResource = "ui/login.fxml";
 
         if (this.authHandler.getActiveSession() != null) {
+            loggedin = true;
             uiResource = "ui/user_main.fxml";
         }
 
         UI ui = UILoader.loadUI(resourceManager.getResource(uiResource));
         setCurrentUI(ui);
+
+        if (loggedin) {
+            EventController.getInstance().postEvent(new AlertEvent("Successfully logged in as " + getAuthHandler().getActiveSession().getProfile().getDisplayName()));
+        }
     }
 
     public AuthHandler getAuthHandler() {

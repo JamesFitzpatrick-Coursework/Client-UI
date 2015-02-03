@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="pnlMenu" layoutX="-205.0" layoutY="0.0" prefHeight="570.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.MenuController">
+<Pane fx:id="pnlMenu" layoutX="-205.0" layoutY="0.0" prefHeight="570.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.controllers.MenuController">
    <children>
       <Pane layoutY="-1.0" prefHeight="60.0" prefWidth="200.0" styleClass="background-primary">
          <effect>

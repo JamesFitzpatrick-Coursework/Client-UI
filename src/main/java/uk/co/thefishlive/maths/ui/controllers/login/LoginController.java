@@ -21,6 +21,8 @@ import uk.co.thefishlive.auth.login.LoginHandler;
 import uk.co.thefishlive.auth.session.Session;
 import uk.co.thefishlive.http.exception.HttpException;
 import uk.co.thefishlive.maths.Main;
+import uk.co.thefishlive.maths.events.AlertEvent;
+import uk.co.thefishlive.maths.events.EventController;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.maths.ui.loader.UI;
@@ -86,6 +88,8 @@ public class LoginController extends Controller {
 
             UI ui = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/user_main.fxml"));
             Main.getInstance().setCurrentUI(ui);
+
+            EventController.getInstance().postEvent(new AlertEvent("Successfully logged in as " + session.getProfile().getDisplayName()));
         } catch (HttpException ex) {
             logger.error(markerLogin, "Error logging into account", ex);
 

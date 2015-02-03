@@ -68,8 +68,6 @@ public class GroupListController extends Controller {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        EffectsUtils.fadeIn(Duration.seconds(1), pnlAlert).play();
-        EffectsUtils.fadeOut(Duration.seconds(3), pnlAlert, Duration.seconds(5)).play();
     }
 
     @Override
