@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import uk.co.thefishlive.maths.resources.ResourceManager;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
@@ -40,7 +41,7 @@ public class UILoader {
 
     public static UI loadUI(Resource dataFile) throws IOException, ResourceException {
         logger.info("Loading ui {}", dataFile.getPath());
-        FXMLLoader loader = new FXMLLoader(dataFile.getUrl());
+        FXMLLoader loader = new FXMLLoader(dataFile.getUrl(), ResourceBundle.getBundle("lang.strings"));
 
         Pane pane = loader.load();
 

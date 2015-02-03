@@ -14,6 +14,8 @@ import uk.co.thefishlive.auth.user.User;
 import uk.co.thefishlive.auth.user.UserManager;
 import uk.co.thefishlive.auth.user.UserProfile;
 import uk.co.thefishlive.maths.Main;
+import uk.co.thefishlive.maths.events.AlertEvent;
+import uk.co.thefishlive.maths.events.EventController;
 import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.meteor.user.MeteorUserProfile;
 
@@ -90,6 +92,8 @@ public class UserCreateController extends Controller {
             User user = manager.getUserProfile(profile);
             callback.userCreated(user);
             Main.getInstance().setCurrentUI(this.getParent());
+
+            EventController.getInstance().postEvent(new AlertEvent("Created user " + profile.getDisplayName()));
         } catch (IOException e) {
             // ERROR
             Throwables.propagate(e);

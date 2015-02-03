@@ -15,6 +15,8 @@ import javafx.util.Duration;
 import uk.co.thefishlive.auth.user.User;
 import uk.co.thefishlive.auth.user.UserProfile;
 import uk.co.thefishlive.maths.Main;
+import uk.co.thefishlive.maths.events.AlertEvent;
+import uk.co.thefishlive.maths.events.EventController;
 import uk.co.thefishlive.maths.ui.Controller;
 
 import java.net.URL;
@@ -77,6 +79,7 @@ public class UserEditController extends Controller {
             // TODO update password
 
             Main.getInstance().setCurrentUI(getParent());
+            EventController.getInstance().postEvent(new AlertEvent("Updated user " + user.getProfile().getDisplayName()));
         } catch (IOException e) {
             Throwables.propagate(e);
         }

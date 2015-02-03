@@ -24,8 +24,7 @@ public class UserMainController extends Controller {
     @FXML private GridPane pnlAssets;
     @FXML private Pane pnlMenu;
 
-    @FXML private Pane pnlAlert;
-    @FXML private Label lblAlertMessage;
+    @FXML private Label lblTitle;
 
     @FXML
     public void btnMenu_Clicked(MouseEvent event) {
@@ -36,14 +35,19 @@ public class UserMainController extends Controller {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 4; y++) {
+        for (int x = 0; x < 4; x++) {
+            for (int y = 0; y < 2; y++) {
                 Pane asset = new Pane();
                 asset.setEffect(new DropShadow());
                 asset.setStyle("-fx-background-color: #FFFFFF;");
                 pnlAssets.add(asset, x, y);
             }
         }
+    }
+
+    @Override
+    public void onDisplay() {
+        this.lblTitle.setText(Main.getInstance().getAuthHandler().getActiveSession().getProfile().getDisplayName());
     }
 
     @Override

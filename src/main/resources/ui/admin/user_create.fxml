@@ -143,5 +143,6 @@
             <DropShadow />
          </effect>
       </Pane>
+       <fx:include fx:id="pnlAlert" source="../alert.fxml" />
    </children>
 </Pane>
