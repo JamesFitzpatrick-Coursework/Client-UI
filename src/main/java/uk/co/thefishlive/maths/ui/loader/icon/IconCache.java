@@ -22,17 +22,18 @@ public class IconCache {
     private Map<IconData, Icon> icons = Maps.newHashMap();
 
     public IconCache() {
-        registerIconName("back",       "arrow_back");
-        registerIconName("close",      "close");
-        registerIconName("delete",     "delete");
-        registerIconName("group-add",  "group_add");
-        registerIconName("group",      "group");
-        registerIconName("home",       "home");
-        registerIconName("menu",       "menu");
-        registerIconName("edit",       "mode_edit");
-        registerIconName("user-add",   "person_add");
-        registerIconName("user",       "person");
-        registerIconName("settings",   "settings");
+        registerIconName("arrow-back",      "arrow_back");
+        registerIconName("arrow-forward",   "arrow_forward");
+        registerIconName("close",           "close");
+        registerIconName("delete",          "delete");
+        registerIconName("group-add",       "group_add");
+        registerIconName("group",           "group");
+        registerIconName("home",            "home");
+        registerIconName("menu",            "menu");
+        registerIconName("edit",            "mode_edit");
+        registerIconName("user-add",        "person_add");
+        registerIconName("user",            "person");
+        registerIconName("settings",        "settings");
     }
 
     public Icon getIcon(CssElementList css) throws ResourceException {

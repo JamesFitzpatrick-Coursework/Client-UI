@@ -39,6 +39,10 @@ public class UILoader {
     private static IconCache iconCache = new IconCache();
     private static List<Resource> stylesheets = new ArrayList<>();
 
+    public static UI loadUI(String dataFile) throws IOException, ResourceException {
+        return loadUI(Main.getInstance().getResourceManager().getResource(dataFile));
+    }
+
     public static UI loadUI(Resource dataFile) throws IOException, ResourceException {
         logger.info("Loading ui {}", dataFile.getPath());
         FXMLLoader loader = new FXMLLoader(dataFile.getUrl(), ResourceBundle.getBundle("lang.strings"));

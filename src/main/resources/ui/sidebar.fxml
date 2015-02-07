@@ -30,7 +30,7 @@
          <children>
             <Pane fx:id="itmHome" onMouseClicked="#itmHome_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <Label layoutX="44.0" layoutY="9.0" prefHeight="20.0" prefWidth="113.0" styleClass="primary-text" text="Home">
+                  <Label layoutX="44.0" layoutY="9.0" prefHeight="20.0" prefWidth="113.0" styleClass="primary-text" text="%menu.home">
                      <font>
                         <Font name="Roboto Regular" size="14.0" />
                      </font>
@@ -47,7 +47,7 @@
             </Pane>
             <Pane fx:id="itmSettings" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <Label layoutX="44.0" layoutY="9.0" prefHeight="20.0" prefWidth="113.0" styleClass="primary-text" text="Settings">
+                  <Label layoutX="44.0" layoutY="9.0" prefHeight="20.0" prefWidth="113.0" styleClass="primary-text" text="%menu.settings">
                      <font>
                         <Font name="Roboto Regular" size="14.0" />
                      </font>
@@ -64,7 +64,7 @@
             </Pane>
             <Pane fx:id="itmGroups" onMouseClicked="#itmGroups_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
-                  <Label layoutX="44.0" layoutY="9.0" prefHeight="20.0" prefWidth="113.0" styleClass="primary-text" text="Classes">
+                  <Label layoutX="44.0" layoutY="9.0" prefHeight="20.0" prefWidth="113.0" styleClass="primary-text" text="%menu.groups">
                      <font>
                         <Font name="Roboto Regular" size="14.0" />
                      </font>

@@ -26,7 +26,6 @@ public class Log4JPrintStream extends PrintStream {
     @Override
     public void println(String string) {
         logger.log(level, string);
-        super.println(string);
     }
 
 

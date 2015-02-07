@@ -8,7 +8,7 @@ public class ColorPalette {
     public static final Color DARK_PRIMARY = Color.web("#1976D2");
     public static final Color LIGHT_PRIMARY = Color.web("#BBDEFB");
 
-    public static final Color ACCENT = Color.web("#FF5722");
+    public static final Color ACCENT = Color.web("#4CAF50");
 
     public static final Color TEXT = Color.web("#212121");
     public static final Color SECONDARY_TEXT = Color.web("#727272");

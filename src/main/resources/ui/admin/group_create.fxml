@@ -69,17 +69,17 @@
                <children>
                   <TextField fx:id="txtDisplayname" prefHeight="25.0" prefWidth="295.0" promptText="Enter Display Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="txtGroupname" prefHeight="25.0" prefWidth="321.0" promptText="Enter Username" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="203.0" text="Display Name" textAlignment="CENTER" GridPane.rowIndex="1">
+                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="203.0" text="%group.create.displayname" textAlignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="201.0" text="Username" textAlignment="CENTER" GridPane.rowIndex="2">
+                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="201.0" text="%group.create.groupname" textAlignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="29.0" prefWidth="523.0" text="Create Group" textAlignment="CENTER" GridPane.columnIndex="1">
+                  <Label alignment="CENTER" prefHeight="29.0" prefWidth="523.0" text="%group.create.title" textAlignment="CENTER" GridPane.columnIndex="1">
                      <font>
                         <Font name="Roboto Bold" size="21.0" />
                      </font>
