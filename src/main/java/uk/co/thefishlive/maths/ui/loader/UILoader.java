@@ -47,6 +47,10 @@ public class UILoader {
         logger.info("Loading ui {}", dataFile.getPath());
         FXMLLoader loader = new FXMLLoader(dataFile.getUrl(), ResourceBundle.getBundle("lang.strings"));
 
+        if (loader.getController() != null && !(loader.getController() instanceof Controller)) {
+            throw new ResourceException(String.format("Controller specified for ui %s is not valid controller (%s)", dataFile.getPath(), loader.getController().getClass().getName()));
+        }
+
         Pane pane = loader.load();
 
         for (Resource resource : stylesheets) {

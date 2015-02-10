@@ -85,8 +85,9 @@ public class UserMainController extends Controller {
                                 question2
                         )
                 );
-                assessment.display(AssessmentView.QUESTION);
+                assessment.display(AssessmentView.START);
             } catch (ReflectiveOperationException | ResourceException | IOException e) {
+                e.printStackTrace();
                 Throwables.propagate(e);
             }
         });

@@ -8,10 +8,10 @@ import uk.co.thefishlive.maths.resources.exception.ResourceException;
 
 public abstract class Question<T> {
 
-    private String question;
-    private int questionNumber;
-    private QuestionType type;
-    public Assessment assessment;
+    protected String question;
+    protected int questionNumber;
+    protected QuestionType type;
+    protected Assessment assessment;
 
     public Question(String question, int questionNumber, QuestionType type) {
         this.question = question;
@@ -45,4 +45,6 @@ public abstract class Question<T> {
     public abstract void setAnswer(T answer);
 
     public abstract T getAnswer();
+
+    public abstract boolean isAnswered();
 }

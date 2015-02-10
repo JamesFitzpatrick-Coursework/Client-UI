@@ -7,8 +7,8 @@ import uk.co.thefishlive.maths.ui.loader.css.CssElementList;
  */
 public class IconData {
 
-    static final String DEFAULT_COLOUR = "black";
-    static final String DEFAULT_SIZE = "36dp";
+    public static final String DEFAULT_COLOUR = "black";
+    public static final String DEFAULT_SIZE = "36dp";
 
     private String id;
     private String color;

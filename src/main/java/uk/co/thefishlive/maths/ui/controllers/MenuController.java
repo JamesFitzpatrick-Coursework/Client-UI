@@ -10,8 +10,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import uk.co.thefishlive.maths.Main;
+import uk.co.thefishlive.maths.assessment.editor.AssessmentBuilder;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.ui.Controller;
+import uk.co.thefishlive.maths.ui.controllers.editor.QuestionEditorController;
 import uk.co.thefishlive.maths.ui.loader.UI;
 import uk.co.thefishlive.maths.ui.loader.UILoader;
 
@@ -30,6 +32,13 @@ public class MenuController extends Controller {
     @FXML
     public void itmHome_Click(MouseEvent event) throws ResourceException, IOException {
         UI ui = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/user_main.fxml"));
+        Main.getInstance().setCurrentUI(ui);
+    }
+
+    @FXML
+    private void itmEditor_Click(MouseEvent event) throws ResourceException, IOException {
+        UI ui = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/editor/editor_question.fxml"));
+        ui.getController(QuestionEditorController.class).setEditorInfo(new AssessmentBuilder(), -1);
         Main.getInstance().setCurrentUI(ui);
     }
 

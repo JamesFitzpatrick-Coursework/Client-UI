@@ -15,10 +15,17 @@ import org.apache.logging.log4j.Logger;
 import uk.co.thefishlive.auth.AuthHandler;
 import uk.co.thefishlive.auth.session.Session;
 import uk.co.thefishlive.auth.session.SessionListener;
+import uk.co.thefishlive.maths.assessment.Assessment;
+import uk.co.thefishlive.maths.assessment.json.AssessmentAdapter;
+import uk.co.thefishlive.maths.assessment.json.question.QuestionAdapter;
+import uk.co.thefishlive.maths.assessment.json.question.multichoice.MultiChoiceQuestionAdapter;
+import uk.co.thefishlive.maths.assessment.question.Question;
+import uk.co.thefishlive.maths.assessment.question.multichoice.MultiChoiceQuestion;
 import uk.co.thefishlive.maths.config.AuthDatabase;
 import uk.co.thefishlive.maths.config.SystemSettings;
 import uk.co.thefishlive.maths.events.AlertEvent;
 import uk.co.thefishlive.maths.events.EventController;
+import uk.co.thefishlive.maths.json.GsonInstance;
 import uk.co.thefishlive.maths.logging.Log4JErrorHandler;
 import uk.co.thefishlive.maths.logging.Log4JPrintStream;
 import uk.co.thefishlive.maths.resources.ResourceManager;
@@ -62,6 +69,12 @@ public class Main extends Application {
         instance = this;
         logger.info("Starting application");
 
+        // Setup GSON
+        GsonInstance.registerAdapter(Assessment.class, new AssessmentAdapter());
+        GsonInstance.registerAdapter(Question.class, new QuestionAdapter());
+        GsonInstance.registerAdapter(MultiChoiceQuestion.class, new MultiChoiceQuestionAdapter());
+        GsonInstance.buildInstance();
+
         // Setup logging redirects
         System.setOut(new Log4JPrintStream(System.out, LogManager.getLogger("SysOut"), Level.INFO));
         System.setErr(new Log4JPrintStream(System.err, LogManager.getLogger("SysErr"), Level.WARN));
@@ -75,12 +88,9 @@ public class Main extends Application {
 
         // Setup Auth Handler
         this.authHandler = new MeteorAuthHandler(ProxyUtils.getSystemProxy(), systemSettings.getClientId());
-        this.authHandler.addSessionListener(new SessionListener() {
-            @Override
-            public void onActiveSessionChanged(Session newSession) {
-                authDatabase.updateSession(newSession);
-                authDatabase.save();
-            }
+        this.authHandler.addSessionListener(newSession -> {
+            authDatabase.updateSession(newSession);
+            authDatabase.save();
         });
 
         // Setup login config
@@ -90,18 +100,16 @@ public class Main extends Application {
         // Setup JavaFX
         this.stage = stage;
         this.stage.setResizable(false);
-        this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                try {
-                    logger.info("Exiting application");
-                    stop();
-                    System.exit(0);
-                } catch (Exception e) {
-                    Throwables.propagate(e);
-                }
+        this.stage.setOnCloseRequest(event -> {
+            try {
+                logger.info("Exiting application");
+                stop();
+                System.exit(0);
+            } catch (Exception e) {
+                Throwables.propagate(e);
             }
         });
+        this.stage.setTitle("BS Maths");
         this.stage.show();
 
         // Setup UI Loader
@@ -154,6 +162,7 @@ public class Main extends Application {
         ui.onDisplay();
 
         this.stage.setScene(ui.buildScene());
+        logger.info("UI displayed successfully {}", ui.getName());
     }
 
     public UI getCurrentUI() {

@@ -13,4 +13,6 @@ public class ColorPalette {
     public static final Color TEXT = Color.web("#212121");
     public static final Color SECONDARY_TEXT = Color.web("#727272");
     public static final Color DIVIDER = Color.web("#B6B6B6");
+
+    public static final Color WHITE = Color.web("#FFFFFF");
 }

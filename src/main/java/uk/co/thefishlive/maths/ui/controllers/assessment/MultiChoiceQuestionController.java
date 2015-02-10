@@ -110,7 +110,6 @@ public class MultiChoiceQuestionController extends Controller {
 
                 this.assessment.nextQuestion();
             } catch (EndOfAssessmentException e) {
-                // End assessment
                 this.assessment.display(AssessmentView.SUMMARY);
             }
         } catch (IOException | ResourceException e) {

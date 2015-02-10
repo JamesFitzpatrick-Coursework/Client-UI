@@ -12,6 +12,11 @@ public class QuestionAdapter implements JsonAdapter<Question> {
     @Override
     public Question deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws JsonParseException {
         JsonObject json = jsonElement.getAsJsonObject();
+
+        if (!json.has("type")) {
+            throw new JsonParseException("Question does not contain type");
+        }
+
         QuestionType questionType = QuestionType.values()[json.get("type").getAsInt()];
         return context.deserialize(json, questionType.getHandlerClass());
     }

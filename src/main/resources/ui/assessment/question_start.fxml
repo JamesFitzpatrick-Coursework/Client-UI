@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.controllers.assessment.StartController">
+   <children>
+      <Pane prefHeight="50.0" prefWidth="300.0" styleClass="background-primary">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Click" pickOnBounds="true" preserveRatio="true" style="icon: menu; icon-color: white;">
+               <image>
+                  <Image url="@../../images/icons/ic_menu_white_36dp.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="93.0" prefHeight="302.0" prefWidth="772.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Label fx:id="lblTitle" layoutX="14.0" layoutY="14.0" text="Assessment Name">
+               <font>
+                  <Font name="Roboto Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTitle1" layoutX="167.0" layoutY="95.0" text="%assessment.summary.total">
+               <font>
+                  <Font name="Roboto Regular" size="24.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="122.0" layoutY="94.0">
+               <image>
+                  <Image url="@../../images/icons/ic_question_answer_black_48dp.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblQuestions" layoutX="350.0" layoutY="95.0" prefHeight="33.0" prefWidth="36.0" text="0">
+               <font>
+                  <Font name="Roboto Regular" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="409.0" prefHeight="98.0" prefWidth="772.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <ImageView fx:id="btnNext" fitHeight="64.0" fitWidth="64.0" layoutX="694.0" layoutY="17.0" onMouseClicked="#btnNext_Click" pickOnBounds="true" preserveRatio="true" style="icon: 'arrow-forward'; icon-size: '48dp'">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@../../images/icons/ic_arrow_forward_black_48dp.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <fx:include fx:id="pnlFooter" source="../footer.fxml" />
+
+      <fx:include fx:id="pnlMenu" source="../sidebar.fxml" />
+      <fx:include fx:id="pnlAlert" source="../alert.fxml" />
+   </children>
+</Pane>
