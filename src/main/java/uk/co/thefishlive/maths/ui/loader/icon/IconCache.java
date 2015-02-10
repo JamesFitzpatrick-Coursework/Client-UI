@@ -1,7 +1,6 @@
 package uk.co.thefishlive.maths.ui.loader.icon;
 
 import com.google.common.collect.Maps;
-import javafx.scene.image.Image;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import uk.co.thefishlive.maths.Main;
@@ -10,6 +9,7 @@ import uk.co.thefishlive.maths.resources.handlers.ImageResource;
 import uk.co.thefishlive.maths.ui.loader.css.CssElementList;
 
 import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -18,25 +18,12 @@ public class IconCache {
 
     private static final Logger logger = LogManager.getLogger();
 
-    private Map<String, String> paths = Maps.newHashMap();
+    private final ResourceBundle iconData;
+
     private Map<IconData, Icon> icons = Maps.newHashMap();
 
     public IconCache() {
-        registerIconName("add",                 "add");
-        registerIconName("arrow-back",          "arrow_back");
-        registerIconName("arrow-forward",       "arrow_forward");
-        registerIconName("assignment-late",     "assignment_late");
-        registerIconName("assignment-complete", "assignment_turned_in");
-        registerIconName("close",               "close");
-        registerIconName("delete",              "delete");
-        registerIconName("group-add",           "group_add");
-        registerIconName("group",               "group");
-        registerIconName("home",                "home");
-        registerIconName("menu",                "menu");
-        registerIconName("edit",                "mode_edit");
-        registerIconName("user-add",            "person_add");
-        registerIconName("user",                "person");
-        registerIconName("settings",            "settings");
+        this.iconData = ResourceBundle.getBundle("properties.icons");
     }
 
     public Icon getIcon(CssElementList css) throws ResourceException {
@@ -62,13 +49,11 @@ public class IconCache {
     }
 
     private Icon loadIcon(IconData data) throws ResourceException {
-        String path = paths.get(data.getId());
-
-        if (path == null) {
+        if (!iconData.containsKey(data.getInternalName())) {
             throw new ResourceException("Cannot find icon for name " + data.getId());
         }
 
-        path += "_" + data.getColor() + "_" + data.getSize() + ".png";
+        String path = findIconPath(data);
 
         logger.info("Loading icon " + path);
 
@@ -76,7 +61,7 @@ public class IconCache {
         return new Icon(data, resource.getImage());
     }
 
-    private void registerIconName(String name, String filename) {
-        this.paths.put(name, "images/icons/ic_" + filename);
+    private String findIconPath(IconData data) {
+        return "images/icons/ic_" + iconData.getString(data.getInternalName()) + "_" + data.getColor() + "_" + data.getSize() + ".png";
     }
 }

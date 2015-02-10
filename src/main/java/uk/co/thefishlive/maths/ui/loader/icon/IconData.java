@@ -2,6 +2,8 @@ package uk.co.thefishlive.maths.ui.loader.icon;
 
 import uk.co.thefishlive.maths.ui.loader.css.CssElementList;
 
+import java.util.regex.Pattern;
+
 /**
  *
  */
@@ -9,6 +11,8 @@ public class IconData {
 
     public static final String DEFAULT_COLOUR = "black";
     public static final String DEFAULT_SIZE = "36dp";
+
+    private static final Pattern FORMAT_NAME = Pattern.compile("_", Pattern.LITERAL);
 
     private String id;
     private String color;
@@ -62,6 +66,10 @@ public class IconData {
 
     public String getSize() {
         return size;
+    }
+
+    public String getInternalName() {
+        return "icon." + FORMAT_NAME.matcher(id).replaceAll(".");
     }
 
     @Override
