@@ -22,6 +22,8 @@ public class ResourceTypeRegistry {
         registerResourceType("jpg",     ImageResource.class);
         registerResourceType("fxml",    FxmlResource.class);
         registerResourceType("css",     CssResource.class);
+        registerResourceType("json",    JsonResource.class);
+        registerResourceType("dat",     JsonResource.class);
     }
 
     public Resource createResource(String name, URL content) throws ResourceException {
@@ -29,6 +31,11 @@ public class ResourceTypeRegistry {
 
         try {
             Class<? extends Resource> clazz = resourceTypes.get(ext);
+
+            if (clazz == null) {
+                throw new ResourceException("Cannot find handler for class of type " + ext);
+            }
+
             Constructor<? extends Resource> ctor = clazz.getConstructor(String.class, URL.class);
 
             return ctor.newInstance(name, content);

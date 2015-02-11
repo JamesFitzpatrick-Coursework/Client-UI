@@ -1,11 +1,17 @@
 package uk.co.thefishlive.maths.ui.loader.icon;
 
 import com.google.common.collect.Maps;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import uk.co.thefishlive.maths.Main;
+import uk.co.thefishlive.maths.resources.ResourceReader;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.resources.handlers.ImageResource;
+import uk.co.thefishlive.maths.resources.handlers.JsonResource;
 import uk.co.thefishlive.maths.ui.loader.css.CssElementList;
 
 import java.util.Map;
@@ -18,12 +24,25 @@ public class IconCache {
 
     private static final Logger logger = LogManager.getLogger();
 
-    private final ResourceBundle iconData;
-
     private Map<IconData, Icon> icons = Maps.newHashMap();
+    private Map<IconData, String> iconData = Maps.newHashMap();
 
-    public IconCache() {
-        this.iconData = ResourceBundle.getBundle("properties.icons");
+    public IconCache() throws ResourceException {
+        JsonObject json = Main.getInstance().getResourceManager().getResourceAs("data/icons.dat", JsonResource.class).parse();
+
+        for (JsonElement element : json.getAsJsonArray("icons")) {
+            JsonObject icon = element.getAsJsonObject();
+            JsonObject iconData = icon.getAsJsonObject("icon");
+
+            this.iconData.put(
+                    new IconData(
+                            iconData.get("name").getAsString(),
+                            iconData.get("colour").getAsString(),
+                            iconData.get("size").getAsString()
+                    ),
+                    "images/icons/" + icon.get("path").getAsString()
+            );
+        }
     }
 
     public Icon getIcon(CssElementList css) throws ResourceException {
@@ -49,19 +68,15 @@ public class IconCache {
     }
 
     private Icon loadIcon(IconData data) throws ResourceException {
-        if (!iconData.containsKey(data.getInternalName())) {
+        String path = iconData.get(data);
+
+        if (path == null) {
             throw new ResourceException("Cannot find icon for name " + data.getId());
         }
-
-        String path = findIconPath(data);
 
         logger.info("Loading icon " + path);
 
         ImageResource resource = Main.getInstance().getResourceManager().getResourceAs(path, ImageResource.class);
         return new Icon(data, resource.getImage());
-    }
-
-    private String findIconPath(IconData data) {
-        return "images/icons/ic_" + iconData.getString(data.getInternalName()) + "_" + data.getColor() + "_" + data.getSize() + ".png";
     }
 }

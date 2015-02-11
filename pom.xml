@@ -88,6 +88,12 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/generated/resources/</directory>
+            </resource>
+        </resources>
+
         <extensions>
             <!-- Enabling the use of FTP -->
             <extension>
@@ -107,6 +113,48 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.6.1</version>
+
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.build.directory}</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${project.basedir}/src/generated/</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+
+                <executions>
+                    <execution>
+                        <id>process-resources</id>
+                        <phase>generate-resources</phase>
+
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+
+                        <configuration>
+                            <tasks>
+                                <copy todir="${basedir}/src/generated/resources/" >
+                                    <fileset dir="${basedir}/src/main/resources/" includes="**"/>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -131,6 +179,8 @@
 				<executions>
 					<execution>
 						<id>generate-assets</id>
+                        <phase>process-resources</phase>
+
 						<goals>
 							<goal>generate-assets</goal>
 						</goals>
@@ -147,14 +197,56 @@
                     <extensions>
                         <extension>less</extension>
                     </extensions>
+
+                    <outputDirectory>${project.basedir}/src/generated/resources/</outputDirectory>
                 </configuration>
 
                 <executions>
                     <execution>
                         <id>less-compile</id>
+                        <phase>generate-resources</phase>
 
                         <goals>
                             <goal>less-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>uk.co.thefishlive</groupId>
+                <artifactId>icons-maven-plugin</artifactId>
+                <version>1.0.0</version>
+
+                <configuration>
+                    <iconDirectories>
+                        <iconDirectory>${project.basedir}/src/main/resources/images/icons</iconDirectory>
+                    </iconDirectories>
+
+                    <uiDirectories>
+                        <uiDirectory>${project.basedir}/src/main/resources/ui/</uiDirectory>
+                    </uiDirectories>
+
+                    <outputFile>${project.basedir}/src/generated/resources/data/icons.dat</outputFile>
+                    <pretty>false</pretty>
+
+                    <mappings>
+                        <mode_edit>edit</mode_edit>
+                        <group_add>group-add</group_add>
+                        <arrow_back>arrow-back</arrow_back>
+                        <arrow_forward>arrow-forward</arrow_forward>
+                        <person_add>user-add</person_add>
+                        <person>user</person>
+                    </mappings>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>generate-icons</id>
+                        <phase>generate-resources</phase>
+
+                        <goals>
+                            <goal>icons-generate</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -168,6 +260,8 @@
                 <executions>
                     <execution>
                         <id>generate-libraries</id>
+                        <phase>generate-resources</phase>
+
                         <goals>
                             <goal>generate-libs</goal>
                         </goals>

@@ -36,8 +36,16 @@ public class UILoader {
     private static final Logger logger = LogManager.getLogger();
     private static final CssParser parser = new CssParser();
 
-    private static IconCache iconCache = new IconCache();
+    private static IconCache iconCache = null;
     private static List<Resource> stylesheets = new ArrayList<>();
+
+    static {
+        try {
+            iconCache = new IconCache();
+        } catch (ResourceException e) {
+            Throwables.propagate(e);
+        }
+    }
 
     public static UI loadUI(String dataFile) throws IOException, ResourceException {
         return loadUI(Main.getInstance().getResourceManager().getResource(dataFile));
