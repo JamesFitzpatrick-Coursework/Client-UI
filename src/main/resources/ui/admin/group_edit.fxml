@@ -94,8 +94,8 @@
             <DropShadow />
          </effect>
       </Pane>
-       <fx:include fx:id="pnlFooter" source="../footer.fxml" />
-       <fx:include fx:id="pnlAlert" source="../alert.fxml" />
-       <fx:include fx:id="pnlMenu" source="../sidebar.fxml" />
+       <fx:include fx:id="pnlFooter" source="/ui/sidebar.fxml" />
+       <fx:include fx:id="pnlAlert" source="/ui/alert.fxml" />
+       <fx:include fx:id="pnlMenu" source="/ui/sidebar.fxml" />
    </children>
 </Pane>

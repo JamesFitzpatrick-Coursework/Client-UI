@@ -105,14 +105,6 @@
             </Pane>
          </children>
       </GridPane>
-      <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="800.0" styleClass="background-primary">
-         <children>
-            <Label fx:id="lblCopywrite" layoutX="14.0" layoutY="6.0" text="© James Fitzpatrick 2014" />
-         </children>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Pane>
       <Pane fx:id="pnlTitle" prefHeight="45.0" prefWidth="300.0" styleClass="background-primary">
          <children>
             <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Click" pickOnBounds="true" preserveRatio="true" style="icon: menu;icon-color: white;">
@@ -130,20 +122,8 @@
             <DropShadow />
          </effect>
       </Pane>
-      <fx:include fx:id="pnlMenu" source="../sidebar.fxml" />
-      <Pane fx:id="pnlAlert" layoutX="360.0" layoutY="535.0" prefHeight="75.0" prefWidth="250.0" style="-fx-background-color: #00E676BB; visibility: none;">
-         <children>
-            <Label fx:id="lblAlertMessage" alignment="TOP_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="51.0" prefWidth="225.0" text="Success" wrapText="true" />
-         </children>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Pane>
-      <Pane layoutX="708.0" prefHeight="45.0" prefWidth="92.0" styleClass="background-primary">
-         <effect>
-            <DropShadow />
-         </effect>
-      </Pane>
-       <fx:include fx:id="pnlAlert" source="../alert.fxml" />
+      <fx:include fx:id="pnlFooter" source="/ui/footer.fxml" />
+      <fx:include fx:id="pnlMenu" source="/ui/sidebar.fxml" />
+       <fx:include fx:id="pnlAlert" source="/ui/alert.fxml" />
    </children>
 </Pane>

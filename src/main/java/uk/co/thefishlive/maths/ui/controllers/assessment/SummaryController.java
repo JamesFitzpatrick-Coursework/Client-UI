@@ -10,9 +10,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-import uk.co.thefishlive.maths.assessment.Assessment;
-import uk.co.thefishlive.maths.assessment.AssessmentView;
-import uk.co.thefishlive.maths.assessment.question.Question;
+import uk.co.thefishlive.auth.assessments.Assessment;
+import uk.co.thefishlive.auth.assessments.questions.Question;
+import uk.co.thefishlive.maths.assessment.AssessmentHandler;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.maths.ui.loader.UILoader;
@@ -31,7 +31,7 @@ public class SummaryController extends Controller {
 
     @FXML private ImageView imgComplete;
 
-    private Assessment assessment;
+    private AssessmentHandler handler;
 
     @Override
     protected Pane getContentPane() {
@@ -40,10 +40,10 @@ public class SummaryController extends Controller {
 
     @Override
     public void onDisplay() {
-        long questions = this.assessment.getQuestions().size();
-        long questionsComplete = this.assessment.getQuestions().stream().filter(Question::isAnswered).count();
+        long questions = this.handler.getAssessment().getQuestions().size();
+        long questionsComplete = this.handler.getAssessment().getQuestions().stream().filter(Question::isAnswered).count();
 
-        lblTitle.setText(this.assessment.getName());
+        lblTitle.setText(this.handler.getAssessment().getProfile().getDisplayName());
         lblQuestions.setText(String.valueOf(questions));
         lblQuestionsComplete.setText(String.valueOf(questionsComplete));
 
@@ -56,8 +56,8 @@ public class SummaryController extends Controller {
         }
     }
 
-    public void setAssessment(Assessment assessment) {
-        this.assessment = assessment;
+    public void setHandler(AssessmentHandler handler) {
+        this.handler = handler;
     }
 
     @FXML
@@ -69,10 +69,5 @@ public class SummaryController extends Controller {
 
     @FXML
     public void btnPrevious_Click(MouseEvent event) {
-        try {
-            this.assessment.display(AssessmentView.QUESTION);
-        } catch (IOException | ResourceException e) {
-            Throwables.propagate(e);
-        }
     }
 }

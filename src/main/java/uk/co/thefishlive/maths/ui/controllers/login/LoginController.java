@@ -28,7 +28,7 @@ import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.maths.ui.loader.UI;
 import uk.co.thefishlive.maths.ui.loader.UILoader;
 import uk.co.thefishlive.meteor.user.MeteorUserProfile;
-import uk.co.thefishlive.meteor.login.exception.LoginException;
+import uk.co.thefishlive.auth.login.exception.LoginException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -101,6 +101,12 @@ public class LoginController extends Controller {
             }
         } catch (LoginException | IOException | ResourceException ex) {
             Throwables.propagate(ex);
+        } finally {
+            try {
+                hideLoadingAnimation();
+            } catch (ResourceException | IOException e) {
+                Throwables.propagate(e);
+            }
         }
     }
 

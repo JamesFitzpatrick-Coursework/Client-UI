@@ -13,6 +13,7 @@ import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.resources.Resource;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.ResourceBundle;
 
 import uk.co.thefishlive.maths.resources.ResourceManager;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
+import uk.co.thefishlive.maths.resources.handlers.PropertiesResource;
 import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.maths.ui.loader.css.CssElementList;
 import uk.co.thefishlive.maths.ui.loader.css.CssException;
@@ -48,12 +50,13 @@ public class UILoader {
     }
 
     public static UI loadUI(String dataFile) throws IOException, ResourceException {
-        return loadUI(Main.getInstance().getResourceManager().getResource(dataFile));
+        return loadUI(Main.getInstance().getResourceManager().getResource("ui/" + dataFile));
     }
 
     public static UI loadUI(Resource dataFile) throws IOException, ResourceException {
         logger.info("Loading ui {}", dataFile.getPath());
-        FXMLLoader loader = new FXMLLoader(dataFile.getUrl(), ResourceBundle.getBundle("lang.strings"));
+        FXMLLoader loader = new FXMLLoader(dataFile.getUrl(), Main.getInstance().getResourceManager().getResourceAs("lang/strings.properties", PropertiesResource.class).getBundle());
+        loader.setClassLoader(new UIClassLoader(new URL[0], UILoader.class.getClassLoader()));
 
         if (loader.getController() != null && !(loader.getController() instanceof Controller)) {
             throw new ResourceException(String.format("Controller specified for ui %s is not valid controller (%s)", dataFile.getPath(), loader.getController().getClass().getName()));

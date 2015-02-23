@@ -4,32 +4,21 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
-
 import org.apache.logging.log4j.Logger;
+
 import uk.co.thefishlive.auth.AuthHandler;
-import uk.co.thefishlive.auth.session.Session;
-import uk.co.thefishlive.auth.session.SessionListener;
-import uk.co.thefishlive.maths.assessment.Assessment;
-import uk.co.thefishlive.maths.assessment.json.AssessmentAdapter;
-import uk.co.thefishlive.maths.assessment.json.question.QuestionAdapter;
-import uk.co.thefishlive.maths.assessment.json.question.multichoice.MultiChoiceQuestionAdapter;
-import uk.co.thefishlive.maths.assessment.question.Question;
-import uk.co.thefishlive.maths.assessment.question.multichoice.MultiChoiceQuestion;
 import uk.co.thefishlive.maths.config.AuthDatabase;
 import uk.co.thefishlive.maths.config.SystemSettings;
 import uk.co.thefishlive.maths.events.AlertEvent;
 import uk.co.thefishlive.maths.events.EventController;
-import uk.co.thefishlive.maths.json.GsonInstance;
 import uk.co.thefishlive.maths.logging.Log4JErrorHandler;
 import uk.co.thefishlive.maths.logging.Log4JPrintStream;
 import uk.co.thefishlive.maths.resources.ResourceManager;
-import uk.co.thefishlive.maths.resources.file.FileResourceManager;
+import uk.co.thefishlive.maths.resources.asset.AssetResourceManager;
 import uk.co.thefishlive.maths.ui.loader.UI;
 import uk.co.thefishlive.maths.ui.loader.UILoader;
 import uk.co.thefishlive.meteor.MeteorAuthHandler;
@@ -69,12 +58,6 @@ public class Main extends Application {
         instance = this;
         logger.info("Starting application");
 
-        // Setup GSON
-        GsonInstance.registerAdapter(Assessment.class, new AssessmentAdapter());
-        GsonInstance.registerAdapter(Question.class, new QuestionAdapter());
-        GsonInstance.registerAdapter(MultiChoiceQuestion.class, new MultiChoiceQuestionAdapter());
-        GsonInstance.buildInstance();
-
         // Setup logging redirects
         System.setOut(new Log4JPrintStream(System.out, LogManager.getLogger("SysOut"), Level.INFO));
         System.setErr(new Log4JPrintStream(System.err, LogManager.getLogger("SysErr"), Level.WARN));
@@ -82,7 +65,7 @@ public class Main extends Application {
         Thread.setDefaultUncaughtExceptionHandler(new Log4JErrorHandler());
 
         // Setup Resource Manager
-        this.resourceManager = new FileResourceManager(new File("classes"));
+        this.resourceManager = new AssetResourceManager(new File("assets/index.json"));
         this.systemSettings = new SystemSettings(new File("config/system.dat"));
         this.systemSettings.load();
 

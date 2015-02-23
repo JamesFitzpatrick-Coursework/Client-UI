@@ -50,7 +50,7 @@
             </Button>
          </children>
       </Pane>
-       <fx:include fx:id="pnlFooter" source="footer.fxml" />
-       <fx:include fx:id="pnlAlert" source="alert.fxml" />
+       <fx:include fx:id="pnlFooter" source="/ui/footer.fxml" />
+       <fx:include fx:id="pnlAlert" source="/ui/alert.fxml" />
    </children>
 </Pane>

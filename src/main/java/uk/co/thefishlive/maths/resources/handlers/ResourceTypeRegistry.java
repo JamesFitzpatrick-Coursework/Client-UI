@@ -18,12 +18,13 @@ public class ResourceTypeRegistry {
     private Map<String, Class<? extends Resource>> resourceTypes = new HashMap<>();
 
     public ResourceTypeRegistry() {
-        registerResourceType("png",     ImageResource.class);
-        registerResourceType("jpg",     ImageResource.class);
-        registerResourceType("fxml",    FxmlResource.class);
-        registerResourceType("css",     CssResource.class);
-        registerResourceType("json",    JsonResource.class);
-        registerResourceType("dat",     JsonResource.class);
+        registerResourceType("png",         ImageResource.class);
+        registerResourceType("jpg",         ImageResource.class);
+        registerResourceType("fxml",        FxmlResource.class);
+        registerResourceType("css",         CssResource.class);
+        registerResourceType("json",        JsonResource.class);
+        registerResourceType("dat",         JsonResource.class);
+        registerResourceType("properties",  PropertiesResource.class);
     }
 
     public Resource createResource(String name, URL content) throws ResourceException {

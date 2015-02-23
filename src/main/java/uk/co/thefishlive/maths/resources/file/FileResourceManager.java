@@ -34,5 +34,4 @@ public class FileResourceManager extends CachingResourceManger {
             throw new ResourceException(e);
         }
     }
-
 }

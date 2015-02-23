@@ -1,16 +1,11 @@
 package uk.co.thefishlive.maths.ui.controllers.assessment;
 
-import com.google.common.base.Throwables;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
+import com.google.common.base.Throwables;
 import javafx.animation.TranslateTransition;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
@@ -20,18 +15,16 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
-import uk.co.thefishlive.maths.assessment.Assessment;
-import uk.co.thefishlive.maths.assessment.AssessmentView;
-import uk.co.thefishlive.maths.assessment.exceptions.EndOfAssessmentException;
-import uk.co.thefishlive.maths.assessment.question.multichoice.MultiChoiceQuestion;
-import uk.co.thefishlive.maths.assessment.question.multichoice.Option;
+import uk.co.thefishlive.auth.assessments.Assessment;
+import uk.co.thefishlive.auth.assessments.questions.multichoice.MultichoiceQuestion;
+import uk.co.thefishlive.auth.assessments.questions.multichoice.Option;
+import uk.co.thefishlive.maths.assessment.AssessmentHandler;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.ui.Controller;
 
 public class MultiChoiceQuestionController extends Controller {
 
-    private MultiChoiceQuestion question;
-    private Assessment assessment;
+    private MultichoiceQuestion question;
     private Pane clicked;
 
     @FXML private Pane pnlContainer;
@@ -42,7 +35,9 @@ public class MultiChoiceQuestionController extends Controller {
     @FXML private Label lblQuestion;
     @FXML private Label lblQuestionNumber;
     @FXML private Label lblTitle;
+
     private Option clickedOption;
+    private AssessmentHandler handler;
 
     @Override
     protected Pane getContentPane() {
@@ -55,7 +50,7 @@ public class MultiChoiceQuestionController extends Controller {
 
     @Override
     public void onDisplay() {
-        this.lblTitle.setText(this.assessment.getName());
+        this.lblTitle.setText(this.handler.getAssessment().getProfile().getDisplayName());
         this.lblQuestion.setText(this.question.getQuestion());
         this.lblQuestionNumber.setText(this.question.getQuestionNumber() + ".");
 
@@ -74,7 +69,7 @@ public class MultiChoiceQuestionController extends Controller {
                 this.clicked = pane;
             });
 
-            if (this.question.getAnswer() == i) {
+            if (this.question.getCurrentAnswer() == i) {
                 this.clicked = pane;
                 pane.setBackground(new Background(new BackgroundFill(Color.web("#C8E6C9"), null, null)));
             }
@@ -90,9 +85,9 @@ public class MultiChoiceQuestionController extends Controller {
         }
     }
 
-    public void setQuestion(Assessment assessment) {
-        this.assessment = assessment;
-        this.question = assessment.getCurrentQuestion(MultiChoiceQuestion.class);
+    public void setHandler(AssessmentHandler handler) {
+        this.handler = handler;
+        this.question = (MultichoiceQuestion) handler.getCurrentQuestion();
     }
 
     @FXML
@@ -105,13 +100,8 @@ public class MultiChoiceQuestionController extends Controller {
     @FXML
     public void btnNext_Click(MouseEvent event) {
         try {
-            try {
-                this.assessment.getCurrentQuestion(MultiChoiceQuestion.class).setAnswer(getClickedOption());
-
-                this.assessment.nextQuestion();
-            } catch (EndOfAssessmentException e) {
-                this.assessment.display(AssessmentView.SUMMARY);
-            }
+            handler.nextQuestion();
+            saveAnswer();
         } catch (IOException | ResourceException e) {
             Throwables.propagate(e);
         }
@@ -120,21 +110,20 @@ public class MultiChoiceQuestionController extends Controller {
     @FXML
     public void btnPrevious_Click(MouseEvent event) {
         try {
-            try {
-                this.assessment.getCurrentQuestion(MultiChoiceQuestion.class).setAnswer(getClickedOption());
-
-                this.assessment.previousQuestion();
-            } catch (EndOfAssessmentException e) {
-                this.assessment.display(AssessmentView.START);
-            }
+            handler.previousQuestion();
+            saveAnswer();
         } catch (IOException | ResourceException e) {
             Throwables.propagate(e);
         }
     }
 
+    private void saveAnswer() {
+        this.question.setCurrentAnswer(getClickedOption());
+    }
+
     public int getClickedOption() {
         if (this.clicked == null) {
-            return MultiChoiceQuestion.NOT_ANSWERED;
+            return -1;
         }
 
         String id = this.clicked.getId();

@@ -56,7 +56,7 @@
                   <Font name="Roboto Regular" size="24.0" />
                </font>
             </Label>
-            <ImageView fx:id="imgComplete" fitHeight="36.0" fitWidth="36.0" layoutX="122.0" layoutY="133.0">
+            <ImageView fx:id="imgComplete" fitHeight="36.0" fitWidth="36.0" layoutX="122.0" layoutY="133.0" style="icon: 'assessment-late'; icon-size: '48dp';">
                <image>
                   <Image url="@../../images/icons/ic_assignment_late_black_48dp.png" />
                </image>
@@ -83,9 +83,8 @@
             </ImageView>
          </children>
       </Pane>
-      <fx:include fx:id="pnlFooter" source="../footer.fxml" />
-
-      <fx:include fx:id="pnlMenu" source="../sidebar.fxml" />
-      <fx:include fx:id="pnlAlert" source="../alert.fxml" />
+      <fx:include fx:id="pnlFooter" source="/ui/footer.fxml" />
+      <fx:include fx:id="pnlMenu" source="/ui/sidebar.fxml" />
+      <fx:include fx:id="pnlAlert" source="/ui/alert.fxml" />
    </children>
 </Pane>

@@ -1,5 +1,6 @@
 package uk.co.thefishlive.maths.resources.asset;
 
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -19,7 +20,7 @@ public class AssetResourceManager extends CachingResourceManger {
     private static final Gson GSON = new GsonBuilder()
                                             .create();
 
-    private Map<String, AssetInfo> assets;
+    private Map<String, AssetInfo> assets = Maps.newHashMap();
     private File baseDir;
 
     public AssetResourceManager(File indexFile) throws ResourceException {

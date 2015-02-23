@@ -14,7 +14,7 @@ import uk.co.thefishlive.auth.user.UserProfile;
 import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.meteor.data.AuthToken;
 import uk.co.thefishlive.meteor.session.MeteorSession;
-import uk.co.thefishlive.meteor.session.exception.SessionException;
+import uk.co.thefishlive.auth.session.exception.SessionException;
 import uk.co.thefishlive.meteor.user.MeteorUserProfile;
 import uk.co.thefishlive.meteor.utils.SerialisationUtils;
 
