@@ -26,6 +26,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import uk.co.thefishlive.auth.group.GroupProfile;
+import uk.co.thefishlive.auth.group.member.GroupMemberProfile;
 import uk.co.thefishlive.auth.user.User;
 import uk.co.thefishlive.auth.user.UserProfile;
 import uk.co.thefishlive.maths.Main;
@@ -109,10 +110,10 @@ public class UserListController extends Controller {
         try {
             pnlUsers.getChildren().clear();
 
-            List<UserProfile> users = getInstance().getAuthHandler().getGroupManager().getGroupProfile(group).getUsers();
+            List<GroupMemberProfile> users = getInstance().getAuthHandler().getGroupManager().getGroupProfile(group).getUsers();
             int pos = 0;
 
-            for (final UserProfile user : users) {
+            for (final GroupMemberProfile user : users) {
                 if (pos > 11) {
                     break;
                 }
@@ -142,17 +143,14 @@ public class UserListController extends Controller {
                 edit.setFitWidth(24d);
                 edit.setFitHeight(24d);
                 edit.setCursor(Cursor.HAND);
-                edit.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        try {
-                            UI ui = UILoader.loadUI(getInstance().getResourceManager().getResource("ui/admin/user_edit.fxml"));
+                edit.setOnMouseClicked(mouseEvent -> {
+                    try {
+                        UI ui = UILoader.loadUI(getInstance().getResourceManager().getResource("ui/admin/user_edit.fxml"));
 
-                            ui.getController(UserEditController.class).setUser(user);
-                            Main.getInstance().setCurrentUI(ui);
-                        } catch (IOException | ResourceException e) {
-                            e.printStackTrace();
-                        }
+                        ui.getController(UserEditController.class).setUser((UserProfile) user);
+                        Main.getInstance().setCurrentUI(ui);
+                    } catch (IOException | ResourceException e) {
+                        e.printStackTrace();
                     }
                 });
                 pane.getChildren().add(edit);
@@ -164,21 +162,18 @@ public class UserListController extends Controller {
                 delete.setFitWidth(24d);
                 delete.setFitHeight(24d);
                 delete.setCursor(Cursor.HAND);
-                delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        try {
-                            LOGGER.info("Deleting user {}", user.toString());
-                            showLoadingAnimation();
+                delete.setOnMouseClicked(mouseEvent -> {
+                    try {
+                        LOGGER.info("Deleting user {}", user.toString());
+                        showLoadingAnimation();
 
-                            getInstance().getAuthHandler().getUserManager().deleteUser(user);
-                            onDisplay();
+                        getInstance().getAuthHandler().getUserManager().deleteUser((UserProfile) user);
+                        onDisplay();
 
-                            hideLoadingAnimation();
-                            LOGGER.info("User deleted {} successfully", user.toString());
-                        } catch (ResourceException | IOException e) {
-                            Throwables.propagate(e);
-                        }
+                        hideLoadingAnimation();
+                        LOGGER.info("User deleted {} successfully", user.toString());
+                    } catch (ResourceException | IOException e) {
+                        Throwables.propagate(e);
                     }
                 });
                 pane.getChildren().add(delete);
