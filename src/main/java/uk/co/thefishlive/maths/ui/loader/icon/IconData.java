@@ -32,25 +32,37 @@ public class IconData {
         this.size = size;
     }
 
+    /**
+     * Load a icon from provided css
+     *
+     * @param css the provided css
+     */
     public IconData(CssElementList css) {
+        // get the icon name
         String name = css.get("icon").getValue();
 
+        // Check the name is specified
         if (name == null) {
             throw new IllegalArgumentException("Icon name must be specified");
         }
 
+        // get the icon color
         String color = css.get("icon-color").getValue();
 
+        // Check if the color is specified
         if (color == null) {
             color = IconData.DEFAULT_COLOUR;
         }
 
+        // get the icon size
         String size = css.get("icon-size").getValue();
 
+        // Check if the size is specified
         if (size == null) {
             size = IconData.DEFAULT_SIZE;
         }
 
+        // Load this provided data
         this.id = name;
         this.color = color;
         this.size = size;

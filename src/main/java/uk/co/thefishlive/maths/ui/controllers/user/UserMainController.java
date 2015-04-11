@@ -33,26 +33,16 @@ import uk.co.thefishlive.maths.ui.Controller;
 
 public class UserMainController extends Controller {
 
-    @FXML
-    private Pane pnlContainer;
-    @FXML
-    private GridPane pnlAssets;
-    @FXML
-    private Pane pnlMenu;
-    @FXML
-    private Label lblTitle;
+    @FXML private Pane pnlContainer;
+
+    @FXML private GridPane pnlAssets;
+    @FXML private Label lblTitle;
 
     private User user;
 
-    @FXML
-    public void btnMenu_Clicked(MouseEvent event) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
-        transition.setByX(205);
-        transition.play();
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Get the current logged in user
         AuthHandler handler = Main.getInstance().getAuthHandler();
         try {
             user = handler.getUserManager().getUserProfile(handler.getActiveSession().getProfile());
@@ -60,25 +50,26 @@ public class UserMainController extends Controller {
             Throwables.propagate(e);
         }
 
+        // Get all the currently outstanding assignments
         List<Assignment> assignments = user.getOutstandingAssignments();
 
         int i = 0;
 
         for (Assignment assignment : assignments) {
             try {
-                System.out.println(assignment);
+                // Build the pane for this assignment
                 final Assessment assessment = assignment.getAssessment();
-                System.out.println(assessment);
 
                 Pane asset = new Pane();
                 asset.setEffect(new DropShadow());
                 asset.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
                 asset.setCursor(Cursor.HAND);
                 asset.setOnMouseClicked(event -> {
+                    // Load the assignment on click
                     try {
-                        AssessmentHandler assessmentHandler = new AssessmentHandler(assessment);
+                        AssessmentHandler assessmentHandler = new AssessmentHandler(user, assignment);
                         assessmentHandler.display(AssessmentView.START);
-                    } catch (ResourceException | IOException e) {
+                    } catch (AssessmentException | ResourceException | IOException e) {
                         Throwables.propagate(e);
                     }
                 });
@@ -88,7 +79,9 @@ public class UserMainController extends Controller {
                 label.setLayoutY(5);
                 asset.getChildren().add(label);
 
+                // Add this assignment to the screen
                 pnlAssets.add(asset, i % 4, (int) Math.floor(i / 4));
+                i++;
             } catch (AssessmentException | IOException ex) {
                 Throwables.propagate(ex);
             }
@@ -98,6 +91,7 @@ public class UserMainController extends Controller {
     @Override
     public void onDisplay() {
         if (user != null) {
+            // Update the title
             this.lblTitle.setText(user.getProfile().getDisplayName());
         }
     }

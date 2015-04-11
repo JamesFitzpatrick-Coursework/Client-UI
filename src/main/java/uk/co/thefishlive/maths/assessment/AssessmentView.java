@@ -5,11 +5,11 @@ package uk.co.thefishlive.maths.assessment;
  */
 public enum AssessmentView {
 
-    START("assessments/assessment_start.fxml"),
+    START("assessment/assessment_start.fxml"),
 
-    QUESTION("assessments/assessment_question.fxml"),
+    QUESTION("assessment/question_multichoice.fxml"),
 
-    SUMMARY("assessments/assessment_summary.fxml");
+    SUMMARY("assessment/assessment_summary.fxml");
 
     private final String ui;
 

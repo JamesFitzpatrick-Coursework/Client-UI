@@ -73,12 +73,20 @@
             <DropShadow />
          </effect>
          <children>
-            <ImageView fx:id="btnNext" fitHeight="64.0" fitWidth="64.0" layoutX="14.0" layoutY="17.0" onMouseClicked="#btnPrevious_Click" pickOnBounds="true" preserveRatio="true" style="icon: 'arrow-back'; icon-size: '48dp';">
+            <ImageView fx:id="btnPrevious" fitHeight="64.0" fitWidth="64.0" layoutX="14.0" layoutY="17.0" onMouseClicked="#btnPrevious_Click" pickOnBounds="true" preserveRatio="true" style="icon: 'arrow-back'; icon-size: '48dp';">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <image>
                   <Image url="@../../images/icons/ic_arrow_back_black_48dp.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="btnSubmit" fitHeight="64.0" fitWidth="64.0" layoutX="694.0" layoutY="17.0" onMouseClicked="#btnSubmit_Click" pickOnBounds="true" preserveRatio="true" style="icon: 'arrow-forward'; icon-size: '48dp'; visiblity: hidden">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@../../images/icons/ic_arrow_forward_black_48dp.png" />
                </image>
             </ImageView>
          </children>

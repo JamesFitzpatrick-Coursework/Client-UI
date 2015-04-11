@@ -1,5 +1,7 @@
 package uk.co.thefishlive.maths.ui.controllers.assessment;
 
+import com.google.common.base.Throwables;
+
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -7,7 +9,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import uk.co.thefishlive.maths.assessment.AssessmentHandler;
+import uk.co.thefishlive.maths.assessment.AssessmentView;
+import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.ui.Controller;
+
+import java.io.IOException;
 
 /**
  *
@@ -15,12 +21,20 @@ import uk.co.thefishlive.maths.ui.Controller;
 public class StartController extends Controller {
 
     @FXML private Pane pnlContainer;
-    @FXML private Pane pnlMenu;
 
     @FXML private Label lblTitle;
     @FXML private Label lblQuestions;
 
     private AssessmentHandler handler;
+
+    @FXML
+    public void btnNext_Click(MouseEvent event) {
+        try {
+            handler.display(AssessmentView.QUESTION);
+        } catch (IOException | ResourceException e) {
+            Throwables.propagate(e);
+        }
+    }
 
     @Override
     protected Pane getContentPane() {
@@ -37,14 +51,4 @@ public class StartController extends Controller {
         this.handler = handler;
     }
 
-    @FXML
-    public void btnMenu_Click(MouseEvent event) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
-        transition.setByX(205);
-        transition.play();
-    }
-
-    @FXML
-    public void btnNext_Click(MouseEvent event) {
-    }
 }

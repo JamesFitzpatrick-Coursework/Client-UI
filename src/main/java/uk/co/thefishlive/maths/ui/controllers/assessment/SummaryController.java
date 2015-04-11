@@ -11,8 +11,10 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import uk.co.thefishlive.auth.assessments.Assessment;
+import uk.co.thefishlive.auth.assessments.assignments.AssignmentResult;
 import uk.co.thefishlive.auth.assessments.questions.Question;
 import uk.co.thefishlive.maths.assessment.AssessmentHandler;
+import uk.co.thefishlive.maths.assessment.AssessmentView;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.maths.ui.loader.UILoader;
@@ -23,7 +25,6 @@ import java.io.IOException;
 public class SummaryController extends Controller {
 
     @FXML private Pane pnlContainer;
-    @FXML private Pane pnlMenu;
 
     @FXML private Label lblTitle;
     @FXML private Label lblQuestions;
@@ -31,11 +32,33 @@ public class SummaryController extends Controller {
 
     @FXML private ImageView imgComplete;
 
+    @FXML private ImageView btnSubmit;
+
     private AssessmentHandler handler;
+    private boolean complete;
 
     @Override
     protected Pane getContentPane() {
         return pnlContainer;
+    }
+
+    @FXML
+    public void btnPrevious_Click(MouseEvent event) {
+        try {
+            handler.display(AssessmentView.QUESTION);
+        } catch (IOException | ResourceException e) {
+            Throwables.propagate(e);
+        }
+    }
+
+    @FXML
+    public void btnSubmit_Click(MouseEvent event) {
+        if (!complete) {
+            return;
+        }
+
+        AssignmentResult result = handler.getTarget().submitAssessment(handler.getAssignment(), handler.getAssessment());
+        System.out.println(result.getScores());
     }
 
     @Override
@@ -48,26 +71,21 @@ public class SummaryController extends Controller {
         lblQuestionsComplete.setText(String.valueOf(questionsComplete));
 
         if (questionsComplete == questions) {
+            btnSubmit.setVisible(true);
+            complete = true;
+
             try {
-                imgComplete.setImage(UILoader.getIconCache().getIcon(new IconData("assignment-complete", "black", "48dp")).getImage());
+                imgComplete.setImage(UILoader.getIconCache().getIcon(new IconData("assessment-complete", "black", "48dp")).getImage());
             } catch (ResourceException e) {
                 Throwables.propagate(e);
             }
+        } else {
+            btnSubmit.setVisible(false);
+            complete = false;
         }
     }
 
     public void setHandler(AssessmentHandler handler) {
         this.handler = handler;
-    }
-
-    @FXML
-    public void btnMenu_Click(MouseEvent event) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
-        transition.setByX(205);
-        transition.play();
-    }
-
-    @FXML
-    public void btnPrevious_Click(MouseEvent event) {
     }
 }

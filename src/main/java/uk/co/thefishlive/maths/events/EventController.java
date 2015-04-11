@@ -15,7 +15,7 @@ public class EventController {
     }
 
     public void postEvent(Event event) {
-        this.eventBus.post(event);
+        eventBus.post(event);
     }
 
     public void registerHandler(Listener listener) {

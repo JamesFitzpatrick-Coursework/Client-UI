@@ -50,25 +50,33 @@ public class UILoader {
     }
 
     public static UI loadUI(String dataFile) throws IOException, ResourceException {
-        return loadUI(Main.getInstance().getResourceManager().getResource("ui/" + dataFile));
+        if (!dataFile.startsWith("ui/")) dataFile = "ui/" + dataFile;
+        if (!dataFile.endsWith(".fxml")) dataFile += ".fxml";
+
+        return loadUI(Main.getInstance().getResourceManager().getResource(dataFile));
     }
 
     public static UI loadUI(Resource dataFile) throws IOException, ResourceException {
         logger.info("Loading ui {}", dataFile.getPath());
+        // Create the FXML loader
         FXMLLoader loader = new FXMLLoader(dataFile.getUrl(), Main.getInstance().getResourceManager().getResourceAs("lang/strings.properties", PropertiesResource.class).getBundle());
         loader.setClassLoader(new UIClassLoader(new URL[0], UILoader.class.getClassLoader()));
 
+        // Check the controller specified is valid
         if (loader.getController() != null && !(loader.getController() instanceof Controller)) {
             throw new ResourceException(String.format("Controller specified for ui %s is not valid controller (%s)", dataFile.getPath(), loader.getController().getClass().getName()));
         }
 
+        // Load the UI
         Pane pane = loader.load();
 
+        // Add any stylesheets required
         for (Resource resource : stylesheets) {
             logger.debug("Adding style sheet {}", resource.getUrl().toExternalForm());
             pane.getStylesheets().add(resource.getUrl().toExternalForm());
         }
 
+        // Replace all icons in the UI
         replaceIcons(pane.getChildren());
 
         logger.info("UI Loaded {}", dataFile.getPath());
@@ -85,12 +93,15 @@ public class UILoader {
 
     private static void replaceIcons(ObservableList<Node> children) throws ResourceException {
         for (Node child : children) {
+            // Find all icon elements
             if (child instanceof ImageView) {
                 try {
+                    // Parse the CSS of the element
                     CssElementList css = parser.parseStyleString(child.getStyle());
                     Icon icon = iconCache.getIcon(css);
 
                     if (icon != null) {
+                        // Replace the image with the required image
                         ((ImageView) child).setImage(icon.getImage());
                     }
                 } catch (CssException e) {
@@ -98,6 +109,7 @@ public class UILoader {
                 }
             }
 
+            // Recurse down the tree
             if (child instanceof Pane) {
                 replaceIcons(((Pane) child).getChildren());
             }

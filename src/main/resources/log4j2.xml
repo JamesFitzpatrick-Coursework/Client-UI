@@ -24,13 +24,13 @@
     </Appenders>
 
     <Loggers>
-        <Root level="debug">
+        <Root level="info">
             <AppenderRef ref="ConsoleError"/>
             <AppenderRef ref="Console"/>
             <AppenderRef ref="File"/>
         </Root>
 
-        <Logger name="uk.co.thefishlive.maths" level="debug">
+        <Logger name="uk.co.thefishlive.maths" level="info">
         </Logger>
 
         <Logger name="SysOut">

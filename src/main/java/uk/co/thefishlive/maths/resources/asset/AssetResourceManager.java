@@ -23,11 +23,13 @@ public class AssetResourceManager extends CachingResourceManger {
     private Map<String, AssetInfo> assets = Maps.newHashMap();
     private File baseDir;
 
-    public AssetResourceManager(File indexFile) throws ResourceException {
+    public AssetResourceManager(File indexFile, File baseDir) throws ResourceException {
         try (FileReader reader = new FileReader(indexFile)) {
+            // Load index file
             AssetIndex index = GSON.fromJson(reader, AssetIndex.class);
-            baseDir = new File(indexFile.getParentFile(), index.getBaseDir());
+            this.baseDir = baseDir;
 
+            // Load all assets from index
             for (AssetInfo info : index.getAssets()) {
                 assets.put(info.getPath(), info);
             }
@@ -40,11 +42,13 @@ public class AssetResourceManager extends CachingResourceManger {
     public Resource loadResource(String path) throws ResourceException {
         AssetInfo info = assets.get(path);
 
+        // Cannot find asset required
         if (info == null) {
             throw new ResourceNotFoundException(path);
         }
 
         try {
+            // Create resource from file
             File file = new File(baseDir, info.getLocalPath());
             return typeRegistry.createResource(path, file.toURI().toURL());
         } catch (MalformedURLException e) {

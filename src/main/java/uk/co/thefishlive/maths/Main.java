@@ -19,6 +19,9 @@ import uk.co.thefishlive.maths.logging.Log4JErrorHandler;
 import uk.co.thefishlive.maths.logging.Log4JPrintStream;
 import uk.co.thefishlive.maths.resources.ResourceManager;
 import uk.co.thefishlive.maths.resources.asset.AssetResourceManager;
+import uk.co.thefishlive.maths.resources.exception.ResourceException;
+import uk.co.thefishlive.maths.resources.file.FileResourceManager;
+import uk.co.thefishlive.maths.resources.jar.JarResourceManager;
 import uk.co.thefishlive.maths.ui.loader.UI;
 import uk.co.thefishlive.maths.ui.loader.UILoader;
 import uk.co.thefishlive.meteor.MeteorAuthHandler;
@@ -26,14 +29,19 @@ import uk.co.thefishlive.meteor.utils.ProxyUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  *
  */
 public class Main extends Application {
 
-    private static final Logger logger = LogManager.getLogger();
+    private static final File configDir = new File("config");
+    private static Logger logger;
 
+    private static final int STATUS_OK = 0;
+
+    private static RuntimeArgsController argsController;
     private static Main instance;
 
     private Stage stage;
@@ -45,7 +53,18 @@ public class Main extends Application {
     private AuthDatabase authDatabase;
     private SystemSettings systemSettings;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ResourceException {
+        argsController = new RuntimeArgsController();
+
+        if (argsController.parseArgs(args)) {
+            return;
+        }
+
+        // Set logger config
+        System.setProperty("log4j.configurationFile", argsController.getLoggingConfig().getAbsolutePath());
+        // Setup Logger
+        logger = LogManager.getLogger();
+
         launch(args);
     }
 
@@ -54,9 +73,29 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
+        try {
+            this.loadApplication(stage);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            stage.close();
+        }
+    }
+
+    public void loadApplication(Stage stage) throws ResourceException, IOException, ReflectiveOperationException, URISyntaxException {
         instance = this;
         logger.info("Starting application");
+        logger.debug("");
+        logger.debug("-- Java Details --");
+        logger.debug("User.Name: {}", System.getProperty("user.name"));
+        logger.debug("Java.Version: {}", System.getProperty("java.version"));
+        logger.debug("Java.Vendor {}", System.getProperty("java.vendor"));
+        logger.debug("Java.Home {}", System.getProperty("java.home"));
+        logger.debug("JavaFX.Version: {}", System.getProperty("javafx.runtime.version"));
+        logger.debug("OS.Name {}", System.getProperty("os.name"));
+        logger.debug("OS.Version {}", System.getProperty("os.version"));
+        logger.debug("OS.Arch {}",           System.getProperty("os.arch"));
+        logger.info("");
 
         // Setup logging redirects
         System.setOut(new Log4JPrintStream(System.out, LogManager.getLogger("SysOut"), Level.INFO));
@@ -65,8 +104,8 @@ public class Main extends Application {
         Thread.setDefaultUncaughtExceptionHandler(new Log4JErrorHandler());
 
         // Setup Resource Manager
-        this.resourceManager = new AssetResourceManager(new File("assets/index.json"));
-        this.systemSettings = new SystemSettings(new File("config/system.dat"));
+        this.resourceManager = createResourceManager();
+        this.systemSettings = new SystemSettings(new File(configDir, "system.dat"));
         this.systemSettings.load();
 
         // Setup Auth Handler
@@ -77,7 +116,7 @@ public class Main extends Application {
         });
 
         // Setup login config
-        this.authDatabase = new AuthDatabase(new File("config/auth.dat"));
+        this.authDatabase = new AuthDatabase(new File(configDir, "auth.dat"));
         this.authDatabase.load();
 
         // Setup JavaFX
@@ -87,7 +126,7 @@ public class Main extends Application {
             try {
                 logger.info("Exiting application");
                 stop();
-                System.exit(0);
+                System.exit(STATUS_OK);
             } catch (Exception e) {
                 Throwables.propagate(e);
             }
@@ -113,6 +152,26 @@ public class Main extends Application {
         if (loggedin) {
             EventController.getInstance().postEvent(new AlertEvent("Successfully logged in as " + getAuthHandler().getActiveSession().getProfile().getDisplayName()));
         }
+    }
+
+    private ResourceManager createResourceManager() throws ResourceException,
+                                                           ReflectiveOperationException {
+
+        Class<? extends ResourceManager> managerClass = argsController.getResourceManagerClass();
+        ResourceManager manager = null;
+        logger.info("Loading resource manager of type " + managerClass.getName());
+
+        if (managerClass.equals(AssetResourceManager.class)) {
+            manager = managerClass.getConstructor(File.class, File.class).newInstance(argsController.getResourceManagerAssetIndex(), argsController.getResourceManagerBaseDir());
+        } else if (managerClass.equals(FileResourceManager.class)) {
+            manager = managerClass.getConstructor(File.class).newInstance(argsController.getResourceManagerBaseDir());
+        } else if (managerClass.equals(JarResourceManager.class)) {
+            manager = managerClass.getConstructor().newInstance();
+        } else {
+            throw new ResourceException("Cannot handle resource manager class");
+        }
+
+        return manager;
     }
 
     public AuthHandler getAuthHandler() {

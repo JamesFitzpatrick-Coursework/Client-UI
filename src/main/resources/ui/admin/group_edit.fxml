@@ -57,12 +57,12 @@
                    </Label>
                   <TextField fx:id="txtDisplayname" prefHeight="25.0" prefWidth="295.0" promptText="%groups.edit.displayname.prompt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="txtGroupname" prefHeight="25.0" prefWidth="321.0" promptText="%groups.edit.groupname.prompt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="203.0" styleClass="primary-text" text="%groups.edit.displayname" textAlignment="CENTER" GridPane.rowIndex="1" labelFor="txtDisplayname">
+                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="203.0" styleClass="primary-text" text="%groups.edit.displayname" textAlignment="CENTER" GridPane.rowIndex="1" labelFor="${txtDisplayname}">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="201.0" styleClass="primary-text" text="%groups.edit.groupname" textAlignment="CENTER" GridPane.rowIndex="2" labelFor="txtUsername">
+                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="201.0" styleClass="primary-text" text="%groups.edit.groupname" textAlignment="CENTER" GridPane.rowIndex="2" labelFor="${txtUsername}">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -94,7 +94,7 @@
             <DropShadow />
          </effect>
       </Pane>
-       <fx:include fx:id="pnlFooter" source="/ui/sidebar.fxml" />
+       <fx:include fx:id="pnlFooter" source="/ui/footer.fxml" />
        <fx:include fx:id="pnlAlert" source="/ui/alert.fxml" />
        <fx:include fx:id="pnlMenu" source="/ui/sidebar.fxml" />
    </children>

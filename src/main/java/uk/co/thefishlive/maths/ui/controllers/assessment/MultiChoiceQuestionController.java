@@ -25,10 +25,8 @@ import uk.co.thefishlive.maths.ui.Controller;
 public class MultiChoiceQuestionController extends Controller {
 
     private MultichoiceQuestion question;
-    private Pane clicked;
 
     @FXML private Pane pnlContainer;
-    @FXML private Pane pnlMenu;
 
     @FXML private GridPane pnlOptions;
 
@@ -36,8 +34,29 @@ public class MultiChoiceQuestionController extends Controller {
     @FXML private Label lblQuestionNumber;
     @FXML private Label lblTitle;
 
-    private Option clickedOption;
+    private Pane clicked;
+    private boolean changed;
     private AssessmentHandler handler;
+
+    @FXML
+    public void btnNext_Click(MouseEvent event) {
+        try {
+            saveAnswer();
+            handler.nextQuestion();
+        } catch (IOException | ResourceException e) {
+            Throwables.propagate(e);
+        }
+    }
+
+    @FXML
+    public void btnPrevious_Click(MouseEvent event) {
+        try {
+            saveAnswer();
+            handler.previousQuestion();
+        } catch (IOException | ResourceException e) {
+            Throwables.propagate(e);
+        }
+    }
 
     @Override
     protected Pane getContentPane() {
@@ -53,6 +72,7 @@ public class MultiChoiceQuestionController extends Controller {
         this.lblTitle.setText(this.handler.getAssessment().getProfile().getDisplayName());
         this.lblQuestion.setText(this.question.getQuestion());
         this.lblQuestionNumber.setText(this.question.getQuestionNumber() + ".");
+        System.out.println(this.question);
 
         for (int i = 0; i < this.question.getOptions().size(); i++) {
             Pane pane = new Pane();
@@ -67,6 +87,7 @@ public class MultiChoiceQuestionController extends Controller {
 
                 pane.setBackground(new Background(new BackgroundFill(Color.web("#C8E6C9"), null, null)));
                 this.clicked = pane;
+                this.changed = true;
             });
 
             if (this.question.getCurrentAnswer() == i) {
@@ -90,34 +111,9 @@ public class MultiChoiceQuestionController extends Controller {
         this.question = (MultichoiceQuestion) handler.getCurrentQuestion();
     }
 
-    @FXML
-    public void btnMenu_Click(MouseEvent event) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
-        transition.setByX(205);
-        transition.play();
-    }
-
-    @FXML
-    public void btnNext_Click(MouseEvent event) {
-        try {
-            handler.nextQuestion();
-            saveAnswer();
-        } catch (IOException | ResourceException e) {
-            Throwables.propagate(e);
-        }
-    }
-
-    @FXML
-    public void btnPrevious_Click(MouseEvent event) {
-        try {
-            handler.previousQuestion();
-            saveAnswer();
-        } catch (IOException | ResourceException e) {
-            Throwables.propagate(e);
-        }
-    }
-
     private void saveAnswer() {
+        if (!changed) return;
+
         this.question.setCurrentAnswer(getClickedOption());
     }
 

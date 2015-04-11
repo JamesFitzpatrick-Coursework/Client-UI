@@ -15,3 +15,5 @@ release.properties
 
 ## Assets ##
 src/generated/
+src/build/jre
+dependency-reduced-pom.xml

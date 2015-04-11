@@ -28,13 +28,12 @@ import uk.co.thefishlive.meteor.user.MeteorUserProfile;
  */
 public class UserEditController extends Controller {
 
+    @FXML private Pane pnlContainer;
+
     @FXML private TextField txtDisplayname;
     @FXML private TextField txtUsername;
     @FXML private PasswordField txtPassword;
     @FXML private PasswordField txtPassword2;
-
-    @FXML private Pane pnlMenu;
-    @FXML private Pane pnlContainer;
 
     private UserProfile user;
 
@@ -54,13 +53,6 @@ public class UserEditController extends Controller {
 
         this.txtDisplayname.setText(this.user.getDisplayName());
         this.txtUsername.setText(this.user.getName());
-    }
-
-    @FXML
-    public void btnMenu_Click(MouseEvent event) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
-        transition.setByX(205);
-        transition.play();
     }
 
     @FXML

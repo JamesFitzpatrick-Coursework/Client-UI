@@ -35,7 +35,7 @@
             <DropShadow />
          </effect>
          <children>
-            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Clicked" pickOnBounds="true" preserveRatio="true" style="icon: menu;icon-color: white;">
+            <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Click" pickOnBounds="true" preserveRatio="true" style="icon: menu;icon-color: white;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

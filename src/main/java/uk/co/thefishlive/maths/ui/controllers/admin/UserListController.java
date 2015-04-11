@@ -45,7 +45,6 @@ public class UserListController extends Controller {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    @FXML private Pane pnlMenu;
     @FXML private Pane pnlContainer;
 
     @FXML private GridPane pnlUsers;
@@ -55,33 +54,31 @@ public class UserListController extends Controller {
     private GroupProfile group;
 
     @FXML
-    public void btnMenu_Click(MouseEvent event) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
-        transition.setByX(205);
-        transition.play();
-    }
-
-    @FXML
     public void itmAddUser_Click(MouseEvent event) throws ResourceException, IOException {
-        UI ui = UILoader.loadUI(getInstance().getResourceManager().getResource("ui/admin/user_create.fxml"));
+        UI ui = UILoader.loadUI("admin/user_create");
 
         UserCreateController controller = ui.getController(UserCreateController.class);
-        controller.setCreateCallback(new CreateCallback() {
-            @Override
-            public void userCreated(User profile) {
-                profile.addGroup(group);
-            }
-        });
+        controller.setCreateCallback(profile -> profile.addGroup(group));
 
         getInstance().setCurrentUI(ui);
     }
 
     @FXML
     public void itmEdit_Click(MouseEvent event) throws ResourceException, IOException {
-        UI ui = UILoader.loadUI(getInstance().getResourceManager().getResource("ui/admin/group_edit.fxml"));
+        UI ui = UILoader.loadUI("admin/group_edit");
 
         GroupEditController controller = ui.getController(GroupEditController.class);
         controller.setGroup(this.group);
+
+        getInstance().setCurrentUI(ui);
+    }
+
+    @FXML
+    public void itmCreateAssignment_Click(MouseEvent event) throws ResourceException, IOException {
+        UI ui = UILoader.loadUI("admin/group_create_assignment");
+
+        GroupCreateAssignmentController controller = ui.getController(GroupCreateAssignmentController.class);
+        controller.setGroup(getInstance().getAuthHandler().getGroupManager().getGroupProfile(this.group));
 
         getInstance().setCurrentUI(ui);
     }
@@ -105,11 +102,13 @@ public class UserListController extends Controller {
     }
 
     public void onDisplay() {
+        // Update title bar
         this.lblGroupName.setText(this.group.getDisplayName());
 
         try {
             pnlUsers.getChildren().clear();
 
+            // Get all the users from this group
             List<GroupMemberProfile> users = getInstance().getAuthHandler().getGroupManager().getGroupProfile(group).getUsers();
             int pos = 0;
 
@@ -118,6 +117,7 @@ public class UserListController extends Controller {
                     break;
                 }
 
+                // Create the panel for this user
                 Pane pane = new Pane();
                 pane.setEffect(new DropShadow());
                 pane.setStyle("-fx-background-color: #FFFFFF;");
@@ -144,8 +144,9 @@ public class UserListController extends Controller {
                 edit.setFitHeight(24d);
                 edit.setCursor(Cursor.HAND);
                 edit.setOnMouseClicked(mouseEvent -> {
+                    // Open edit screen
                     try {
-                        UI ui = UILoader.loadUI(getInstance().getResourceManager().getResource("ui/admin/user_edit.fxml"));
+                        UI ui = UILoader.loadUI(getInstance().getResourceManager().getResource("admin/user_edit"));
 
                         ui.getController(UserEditController.class).setUser((UserProfile) user);
                         Main.getInstance().setCurrentUI(ui);
@@ -163,6 +164,7 @@ public class UserListController extends Controller {
                 delete.setFitHeight(24d);
                 delete.setCursor(Cursor.HAND);
                 delete.setOnMouseClicked(mouseEvent -> {
+                    // Delete user
                     try {
                         LOGGER.info("Deleting user {}", user.toString());
                         showLoadingAnimation();
@@ -172,7 +174,7 @@ public class UserListController extends Controller {
 
                         hideLoadingAnimation();
                         LOGGER.info("User deleted {} successfully", user.toString());
-                    } catch (ResourceException | IOException e) {
+                    } catch (IOException e) {
                         Throwables.propagate(e);
                     }
                 });

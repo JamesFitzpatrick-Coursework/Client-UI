@@ -1,6 +1,10 @@
 package uk.co.thefishlive.maths.assessment;
 
 import uk.co.thefishlive.auth.assessments.Assessment;
+import uk.co.thefishlive.auth.assessments.assignments.Assignment;
+import uk.co.thefishlive.auth.assessments.assignments.AssignmentTarget;
+import uk.co.thefishlive.auth.assessments.assignments.QuestionScore;
+import uk.co.thefishlive.auth.assessments.exception.AssessmentException;
 import uk.co.thefishlive.auth.assessments.questions.Question;
 import uk.co.thefishlive.auth.assessments.questions.QuestionType;
 import uk.co.thefishlive.maths.Main;
@@ -16,14 +20,27 @@ import java.io.IOException;
 public class AssessmentHandler {
 
     private final Assessment assessment;
+    private final AssignmentTarget target;
     private int questionNumber;
+    private Assignment assignment;
 
-    public AssessmentHandler(Assessment assessment) {
-        this.assessment = assessment;
+    public AssessmentHandler(AssignmentTarget target, Assignment assignment)
+        throws IOException, AssessmentException {
+        this.assignment = assignment;
+        this.assessment = assignment.getAssessment();
+        this.target = target;
     }
 
     public Assessment getAssessment() {
         return assessment;
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public AssignmentTarget getTarget() {
+        return target;
     }
 
     public int getQuestionNumber() {
@@ -44,7 +61,7 @@ public class AssessmentHandler {
             case QUESTION:
                 switch (getCurrentQuestion().getType()) {
                     case MULTI_CHOICE:
-                        ui = UILoader.loadUI("ui/assessment/question_multichoice.fxml");
+                        ui = UILoader.loadUI("assessment/question_multichoice.fxml");
                         ui.getController(MultiChoiceQuestionController.class).setHandler(this);
                         Main.getInstance().setCurrentUI(ui);
                         break;
@@ -67,7 +84,7 @@ public class AssessmentHandler {
     }
 
     public void nextQuestion() throws IOException, ResourceException {
-        if (questionNumber == assessment.getQuestions().size()) {
+        if (questionNumber + 1 >= assessment.getQuestions().size()) {
             display(AssessmentView.SUMMARY);
             return;
         }
@@ -77,7 +94,7 @@ public class AssessmentHandler {
     }
 
     public void previousQuestion() throws IOException, ResourceException {
-        if (questionNumber == 0) {
+        if (questionNumber <= 0) {
             display(AssessmentView.START);
             return;
         }

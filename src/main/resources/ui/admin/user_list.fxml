@@ -99,6 +99,15 @@
                                  <Cursor fx:constant="HAND" />
                              </cursor>
                          </Pane>
+                         <Pane fx:id="itmCreateAssignment" onMouseClicked="#itmCreateAssignment_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+                             <children>
+                                 <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" style="icon: assessment" />
+                                 <Label layoutX="65.0" layoutY="10.0" styleClass="primary-text" text="Create Assignment" />
+                             </children>
+                             <cursor>
+                                 <Cursor fx:constant="HAND" />
+                             </cursor>
+                         </Pane>
                      </children>
                   </GridPane>
                </children>

@@ -12,14 +12,6 @@
 
 <Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.controllers.admin.GroupCreateController">
    <children>
-      <Pane fx:id="pnlFooter" layoutY="570.0" prefHeight="30.0" prefWidth="800.0" style="-fx-background-color: #2196F3;">
-         <children>
-            <Label fx:id="lblCopywrite" layoutX="14.0" layoutY="6.0" text="© James Fitzpatrick 2014" />
-         </children>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Pane>
       <Pane fx:id="pnlTitle" prefHeight="45.0" prefWidth="300.0" style="-fx-background-color: #2196F3;">
          <children>
             <ImageView fx:id="btnMenu" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" onMouseClicked="#btnMenu_Click" pickOnBounds="true" preserveRatio="true" style="icon: menu;icon-color: white;">
@@ -30,14 +22,6 @@
                   <Image url="@../../images/icons/ic_menu_white_36dp.png" />
                </image>
             </ImageView>
-         </children>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Pane>
-      <Pane fx:id="pnlAlert" layoutX="360.0" layoutY="535.0" prefHeight="75.0" prefWidth="250.0" style="-fx-background-color: #00E676BB; visibility: none;">
-         <children>
-            <Label fx:id="lblAlertMessage" alignment="TOP_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="51.0" prefWidth="225.0" text="Success" wrapText="true" />
          </children>
          <effect>
             <DropShadow />
@@ -66,26 +50,26 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="txtDisplayname" prefHeight="25.0" prefWidth="295.0" promptText="Enter Display Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtGroupname" prefHeight="25.0" prefWidth="321.0" promptText="Enter Username" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="203.0" text="%group.create.displayname" textAlignment="CENTER" GridPane.rowIndex="1">
+                  <TextField fx:id="txtDisplayname" prefHeight="25.0" prefWidth="295.0" promptText="%groups.create.displayname.prompt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtGroupname" prefHeight="25.0" prefWidth="321.0" promptText="%groups.create.groupname.prompt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="203.0" text="%groups.create.displayname" textAlignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="201.0" text="%group.create.groupname" textAlignment="CENTER" GridPane.rowIndex="2">
+                  <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="201.0" text="%groups.create.groupname" textAlignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="29.0" prefWidth="523.0" text="%group.create.title" textAlignment="CENTER" GridPane.columnIndex="1">
+                  <Label alignment="CENTER" prefHeight="29.0" prefWidth="523.0" text="%groups.create.title" textAlignment="CENTER" GridPane.columnIndex="1">
                      <font>
                         <Font name="Roboto Bold" size="21.0" />
                      </font>
                   </Label>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
                      <children>
-                        <Button fx:id="btnCreate" layoutX="85.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnCreate_Click" prefWidth="99.0" style="-fx-background-color: #2196F3;" text="Create User" textFill="WHITE">
+                        <Button fx:id="btnCreate" layoutX="85.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnCreate_Click" prefWidth="99.0" style="-fx-background-color: #2196F3;" text="%groups.create.submit" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -93,7 +77,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="btnCancel" layoutX="195.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnCancel_Click" prefWidth="99.0" style="-fx-background-color: #F44336;" text="Cancel" textFill="WHITE">
+                        <Button fx:id="btnCancel" layoutX="195.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnCancel_Click" prefWidth="99.0" style="-fx-background-color: #F44336;" text="%app.cancel" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -103,12 +87,12 @@
                         </Button>
                      </children>
                   </Pane>
-                  <Label fx:id="lblErrorGroupname" prefHeight="38.0" prefWidth="201.0" text="Required Field" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Label fx:id="lblErrorGroupname" prefHeight="38.0" prefWidth="201.0" text="%groups.create.groupname.required" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblErrorDisplayname" prefHeight="38.0" prefWidth="203.0" text="Required Field" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Label fx:id="lblErrorDisplayname" prefHeight="38.0" prefWidth="203.0" text="%groups.create.displayname.required" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font size="11.0" />
                      </font>
@@ -120,7 +104,8 @@
             <DropShadow />
          </effect>
       </Pane>
+      <fx:include fx:id="pnlFooter" source="/ui/footer.fxml" />
       <fx:include fx:id="pnlMenu" source="/ui/sidebar.fxml" />
-       <fx:include fx:id="pnlAlert" source="/ui/alert.fxml" />
+      <fx:include fx:id="pnlAlert" source="/ui/alert.fxml" />
    </children>
 </Pane>

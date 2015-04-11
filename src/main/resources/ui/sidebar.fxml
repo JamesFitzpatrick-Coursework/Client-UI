@@ -79,16 +79,16 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Pane>
-            <Pane fx:id="itmEditor" onMouseClicked="#itmEditor_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+            <Pane fx:id="itmAssessments" onMouseClicked="#itmAssessments_Click" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
                <children>
-                  <Label layoutX="44.0" layoutY="9.0" prefHeight="20.0" prefWidth="113.0" styleClass="primary-text" text="%menu.editor">
+                  <Label layoutX="44.0" layoutY="9.0" prefHeight="20.0" prefWidth="113.0" styleClass="primary-text" text="%menu.assessments">
                      <font>
                         <Font name="Roboto Regular" size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="12.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" style="icon: edit;">
+                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="12.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" style="icon: assessment;">
                      <image>
-                        <Image url="@../images/icons/ic_mode_edit_black_32dp.png" />
+                        <Image url="@../images/icons/ic_assignment_ind_black_36dp.png" />
                      </image>
                   </ImageView>
                </children>

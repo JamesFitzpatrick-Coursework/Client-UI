@@ -33,12 +33,18 @@ public class AlertController extends Controller implements Listener {
         pnlAlert.setVisible(false);
     }
 
+    /**
+     * Event is called whenever an alert is called by the application.
+     *
+     * @param event the alert event
+     */
     @Subscribe
     public void onAlert(AlertEvent event) {
+        // Update the alert element
         pnlAlert.setVisible(true);
-
         lblAlertMessage.setText(event.getMessage());
 
+        // Create and play the transitions
         EffectsUtils.fadeIn(Duration.seconds(1), pnlAlert).play();
         EffectsUtils.fadeOut(Duration.seconds(1), pnlAlert, Duration.seconds(5)).play();
     }

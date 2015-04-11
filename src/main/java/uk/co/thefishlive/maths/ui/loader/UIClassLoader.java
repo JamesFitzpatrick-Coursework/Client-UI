@@ -31,6 +31,7 @@ public class UIClassLoader extends URLClassLoader {
         logger.info("Loading resource " + name);
 
         try {
+            // Load resource from resource manager
             return Main.getInstance().getResourceManager().getResource(name).getUrl();
         } catch (ResourceException e) {
             Throwables.propagate(e);

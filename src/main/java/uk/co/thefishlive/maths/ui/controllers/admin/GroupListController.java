@@ -14,7 +14,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
-import uk.co.thefishlive.auth.group.Group;
 import uk.co.thefishlive.auth.group.GroupProfile;
 import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
@@ -22,7 +21,6 @@ import uk.co.thefishlive.maths.ui.ColorPalette;
 import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.maths.ui.loader.UI;
 import uk.co.thefishlive.maths.ui.loader.UILoader;
-import uk.co.thefishlive.maths.ui.utils.EffectsUtils;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,7 +33,6 @@ import java.util.ResourceBundle;
 public class GroupListController extends Controller {
 
     @FXML private Pane pnlContainer;
-    @FXML private Pane pnlMenu;
 
     @FXML private GridPane pnlGroups;
 
@@ -43,21 +40,11 @@ public class GroupListController extends Controller {
     @FXML private Label lblAlertMessage;
 
     @FXML
-    public void btnMenu_Click(MouseEvent event) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
-        transition.setByX(205);
-        transition.play();
-    }
-
-    @FXML
     private void itmAddGroup_Click(MouseEvent event) {
         try {
             UI ui = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/admin/group_create.fxml"));
 
-            ui.getController(GroupCreateController.class).setCreateCallback(new GroupCreateController.CreateCallback() {
-                @Override
-                public void groupCreated(Group profile) {
-                }
+            ui.getController(GroupCreateController.class).setCreateCallback(profile -> {
             });
 
             Main.getInstance().setCurrentUI(ui);
@@ -73,13 +60,16 @@ public class GroupListController extends Controller {
     @Override
     public void onDisplay() {
         try {
+            // Remove current groups
             pnlGroups.getChildren().clear();
 
+            // Get all groups
             final List<GroupProfile> groups = Main.getInstance().getAuthHandler().getGroupManager().getGroups();
             int index = 0;
 
             for (int y = 0; y < 4; y++) {
                 for (int x = 0; x < 3; x++) {
+                    // Build pane for this group
                     final GroupProfile groupProfile = groups.get(index);
 
                     Pane group = new Pane();
@@ -107,25 +97,25 @@ public class GroupListController extends Controller {
                     button.setText("Edit");
                     button.setStyle("-fx-background-color: #2196F3;");
                     button.setCursor(Cursor.HAND);
-                    button.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent mouseEvent) {
-                            try {
-                                showLoadingAnimation();
+                    button.setOnMouseClicked(mouseEvent -> {
+                        try {
+                            showLoadingAnimation();
 
-                                UI ui = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/admin/user_list.fxml"));
-                                ui.setParent(Main.getInstance().getCurrentUI());
-                                UserListController controller = (UserListController) ui.getController();
-                                controller.setGroup(groupProfile);
-                                Main.getInstance().setCurrentUI(ui);
-                            } catch (IOException | ResourceException e) {
-                                e.printStackTrace();
-                            }
-
+                            UI ui = UILoader.loadUI(Main.getInstance().getResourceManager().getResource("ui/admin/user_list.fxml"));
+                            ui.setParent(Main.getInstance().getCurrentUI());
+                            UserListController controller = (UserListController) ui.getController();
+                            controller.setGroup(groupProfile);
+                            Main.getInstance().setCurrentUI(ui);
+                        } catch (IOException | ResourceException e) {
+                            e.printStackTrace();
+                        } finally {
+                            hideLoadingAnimation();
                         }
+
                     });
                     group.getChildren().add(button);
 
+                    // Add this to the UI
                     pnlGroups.add(group, x, y);
 
                     if (++index >= groups.size()) {

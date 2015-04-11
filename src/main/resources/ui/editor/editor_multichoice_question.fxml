@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.controllers.editor.QuestionEditorController">
+<Pane fx:id="pnlContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.thefishlive.maths.ui.controllers.editor.MultichoiceQuestionEditorController">
    <children>
       <Pane prefHeight="50.0" prefWidth="300.0" styleClass="background-primary">
          <effect>
@@ -63,20 +63,12 @@
             <DropShadow />
          </effect>
          <children>
-            <ImageView fx:id="btnPrevious" fitHeight="64.0" fitWidth="64.0" layoutX="14.0" layoutY="17.0" onMouseClicked="#btnPrevious_Click" pickOnBounds="true" preserveRatio="true" style="icon: 'arrow-back'; icon-size: '48dp'">
-               <image>
-                  <Image url="@../../images/icons/ic_arrow_back_black_48dp.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <ImageView fx:id="btnNext" fitHeight="64.0" fitWidth="64.0" layoutX="694.0" layoutY="17.0" onMouseClicked="#btnNext_Click" pickOnBounds="true" preserveRatio="true" style="icon: 'arrow-forward'; icon-size: '48dp'">
+            <ImageView fx:id="btnSave" fitHeight="64.0" fitWidth="64.0" layoutX="694.0" layoutY="17.0" onMouseClicked="#btnSave_Click" pickOnBounds="true" preserveRatio="true" style="icon: 'save'; icon-size: '48dp'">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <image>
-                  <Image url="@../../images/icons/ic_arrow_forward_black_48dp.png" />
+                  <Image url="@../../images/icons/ic_save_black_48dp.png" />
                </image>
             </ImageView>
          </children>

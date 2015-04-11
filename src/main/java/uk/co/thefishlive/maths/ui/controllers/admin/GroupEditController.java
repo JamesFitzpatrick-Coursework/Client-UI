@@ -13,6 +13,7 @@ import uk.co.thefishlive.auth.group.GroupProfile;
 import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.events.AlertEvent;
 import uk.co.thefishlive.maths.events.EventController;
+import uk.co.thefishlive.maths.tasks.TaskManager;
 import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.meteor.group.MeteorGroupProfile;
 
@@ -25,11 +26,10 @@ import java.util.ResourceBundle;
  */
 public class GroupEditController extends Controller {
 
+    @FXML private Pane pnlContainer;
+
     @FXML private TextField txtDisplayname;
     @FXML private TextField txtGroupname;
-
-    @FXML private Pane pnlMenu;
-    @FXML private Pane pnlContainer;
 
     private GroupProfile group;
 
@@ -43,19 +43,13 @@ public class GroupEditController extends Controller {
 
     @Override
     public void onDisplay() {
-        if (this.group== null) {
+        if (this.group == null) {
             return;
         }
 
+        // Update with current group values
         this.txtDisplayname.setText(this.group.getDisplayName());
         this.txtGroupname.setText(this.group.getName());
-    }
-
-    @FXML
-    public void btnMenu_Click(MouseEvent event) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
-        transition.setByX(205);
-        transition.play();
     }
 
     @FXML
@@ -65,17 +59,26 @@ public class GroupEditController extends Controller {
 
     @FXML
     public void btnEdit_Click(ActionEvent event) {
-        try {
-            Group group = Main.getInstance().getAuthHandler().getGroupManager().getGroupProfile(this.group);
+        showLoadingAnimation();
 
-            GroupProfile updated = new MeteorGroupProfile(this.txtGroupname.getText(), this.txtDisplayname.getText());
-            group.updateProfile(updated);
+        TaskManager.runTaskAsync(() -> {
+            try {
+                Group group = Main.getInstance().getAuthHandler().getGroupManager().getGroupProfile(this.group);
 
-            this.close();
-            EventController.getInstance().postEvent(new AlertEvent("Updated group " + this.group.getDisplayName()));
-        } catch (IOException e) {
-            Throwables.propagate(e);
-        }
+                GroupProfile updated = new MeteorGroupProfile(this.txtGroupname.getText(), this.txtDisplayname.getText());
+                TaskManager.runTaskSync(() -> {
+                    group.updateProfile(updated);
+
+                    close();
+                    EventController.getInstance().postEvent(new AlertEvent("Updated group " + this.group.getDisplayName()));
+                });
+            } catch (IOException e) {
+                Throwables.propagate(e);
+            } finally {
+                hideLoadingAnimation();
+            }
+        });
+
     }
 
     @Override

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="info" name="Bs-Maths" packages="org.apache.logging.log4j">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <ThresholdFilter level="warn" onMatch="DENY" onMismatch="ACCEPT"/>
+
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%c{1}] [%t/%level]: %msg%n" />
+        </Console>
+
+        <Console name="ConsoleError" target="SYSTEM_ERR">
+            <ThresholdFilter level="warn" onMatch="ACCEPT"/>
+
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%c{1}] [%t/%level]: %msg%n" />
+        </Console>
+
+        <RollingRandomAccessFile name="File" fileName="logs/latest.log" filePattern="logs/%d{yyyy}/%d{MM}/%d{dd}/%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%c] [%p]: %msg%n" />
+
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <OnStartupTriggeringPolicy />
+            </Policies>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="ConsoleError"/>
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+
+        <Logger name="uk.co.thefishlive.maths" level="debug">
+        </Logger>
+
+        <Logger name="SysOut">
+        </Logger>
+
+        <Logger name="SysErr">
+        </Logger>
+    </Loggers>
+</Configuration>

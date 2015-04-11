@@ -18,11 +18,16 @@ import uk.co.thefishlive.auth.group.GroupProfile;
 import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.events.AlertEvent;
 import uk.co.thefishlive.maths.events.EventController;
+import uk.co.thefishlive.maths.resources.exception.ResourceException;
+import uk.co.thefishlive.maths.tasks.Task;
+import uk.co.thefishlive.maths.tasks.TaskManager;
 import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.meteor.group.MeteorGroupProfile;
 
 public class GroupCreateController extends Controller {
     private CreateCallback callback;
+
+    @FXML private Pane pnlContainer;
 
     @FXML private TextField txtGroupname;
     @FXML private TextField txtDisplayname;
@@ -30,15 +35,6 @@ public class GroupCreateController extends Controller {
     @FXML private Label lblErrorGroupname;
     @FXML private Label lblErrorDisplayname;
 
-    @FXML private Pane pnlMenu;
-    @FXML private Pane pnlContainer;
-
-    @FXML
-    public void btnMenu_Click(MouseEvent event) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
-        transition.setToX(0);
-        transition.play();
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -51,6 +47,8 @@ public class GroupCreateController extends Controller {
 
     @FXML
     public void btnCreate_Click(ActionEvent event) {
+        showLoadingAnimation();
+
         boolean error = false;
 
         // Validate input
@@ -72,18 +70,27 @@ public class GroupCreateController extends Controller {
         GroupProfile profile = new MeteorGroupProfile(txtGroupname.getText(), txtDisplayname.getText());
         GroupManager manager = Main.getInstance().getAuthHandler().getGroupManager();
 
-        try {
-            profile = manager.createGroup(profile);
+        // Create the group off the main thread
+        TaskManager.runTaskAsync("Create Group", () -> {
+            try {
+                // Send the creation request
+                GroupProfile createdProfile = manager.createGroup(profile);
 
-            Group group = manager.getGroupProfile(profile);
-            callback.groupCreated(group);
-            Main.getInstance().setCurrentUI(this.getParent());
-            EventController.getInstance().postEvent(new AlertEvent("Created group " + profile.getDisplayName()));
-        } catch (IOException e) {
-            // ERROR
-            Throwables.propagate(e);
-        }
+                Group group = manager.getGroupProfile(createdProfile);
+                TaskManager.runTaskSync(() -> {
+                    callback.groupCreated(group);
 
+                    // Display the success back to the user
+                    Main.getInstance().setCurrentUI(getParent());
+                    EventController.getInstance().postEvent(new AlertEvent("Created group " + createdProfile.getDisplayName()));
+                });
+            } catch (IOException e) {
+                // ERROR
+                Throwables.propagate(e);
+            } finally {
+                hideLoadingAnimation();
+            }
+        });
     }
 
     public void setCreateCallback(CreateCallback callback) {

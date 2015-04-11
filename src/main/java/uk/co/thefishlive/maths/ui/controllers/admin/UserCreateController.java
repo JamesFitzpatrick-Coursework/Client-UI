@@ -24,7 +24,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserCreateController extends Controller {
-    private CreateCallback callback;
+
+    @FXML private Pane pnlContainer;
 
     @FXML private TextField txtUsername;
     @FXML private TextField txtDisplayname;
@@ -36,15 +37,7 @@ public class UserCreateController extends Controller {
     @FXML private Label lblErrorPassword;
     @FXML private Label lblErrorPassword2;
 
-    @FXML private Pane pnlMenu;
-    @FXML private Pane pnlContainer;
-
-    @FXML
-    public void btnMenu_Click(MouseEvent event) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(500), pnlMenu);
-        transition.setToX(0);
-        transition.play();
-    }
+    private CreateCallback callback;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

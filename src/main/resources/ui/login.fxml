@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
 <?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import java.lang.*?>
@@ -14,6 +17,15 @@
          <effect>
             <DropShadow />
          </effect>
+         <children>
+            <ImageView fx:id="icnLogin" fitHeight="36.0" fitWidth="36.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" style="icon: user;icon-color: white;">
+            </ImageView>
+            <Label fx:id="lblTitle" layoutX="50.0" layoutY="10.0" text="Login" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Regular" size="18.0" />
+               </font>
+            </Label>
+         </children>
       </Pane>
       <Pane fx:id="pnlLogin" layoutX="250.0" layoutY="150.0" prefHeight="300.0" prefWidth="300.0" styleClass="background-primary-light">
          <effect>
