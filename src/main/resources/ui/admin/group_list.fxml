@@ -30,14 +30,6 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="pnlAlert" layoutX="360.0" layoutY="535.0" prefHeight="75.0" prefWidth="250.0" style="-fx-background-color: #00E676BB; visibility: none;">
-         <children>
-            <Label fx:id="lblAlertMessage" alignment="TOP_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="51.0" prefWidth="225.0" text="Success" wrapText="true" />
-         </children>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Pane>
       <GridPane hgap="10.0" layoutX="-1.0" layoutY="45.0" prefHeight="525.0" prefWidth="800.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="631.0" minWidth="10.0" prefWidth="603.0" />
@@ -107,6 +99,6 @@
       </GridPane>
       <fx:include fx:id="pnlFooter" source="/ui/footer.fxml" />
       <fx:include fx:id="pnlMenu" source="/ui/sidebar.fxml" />
-       <fx:include fx:id="pnlAlert" source="/ui/alert.fxml" />
+      <fx:include fx:id="pnlAlert" source="/ui/alert.fxml" />
    </children>
 </Pane>

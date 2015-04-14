@@ -30,6 +30,8 @@ import uk.co.thefishlive.auth.group.member.GroupMemberProfile;
 import uk.co.thefishlive.auth.user.User;
 import uk.co.thefishlive.auth.user.UserProfile;
 import uk.co.thefishlive.maths.Main;
+import uk.co.thefishlive.maths.events.AlertEvent;
+import uk.co.thefishlive.maths.events.EventController;
 import uk.co.thefishlive.maths.resources.Resource;
 import uk.co.thefishlive.maths.resources.exception.ResourceException;
 import uk.co.thefishlive.maths.ui.ColorPalette;
@@ -90,6 +92,8 @@ public class UserListController extends Controller {
 
         getInstance().getAuthHandler().getGroupManager().deleteGroup(group);
         close();
+
+        EventController.getInstance().postEvent(new AlertEvent("Successfully deleted group " + group.getDisplayName()));
         LOGGER.info("Deleted group {} successfully", group.toString());
     }
 
@@ -146,7 +150,7 @@ public class UserListController extends Controller {
                 edit.setOnMouseClicked(mouseEvent -> {
                     // Open edit screen
                     try {
-                        UI ui = UILoader.loadUI(getInstance().getResourceManager().getResource("admin/user_edit"));
+                        UI ui = UILoader.loadUI("admin/user_edit");
 
                         ui.getController(UserEditController.class).setUser((UserProfile) user);
                         Main.getInstance().setCurrentUI(ui);
@@ -171,6 +175,8 @@ public class UserListController extends Controller {
 
                         getInstance().getAuthHandler().getUserManager().deleteUser((UserProfile) user);
                         onDisplay();
+
+                        EventController.getInstance().postEvent(new AlertEvent("Successfully deleted user " + user.getDisplayName()));
 
                         hideLoadingAnimation();
                         LOGGER.info("User deleted {} successfully", user.toString());

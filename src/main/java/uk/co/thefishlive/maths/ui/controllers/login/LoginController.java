@@ -5,6 +5,7 @@ import com.google.common.base.Throwables;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,6 +32,7 @@ import uk.co.thefishlive.maths.tasks.TaskManager;
 import uk.co.thefishlive.maths.ui.Controller;
 import uk.co.thefishlive.maths.ui.loader.UI;
 import uk.co.thefishlive.maths.ui.loader.UILoader;
+import uk.co.thefishlive.maths.ui.utils.EffectsUtils;
 import uk.co.thefishlive.meteor.user.MeteorUserProfile;
 import uk.co.thefishlive.auth.login.exception.LoginException;
 
@@ -46,25 +48,19 @@ public class LoginController extends Controller {
 
     private static final Logger logger = LogManager.getLogger();
     private static final Marker markerLogin = MarkerManager.getMarker("LOGIN");
+    private static final PseudoClass errorClass = PseudoClass.getPseudoClass("error");
 
-    @FXML
-    private Pane pnlContainer;
+    @FXML private Pane pnlContainer;
 
-    @FXML
-    private Pane pnlLogin;
+    @FXML private Pane pnlLogin;
 
-    @FXML
-    private TextField txtUsername;
-    @FXML
-    private PasswordField txtPassword;
+    @FXML private TextField txtUsername;
+    @FXML private PasswordField txtPassword;
 
-    @FXML
-    private Label lblErrorUsername;
-    @FXML
-    private Label lblErrorPassword;
+    @FXML private Label lblErrorUsername;
+    @FXML private Label lblErrorPassword;
 
-    @FXML
-    private Button btnLogin;
+    @FXML private Button btnLogin;
 
     @FXML
     public void btnLogin_Click(ActionEvent event) {
@@ -74,6 +70,8 @@ public class LoginController extends Controller {
         // Hide the error messages
         lblErrorUsername.setVisible(false);
         lblErrorPassword.setVisible(false);
+        txtUsername.pseudoClassStateChanged(errorClass, false);
+        txtPassword.pseudoClassStateChanged(errorClass, false);
 
         boolean valid = true;
 
@@ -81,17 +79,22 @@ public class LoginController extends Controller {
         if (txtUsername.getText().length() == 0) {
             lblErrorUsername.setText("Please enter your username");
             lblErrorUsername.setVisible(true);
+
+            txtUsername.pseudoClassStateChanged(errorClass, true);
             valid = false;
         }
         if (txtPassword.getText().length() == 0) {
             lblErrorPassword.setText("Please enter your password");
             lblErrorPassword.setVisible(true);
+
+            txtPassword.pseudoClassStateChanged(errorClass, true);
             valid = false;
         }
 
         // Exit if not valid
         if (!valid) {
             hideLoadingAnimation();
+            EffectsUtils.panelShake(pnlLogin);
             return;
         }
 
@@ -132,11 +135,13 @@ public class LoginController extends Controller {
                     if (ex.getMessage().contains("password")) {
                         lblErrorPassword.setText(ex.getMessage());
                         lblErrorPassword.setVisible(true);
+                        txtPassword.pseudoClassStateChanged(errorClass, true);
                         return;
                     }
                     if (ex.getMessage().contains("user")) {
                         lblErrorUsername.setText(ex.getMessage());
                         lblErrorUsername.setVisible(true);
+                        txtUsername.pseudoClassStateChanged(errorClass, true);
                         return;
                     }
                 });

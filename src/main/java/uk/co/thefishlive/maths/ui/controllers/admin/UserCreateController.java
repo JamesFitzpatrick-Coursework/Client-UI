@@ -39,10 +39,6 @@ public class UserCreateController extends Controller {
 
     private CreateCallback callback;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-    }
-
     @FXML
     public void btnCancel_Click(ActionEvent event) {
         Main.getInstance().setCurrentUI(getParent());
@@ -50,22 +46,33 @@ public class UserCreateController extends Controller {
 
     @FXML
     public void btnCreate_Click(ActionEvent event) {
+        // Reset error messages
+        lblErrorUsername.setVisible(false);
+        lblErrorDisplayname.setVisible(false);
+        lblErrorPassword.setVisible(false);
+        lblErrorPassword2.setVisible(false);
+
         boolean error = false;
 
         // Validate input
-        if (txtUsername.getText().length() <= 0) {
+        if (txtUsername.getText().length() <= 0) { // Check for username
             lblErrorUsername.setVisible(true);
             error = true;
         }
-        if (txtDisplayname.getText().length() <= 0) {
+        if (txtUsername.getText().contains(" ")) { // Validate username
+            lblErrorUsername.setText("Username must not contain spaces");
+            lblErrorUsername.setVisible(true);
+            error = true;
+        }
+        if (txtDisplayname.getText().length() <= 0) { // Check for display name
             lblErrorDisplayname.setVisible(true);
             error = true;
         }
-        if (txtPassword.getText().length() <= 5) {
+        if (txtPassword.getText().length() <= 5) { // Check for valid length password
             lblErrorPassword.setVisible(true);
             error = true;
         }
-        if (!txtPassword.getText().equals(txtPassword2.getText())) {
+        if (!txtPassword.getText().equals(txtPassword2.getText())) { // Validate password against confirmation
             lblErrorPassword2.setVisible(true);
             error = true;
         }
@@ -80,27 +87,30 @@ public class UserCreateController extends Controller {
         UserManager manager = Main.getInstance().getAuthHandler().getUserManager();
 
         try {
+            // Create the user
             profile = manager.createUser(profile, txtPassword.getText().toCharArray());
 
+            // Get the new created user
             User user = manager.getUserProfile(profile);
             callback.userCreated(user);
+            // Close the current UI
             Main.getInstance().setCurrentUI(this.getParent());
 
+            // Alert the user
             EventController.getInstance().postEvent(new AlertEvent("Created user " + profile.getDisplayName()));
         } catch (IOException e) {
             // ERROR
             Throwables.propagate(e);
         }
-
-    }
-
-    public void setCreateCallback(CreateCallback callback) {
-        this.callback = callback;
     }
 
     @Override
     protected Pane getContentPane() {
         return pnlContainer;
+    }
+
+    public void setCreateCallback(CreateCallback callback) {
+        this.callback = callback;
     }
 
     public static interface CreateCallback {

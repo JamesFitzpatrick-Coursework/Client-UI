@@ -318,6 +318,18 @@
                             <color>black</color>
                             <size>48dp</size>
                         </forcedIcon>
+
+                        <forcedIcon>
+                            <id>check</id>
+                            <color>black</color>
+                            <size>24dp</size>
+                        </forcedIcon>
+
+                        <forcedIcon>
+                            <id>close</id>
+                            <color>black</color>
+                            <size>24dp</size>
+                        </forcedIcon>
                     </forcedIcons>
                 </configuration>
 

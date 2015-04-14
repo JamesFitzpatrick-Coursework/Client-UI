@@ -6,7 +6,6 @@ import uk.co.thefishlive.auth.assessments.Assessment;
 import uk.co.thefishlive.auth.assessments.AssessmentBuilder;
 import uk.co.thefishlive.auth.assessments.AssessmentManager;
 import uk.co.thefishlive.auth.assessments.exception.AssessmentCreateException;
-import uk.co.thefishlive.auth.group.Group;
 import uk.co.thefishlive.maths.Main;
 import uk.co.thefishlive.maths.events.AlertEvent;
 import uk.co.thefishlive.maths.events.EventController;
@@ -16,21 +15,18 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 
 public class AssessmentCreateController extends CreateController<Assessment> {
 
     @FXML private TextField txtName;
     @FXML private TextField txtDisplayname;
 
-    @FXML private Label lblErrorGroupname;
+    @FXML private Label lblErrorName;
     @FXML private Label lblErrorDisplayname;
 
     @FXML private Pane pnlMenu;
@@ -48,7 +44,7 @@ public class AssessmentCreateController extends CreateController<Assessment> {
 
         // Validate input
         if (txtName.getText().length() <= 0) {
-            lblErrorGroupname.setVisible(true);
+            lblErrorName.setVisible(true);
             error = true;
         }
         if (txtDisplayname.getText().length() <= 0) {
@@ -75,7 +71,7 @@ public class AssessmentCreateController extends CreateController<Assessment> {
                 Assessment assessment = builder.build();
 
                 TaskManager.runTaskSync("Create Group Callback", () -> {
-                    callback.created(assessment);
+                    if (callback != null) callback.created(assessment);
 
                     // Display the success back to the user
                     EventController.getInstance().postEvent(new AlertEvent("Created assessment " + assessment.getProfile().getDisplayName()));

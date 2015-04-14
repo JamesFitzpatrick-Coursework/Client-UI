@@ -4,6 +4,7 @@ import com.google.common.base.Throwables;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -15,6 +16,7 @@ import uk.co.thefishlive.maths.events.AlertEvent;
 import uk.co.thefishlive.maths.events.EventController;
 import uk.co.thefishlive.maths.tasks.TaskManager;
 import uk.co.thefishlive.maths.ui.Controller;
+import uk.co.thefishlive.maths.ui.utils.EffectsUtils;
 import uk.co.thefishlive.meteor.group.MeteorGroupProfile;
 
 import java.io.IOException;
@@ -30,6 +32,9 @@ public class GroupEditController extends Controller {
 
     @FXML private TextField txtDisplayname;
     @FXML private TextField txtGroupname;
+
+    @FXML private Label lblErrorGroupname;
+    @FXML private Label lblErrorDisplayname;
 
     private GroupProfile group;
 
@@ -60,6 +65,32 @@ public class GroupEditController extends Controller {
     @FXML
     public void btnEdit_Click(ActionEvent event) {
         showLoadingAnimation();
+        lblErrorGroupname.setVisible(false);
+        lblErrorDisplayname.setVisible(false);
+
+        boolean error = false;
+
+        // Validate input
+        if (txtGroupname.getText().length() <= 0) { // Check groupname length
+            lblErrorGroupname.setVisible(true);
+            error = true;
+        }
+        if (txtGroupname.getText().contains(" ")) { // Validate groupname
+            lblErrorGroupname.setVisible(true);
+            lblErrorGroupname.setText("Groupname cannot contain spaces");
+            error = true;
+        }
+        if (txtDisplayname.getText().length() <= 0) { // Check displayname length
+            lblErrorDisplayname.setVisible(true);
+            error = true;
+        }
+
+        if (error) {
+            // Something went wrong exit now
+            hideLoadingAnimation();
+            return;
+        }
+
 
         TaskManager.runTaskAsync(() -> {
             try {

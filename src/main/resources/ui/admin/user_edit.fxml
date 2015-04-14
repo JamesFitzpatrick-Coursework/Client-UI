@@ -27,9 +27,9 @@
             <DropShadow />
          </effect>
       </Pane>
-      <Pane layoutX="7.0" layoutY="54.0" prefHeight="506.0" prefWidth="785.0" style="-fx-background-color: #ffffff;">
+      <Pane fx:id="pnlForm" layoutX="7.0" layoutY="54.0" prefHeight="506.0" prefWidth="785.0" style="-fx-background-color: #ffffff;">
          <children>
-            <GridPane fx:id="pnlUsers" hgap="5.0" prefHeight="506.0" prefWidth="787.0" vgap="5.0">
+            <GridPane hgap="5.0" prefHeight="506.0" prefWidth="787.0" vgap="5.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="545.0" minWidth="10.0" prefWidth="458.0" />
@@ -99,12 +99,12 @@
                         </Button>
                      </children>
                   </Pane>
-                  <Label fx:id="lblErrorPassword2" prefHeight="38.0" prefWidth="203.0" text="Passwords do not match" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                  <Label fx:id="lblErrorPassword2" prefHeight="38.0" prefWidth="203.0" text="Passwords do not match" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblErrorPassword" prefHeight="38.0" prefWidth="206.0" text="Password must be at least 6 characters long" textFill="RED" visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                  <Label fx:id="lblErrorPassword" prefHeight="38.0" prefWidth="206.0" text="Password must be at least 6 characters long" textFill="RED" visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <font>
                         <Font size="11.0" />
                      </font>

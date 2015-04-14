@@ -48,21 +48,29 @@ public class GroupCreateController extends Controller {
     @FXML
     public void btnCreate_Click(ActionEvent event) {
         showLoadingAnimation();
+        lblErrorGroupname.setVisible(false);
+        lblErrorDisplayname.setVisible(false);
 
         boolean error = false;
 
         // Validate input
-        if (txtGroupname.getText().length() <= 0) {
+        if (txtGroupname.getText().length() <= 0) { // Check groupname length
             lblErrorGroupname.setVisible(true);
             error = true;
         }
-        if (txtDisplayname.getText().length() <= 0) {
+        if (txtGroupname.getText().contains(" ")) { // Validate groupname
+            lblErrorGroupname.setVisible(true);
+            lblErrorGroupname.setText("Classname cannot contain spaces");
+            error = true;
+        }
+        if (txtDisplayname.getText().length() <= 0) { // Check displayname length
             lblErrorDisplayname.setVisible(true);
             error = true;
         }
 
         if (error) {
-            // Something went wrong exit now
+            // Never trust the user
+            hideLoadingAnimation();
             return;
         }
 

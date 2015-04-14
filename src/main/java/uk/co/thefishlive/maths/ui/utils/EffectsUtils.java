@@ -1,17 +1,12 @@
 package uk.co.thefishlive.maths.ui.utils;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.Interpolator;
 import javafx.animation.Transition;
-import javafx.geometry.Point2D;
+import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.util.Duration;
-import uk.co.thefishlive.maths.Main;
 
 /**
  * A builder class to build simple UI transitions
@@ -72,5 +67,36 @@ public class EffectsUtils {
         transition.setFromValue(0);
         transition.setToValue(1);
         return transition;
+    }
+
+    /**
+     * Shake a panel in the event of an error.
+     *
+     * @param pane the pane to shake
+     */
+    public static void panelShake(Pane pane) {
+        int duration = 100;
+        int count = 2;
+
+        TranslateTransition transition1 = new TranslateTransition(Duration.millis(duration), pane);
+        transition1.setFromX(0);
+        transition1.setToX(-5);
+        transition1.setInterpolator(Interpolator.LINEAR);
+
+        TranslateTransition transition2 = new TranslateTransition(Duration.millis(duration), pane);
+        transition2.setFromX(-5);
+        transition2.setToX(5);
+        transition2.setDelay(Duration.millis(duration));
+        transition2.setInterpolator(Interpolator.LINEAR);
+        transition2.setCycleCount(count);
+
+        TranslateTransition transition3 = new TranslateTransition(Duration.millis(duration), pane);
+        transition3.setToX(0);
+        transition3.setDelay(Duration.millis((count + 1) * duration));
+        transition3.setInterpolator(Interpolator.LINEAR);
+
+        transition1.play();
+        transition2.play();
+        transition3.play();
     }
 }
